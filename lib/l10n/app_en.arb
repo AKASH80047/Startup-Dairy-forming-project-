@@ -1,0 +1,149 @@
+{
+  "appName": "Pandey Dairy Farming",
+  "@appName": {
+    "description": "The name of the application"
+  },
+  "tagline": "Pure • Fresh • From Our Roots",
+  "@tagline": {
+    "description": "The brand tagline"
+  },
+  "omNamahShivaya": "Om Namah Shivaya",
+  "@omNamahShivaya": {
+    "description": "The brand devotional line"
+  },
+  "chooseLanguage": "Choose Your Language",
+  "@chooseLanguage": {
+    "description": "Title of the language selection screen"
+  },
+  "selectLanguageDesc": "Please select your preferred language to continue.",
+  "@selectLanguageDesc": {
+    "description": "Description of the language selection screen"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language name"
+  },
+  "hindi": "हिंदी",
+  "@hindi": {
+    "description": "Hindi language name"
+  },
+  "cow": "Cow",
+  "@cow": {
+    "description": "Cow category title"
+  },
+  "buffalo": "Buffalo",
+  "@buffalo": {
+    "description": "Buffalo category title"
+  },
+  "otherProducts": "Other Products",
+  "@otherProducts": {
+    "description": "Other dairy products category title"
+  },
+  "bulkOrders": "Bulk & Event Orders",
+  "@bulkOrders": {
+    "description": "Bulk and event orders category title"
+  },
+  "freeDeliveryMsg": "Free delivery within 2 km",
+  "@freeDeliveryMsg": {
+    "description": "Free delivery details badge message"
+  },
+  "deliveryLocation": "Delivery Location",
+  "@deliveryLocation": {
+    "description": "Label for the current delivery location"
+  },
+  "defaultLocation": "Select Location...",
+  "@defaultLocation": {
+    "description": "Default placeholder text for delivery location"
+  },
+  "continueButton": "Continue",
+  "@continueButton": {
+    "description": "Label for standard continue button"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings label"
+  },
+  "changeLanguage": "Change Language",
+  "@changeLanguage": {
+    "description": "Label for changing language option"
+  },
+  "originLabel": "Origin",
+  "sourceVillageLabel": "Source Village",
+  "fatPercentageLabel": "Average Fat Content",
+  "yieldLabel": "Avg Yield per Day",
+  "priceLabel": "Price",
+  "availableQtyLabel": "Available Quantity",
+  "a2StatusLabel": "A2 Milk Certification",
+  "verifiedLabel": "Verified A2",
+  "notVerifiedLabel": "Not A2 Certified",
+  "unknownLabel": "Unknown",
+  "addToCartLabel": "Add to Cart",
+  "buyNowLabel": "Buy Now",
+  "subscribeLabel": "Start Subscription",
+  "selectQuantityLabel": "Select Quantity",
+  "availableLabel": "Available",
+  "outOfStockLabel": "Out of stock",
+  "cowBreedsTitle": "Cow Breeds",
+  "buffaloBreedsTitle": "Buffalo Breeds",
+  "otherProductsTitle": "Other Products",
+  "litresLabel": "Litres",
+  "customQuantityHint": "Enter custom qty (ml)",
+  "noBreedsMessage": "No breeds found.",
+  "noProductsMessage": "No dairy products catalog available.",
+  "productAdded": "Product added to cart!",
+  "checkoutTitle": "Checkout Details",
+  "fullNameLabel": "Full Name",
+  "nameEmptyError": "Please enter your full name",
+  "phoneNumberLabel": "Phone Number",
+  "phoneInvalidError": "Please enter a valid 10-digit phone number",
+  "deliverySlotLabel": "Select Delivery Slot",
+  "morningSlotLabel": "Morning (6:00 AM - 9:00 AM)",
+  "eveningSlotLabel": "Evening (5:00 PM - 8:00 PM)",
+  "paymentMethodLabel": "Select Payment Method",
+  "codLabel": "Cash on Delivery (COD)",
+  "creditLabel": "Village Credit (खाता)",
+  "placeOrderLabel": "Place Order",
+  "orderSuccessTitle": "Order Placed Successfully!",
+  "orderNumberLabel": "Order Number",
+  "thankYouMessage": "Thank you for choosing Pandey Dairy Farming. Your fresh dairy delivery is scheduled.",
+  "estimatedDeliveryLabel": "Estimated Delivery",
+  "backToHomeLabel": "Back to Home",
+  "itemsOrderedLabel": "Items Ordered",
+  "totalAmountLabel": "Total Amount",
+  "orderHistoryTitle": "Order History",
+  "noOrdersMessage": "No past orders logged.",
+  "clearHistoryLabel": "Clear History",
+  "clearHistorySuccess": "Order history cleared successfully!",
+  "placedOnLabel": "Placed on",
+  "bulkOrderFormTitle": "Book Bulk / Event Order",
+  "customerDetailsStep": "Contact Info",
+  "productsSelectionStep": "Select Products",
+  "deliveryDetailsStep": "Delivery & Slot",
+  "paymentConfirmationStep": "Advance & Confirm",
+  "eventTypeLabel": "Event Type",
+  "eventDateLabel": "Event Date",
+  "expectedGuestsLabel": "Expected Guests",
+  "minimumAdvanceWarning": "Minimum 20% advance required",
+  "advancePaymentLabel": "Advance Payment (₹)",
+  "pendingBalanceLabel": "Pending Balance (₹)",
+  "bulkDiscountLabel": "Bulk Discount",
+  "minAdvanceRequiredError": "Advance must be at least 20% of grand total",
+  "bulkOrderSuccessTitle": "Event Booking Successful!",
+  "bulkOrderSuccessSub": "Your bulk event order has been logged and is awaiting dispatch confirmation.",
+  "advancePaidLabel": "Advance Paid",
+  "balanceDueLabel": "Balance Due",
+  "adminModeTitle": "Admin Dashboard",
+  "adminToggleLabel": "Admin Panel",
+  "totalCustomersLabel": "Total Subscribers",
+  "activeSubscribersLabel": "Active Subscribers",
+  "dailyMilkQtyLabel": "Today's Milk (L)",
+  "totalRevenueLabel": "Total Revenue (₹)",
+  "villagesTab": "Villages",
+  "dailyCustomersTab": "Subscribers",
+  "ordersTab": "User Orders",
+  "bulkOrdersTab": "Bulk Orders",
+  "reportsTab": "Reports & Analytics",
+  "addVillageLabel": "Add Village",
+  "villageNameLabel": "Village Name",
+  "registerSubscriberLabel": "Register Subscriber"
+}

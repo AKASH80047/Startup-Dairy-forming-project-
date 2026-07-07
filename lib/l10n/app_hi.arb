@@ -1,0 +1,149 @@
+{
+  "appName": "पांडेय डेयरी फार्मिंग",
+  "@appName": {
+    "description": "The name of the application"
+  },
+  "tagline": "शुद्ध • ताज़ा • अपनी मिट्टी से",
+  "@tagline": {
+    "description": "The brand tagline"
+  },
+  "omNamahShivaya": "ॐ नमः शिवाय",
+  "@omNamahShivaya": {
+    "description": "The brand devotional line"
+  },
+  "chooseLanguage": "अपनी भाषा चुनें",
+  "@chooseLanguage": {
+    "description": "Title of the language selection screen"
+  },
+  "selectLanguageDesc": "कृपया आगे बढ़ने के लिए अपनी पसंदीदा भाषा चुनें।",
+  "@selectLanguageDesc": {
+    "description": "Description of the language selection screen"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language name"
+  },
+  "hindi": "हिंदी",
+  "@hindi": {
+    "description": "Hindi language name"
+  },
+  "cow": "गाय",
+  "@cow": {
+    "description": "Cow category title"
+  },
+  "buffalo": "भैंस",
+  "@buffalo": {
+    "description": "Buffalo category title"
+  },
+  "otherProducts": "अन्य उत्पाद",
+  "@otherProducts": {
+    "description": "Other dairy products category title"
+  },
+  "bulkOrders": "थोक एवं समारोह ऑर्डर",
+  "@bulkOrders": {
+    "description": "Bulk and event orders category title"
+  },
+  "freeDeliveryMsg": "2 किमी तक मुफ़्त डिलीवरी",
+  "@freeDeliveryMsg": {
+    "description": "Free delivery details badge message"
+  },
+  "deliveryLocation": "डिलीवरी का स्थान",
+  "@deliveryLocation": {
+    "description": "Label for the current delivery location"
+  },
+  "defaultLocation": "स्थान चुनें...",
+  "@defaultLocation": {
+    "description": "Default placeholder text for delivery location"
+  },
+  "continueButton": "आगे बढ़ें",
+  "@continueButton": {
+    "description": "Label for standard continue button"
+  },
+  "settings": "सेटिंग्स",
+  "@settings": {
+    "description": "Settings label"
+  },
+  "changeLanguage": "भाषा बदलें",
+  "@changeLanguage": {
+    "description": "Label for changing language option"
+  },
+  "originLabel": "मूल स्थान",
+  "sourceVillageLabel": "स्रोत गाँव",
+  "fatPercentageLabel": "औसत वसा प्रतिशत",
+  "yieldLabel": "औसत उपज प्रति दिन",
+  "priceLabel": "कीमत",
+  "availableQtyLabel": "उपलब्ध मात्रा",
+  "a2StatusLabel": "A2 दूध प्रमाणन",
+  "verifiedLabel": "प्रमाणित A2",
+  "notVerifiedLabel": "प्रमाणित नहीं",
+  "unknownLabel": "अज्ञात",
+  "addToCartLabel": "कार्ट में जोड़ें",
+  "buyNowLabel": "अभी खरीदें",
+  "subscribeLabel": "सदस्यता शुरू करें",
+  "selectQuantityLabel": "मात्रा चुनें",
+  "availableLabel": "उपलब्ध",
+  "outOfStockLabel": "स्टॉक में नहीं",
+  "cowBreedsTitle": "गाय की नस्लें",
+  "buffaloBreedsTitle": "भैंस की नस्लें",
+  "otherProductsTitle": "अन्य उत्पाद",
+  "litresLabel": "लीटर",
+  "customQuantityHint": "कस्टम मात्रा दर्ज करें (मिली)",
+  "noBreedsMessage": "कोई नस्ल नहीं मिली।",
+  "noProductsMessage": "कोई उत्पाद उपलब्ध नहीं है।",
+  "productAdded": "उत्पाद कार्ट में जोड़ा गया!",
+  "checkoutTitle": "चेकआउट विवरण",
+  "fullNameLabel": "पूरा नाम",
+  "nameEmptyError": "कृपया अपना पूरा नाम दर्ज करें",
+  "phoneNumberLabel": "फ़ोन नंबर",
+  "phoneInvalidError": "कृपया 10 अंकों का मान्य फ़ोन नंबर दर्ज करें",
+  "deliverySlotLabel": "डिलीवरी स्लॉट चुनें",
+  "morningSlotLabel": "सुबह (6:00 AM - 9:00 AM)",
+  "eveningSlotLabel": "शाम (5:00 PM - 8:00 PM)",
+  "paymentMethodLabel": "भुगतान विधि चुनें",
+  "codLabel": "कैश ऑन डिलीवरी (COD)",
+  "creditLabel": "खाता (लोकल क्रेडिट)",
+  "placeOrderLabel": "ऑर्डर सबमिट करें",
+  "orderSuccessTitle": "ऑर्डर सफलतापूर्वक सबमिट किया गया!",
+  "orderNumberLabel": "ऑर्डर संख्या",
+  "thankYouMessage": "पांडेय डेयरी फार्मिंग को चुनने के लिए धन्यवाद। आपकी ताज़ा डेयरी डिलीवरी शेड्यूल हो गई है।",
+  "estimatedDeliveryLabel": "अनुमानित डिलीवरी",
+  "backToHomeLabel": "मुख्य पृष्ठ पर जाएं",
+  "itemsOrderedLabel": "ऑर्डर किए गए उत्पाद",
+  "totalAmountLabel": "कुल देय राशि",
+  "orderHistoryTitle": "ऑर्डर का इतिहास",
+  "noOrdersMessage": "कोई पुराना ऑर्डर नहीं मिला।",
+  "clearHistoryLabel": "इतिहास मिटाएं",
+  "clearHistorySuccess": "ऑर्डर इतिहास सफलतापूर्वक मिटा दिया गया!",
+  "placedOnLabel": "ऑर्डर की तिथि",
+  "bulkOrderFormTitle": "थोक / समारोह ऑर्डर बुक करें",
+  "customerDetailsStep": "सम्पर्क विवरण",
+  "productsSelectionStep": "उत्पाद चुनें",
+  "deliveryDetailsStep": "डिलीवरी एवं पता",
+  "paymentConfirmationStep": "अग्रिम भुगतान",
+  "eventTypeLabel": "समारोह का प्रकार",
+  "eventDateLabel": "समारोह की तिथि",
+  "expectedGuestsLabel": "अपेक्षित मेहमान संख्या",
+  "minimumAdvanceWarning": "न्यूनतम 20% अग्रिम भुगतान आवश्यक",
+  "advancePaymentLabel": "अग्रिम भुगतान (₹)",
+  "pendingBalanceLabel": "बकाया राशि (₹)",
+  "bulkDiscountLabel": "थोक छूट",
+  "minAdvanceRequiredError": "अग्रिम भुगतान कुल राशि का कम से कम 20% होना चाहिए",
+  "bulkOrderSuccessTitle": "समारोह बुकिंग सफल!",
+  "bulkOrderSuccessSub": "आपका थोक समारोह ऑर्डर दर्ज कर लिया गया है और पुष्टिकरण के लिए लंबित है।",
+  "advancePaidLabel": "अग्रिम भुगतान किया गया",
+  "balanceDueLabel": "बकाया राशि",
+  "adminModeTitle": "एडमिन पैनल",
+  "adminToggleLabel": "एडमिन पैनल",
+  "totalCustomersLabel": "कुल ग्राहक संख्या",
+  "activeSubscribersLabel": "सक्रिय ग्राहक",
+  "dailyMilkQtyLabel": "दैनिक दूध मात्रा (L)",
+  "totalRevenueLabel": "कुल आय (₹)",
+  "villagesTab": "गाँव प्रबंध",
+  "dailyCustomersTab": "दैनिक ग्राहक",
+  "ordersTab": "सामान्य ऑर्डर्स",
+  "bulkOrdersTab": "थोक ऑर्डर्स",
+  "reportsTab": "रिपोर्ट्स और आय",
+  "addVillageLabel": "गाँव जोड़ें",
+  "villageNameLabel": "गाँव का नाम",
+  "registerSubscriberLabel": "दैनिक ग्राहक दर्ज करें"
+}

@@ -1,0 +1,4 @@
+enum AnimalType {
+  cow,
+  buffalo,
+}
