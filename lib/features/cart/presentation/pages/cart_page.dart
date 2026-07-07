@@ -407,9 +407,47 @@ class CartPage extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: locationSet && !isTooFar
-                  ? () => context.push('/checkout')
-                  : null,
+              onPressed: () {
+                if (!locationSet) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        isHindi
+                            ? 'आगे बढ़ने के लिए कृपया पहले अपनी डिलीवरी लोकेशन चुनें!'
+                            : 'Please select your delivery location before proceeding!',
+                      ),
+                      backgroundColor: AppConstants.accentOrange,
+                      action: SnackBarAction(
+                        label: isHindi ? 'लोकेशन चुनें' : 'Set Location',
+                        textColor: Colors.white,
+                        onPressed: () => context.push('/map-picker'),
+                      ),
+                    ),
+                  );
+                  return;
+                }
+                if (isTooFar) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text(isHindi ? 'सीमा से बाहर' : 'Delivery Out of Range'),
+                      content: Text(
+                        isHindi
+                            ? 'क्षमा करें, हम केवल डेयरी फार्म से १० किमी के दायरे में ही डिलीवरी प्रदान करते हैं।'
+                            : 'Sorry, we only deliver within a 10 km radius of our farm base.',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text(isHindi ? 'ठीक है' : 'OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                  return;
+                }
+                context.push('/checkout');
+              },
               child: Text(isHindi ? 'चेकआउट के लिए आगे बढ़ें' : 'Proceed to Checkout'),
             ),
           ),
