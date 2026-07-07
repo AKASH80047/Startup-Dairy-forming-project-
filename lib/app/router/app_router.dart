@@ -18,6 +18,7 @@ import '../../features/bulk_order/presentation/pages/bulk_order_form_page.dart';
 import '../../features/bulk_order/presentation/pages/bulk_order_success_page.dart';
 import '../../features/bulk_order/domain/entities/bulk_order_entity.dart';
 import '../../features/admin/presentation/pages/admin_dashboard_page.dart';
+import '../../features/checkout/presentation/pages/mock_gateway_page.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -95,6 +96,13 @@ class AppRouter {
       GoRoute(
         path: '/admin',
         builder: (context, state) => const AdminDashboardPage(),
+      ),
+      GoRoute(
+        path: '/mock-gateway',
+        builder: (context, state) {
+          final order = state.extra as OrderEntity;
+          return MockGatewayPage(order: order);
+        },
       ),
     ],
   );

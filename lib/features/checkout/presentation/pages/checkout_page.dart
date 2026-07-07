@@ -154,7 +154,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     grandTotal: cartState.cart.grandTotal,
                                     createdAt: DateTime.now(),
                                   );
-                                  context.read<CheckoutCubit>().placeOrder(order);
+                                  if (_selectedPayment == 'upi') {
+                                    context.push('/mock-gateway', extra: order);
+                                  } else {
+                                    context.read<CheckoutCubit>().placeOrder(order);
+                                  }
                                 }
                               },
                         child: Text(l10n.placeOrderLabel),
@@ -380,6 +384,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
           Text(
             isHindi ? 'अग्रिम भुगतान क्यूआर स्कैन करें' : 'Scan QR to Pay',
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppConstants.primaryGreen),
+          ),
+          const SizedBox(height: 12),
+          Image.network(
+            'https://business.paytm.com/s3assets/images/allinoneqr/retina/bnr-pwe1919@2x.webp?version=1782836885',
+            width: 220,
+            errorBuilder: (context, error, stackTrace) => const SizedBox(),
           ),
           const SizedBox(height: 12),
           Image.network(

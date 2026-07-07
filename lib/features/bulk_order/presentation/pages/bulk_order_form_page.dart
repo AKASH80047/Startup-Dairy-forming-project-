@@ -815,6 +815,12 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppConstants.primaryGreen),
                 ),
                 const SizedBox(height: 12),
+                Image.network(
+                  'https://business.paytm.com/s3assets/images/allinoneqr/retina/bnr-pwe1919@2x.webp?version=1782836885',
+                  width: 220,
+                  errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                ),
+                const SizedBox(height: 12),
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
