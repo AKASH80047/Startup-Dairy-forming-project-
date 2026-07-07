@@ -2,6 +2,10 @@
 
 <div align="center">
 
+<img src="screenshots/banner.png" width="100%" alt="Pandey Dairy Farming Banner"/>
+
+<br/>
+
 # 🕉️ ॐ नमः शिवाय
 
 ## Pandey Dairy Farming
@@ -11,7 +15,9 @@
 **Pure • Fresh • From Our Roots**
 **शुद्ध • ताज़ा • अपनी मिट्टी से**
 
-A bilingual, village-focused dairy ordering and business management application built with Flutter and BLoC.
+<br/>
+
+A modern bilingual dairy ordering and village dairy business management application built with Flutter, BLoC, Clean Architecture, Maps, and REST API-ready architecture.
 
 </div>
 
@@ -19,30 +25,60 @@ A bilingual, village-focused dairy ordering and business management application 
 
 ## 📌 About the Project
 
-**Pandey Dairy Farming** is a modern dairy business application designed for customers, village-based daily milk management, dairy product ordering, bulk event orders, delivery location tracking, payments, and administration.
+**Pandey Dairy Farming** is a village-focused dairy business application designed for both customers and dairy administrators.
 
-The project is designed as a small MVP initially, but its architecture is planned for future business-level expansion.
+The application helps manage:
 
-The application supports:
-
-* English and Hindi
-* Cow milk categories
-* Buffalo milk categories
-* Dairy products
-* Daily milk customers
-* Village-wise customer records
-* Monthly milk history
-* Bulk and event orders
-* Large-order discounts
-* Map-based delivery locations
-* Free delivery within 2 km
-* Cash on Delivery
-* QR / UPI payment
-* Admin management
+* 🐄 Cow breeds and milk
+* 🐃 Buffalo breeds and milk
+* 🥛 Other dairy products
+* 🎉 Wedding and event bulk orders
+* 👥 Village-wise customers
+* 📅 Daily milk history
+* 💰 Monthly milk हिसाब
+* 📍 Map-based delivery locations
+* 🚚 Free delivery within 2 km
+* 💵 Cash on Delivery
+* 📱 QR / UPI payments
+* 🌐 Hindi and English
+* 🧑‍💼 Admin management
 
 ---
 
-# 📱 Application Flow
+# 📱 Application Preview
+
+<div align="center">
+
+<img src="screenshots/splash_screen.png" width="23%" alt="Splash Screen"/>
+&nbsp;
+<img src="screenshots/language_selection.png" width="23%" alt="Language Selection"/>
+&nbsp;
+<img src="screenshots/home_screen.png" width="23%" alt="Home Screen"/>
+&nbsp;
+<img src="screenshots/cow_breeds.png" width="23%" alt="Cow Breeds"/>
+
+</div>
+
+<br/>
+
+<div align="center">
+
+<b>Splash Screen</b>
+       <b>Language</b>
+       <b>Home Screen</b>
+       <b>Cow Breeds</b>
+
+</div>
+
+---
+
+# 🚀 Application Flow
+
+<div align="center">
+
+<img src="screenshots/app_flow.png" width="90%" alt="Pandey Dairy Farming App Flow"/>
+
+</div>
 
 ```text
 App Open
@@ -53,8 +89,6 @@ Pandey Dairy Farming
 पांडेय डेयरी फार्मिंग
    ↓
 Choose Language
-भाषा चुनें
-   ↓
 English / हिंदी
    ↓
 Home Screen
@@ -70,99 +104,185 @@ Home Screen
 
 ---
 
-# 🖼️ App Screenshots
+# 🕉️ 1. Premium Splash Screen
 
-> Add real application screenshots inside the `screenshots/` folder.
+<div align="center">
 
-## Splash Screen
+<img src="screenshots/splash_screen.png" width="280" alt="Pandey Dairy Farming Splash Screen"/>
 
-![Splash Screen](screenshots/splash_screen.png)
+</div>
 
-The splash screen displays:
+The application starts with a premium devotional and brand-focused splash screen.
 
-* ॐ symbol
-* ॐ नमः शिवाय
-* Om Namah Shivaya
-* Pandey Dairy Farming
-* पांडेय डेयरी फार्मिंग
-* Brand tagline
+### Display Sequence
+
+```text
+🕉️
+↓
+ॐ नमः शिवाय
+↓
+OM NAMAH SHIVAYA
+↓
+PANDEY DAIRY FARMING
+↓
+पांडेय डेयरी फार्मिंग
+↓
+Pure • Fresh • From Our Roots
+```
+
+The animation should remain subtle, premium, and professional.
 
 ---
 
-## 🌐 Language Selection
+# 🌐 2. Hindi and English Language Support
 
-![Language Selection](screenshots/language_selection.png)
+<div align="center">
+
+<img src="screenshots/language_selection.png" width="280" alt="Language Selection"/>
+
+</div>
 
 The application supports:
 
+* 🇮🇳 हिंदी
 * English
-* हिंदी
 
-The selected language is saved locally.
+### First-Time User Flow
 
-The user can change the language later from the app.
+```text
+Splash
+   ↓
+Choose Language
+अपनी भाषा चुनें
+   ↓
+English / हिंदी
+   ↓
+Save Preference
+   ↓
+Open Home
+```
 
----
+The selected language is stored locally.
 
-# 🏠 Home Screen
+The user can change language later from:
 
-![Home Screen](screenshots/home_screen.png)
+* Home AppBar
+* Profile
+* Settings
 
-The main home screen contains four primary categories:
+### Localization Files
 
-### 1. Cow / गाय
-
-Browse different cow breeds and milk options.
-
-### 2. Buffalo / भैंस
-
-Browse supported buffalo breeds.
-
-### 3. Other Products / अन्य उत्पाद
-
-Browse dairy products such as Paneer, Curd, Ghee, and Buttermilk.
-
-### 4. Bulk & Event Orders / थोक एवं समारोह ऑर्डर
-
-Place large orders for weddings, birthdays, religious functions, and other events.
-
----
-
-# 🐄 Cow Breeds
-
-![Cow Breeds](screenshots/cow_breeds.png)
-
-When the user selects **Cow**, all available cow breeds open directly.
-
-Supported initial breeds:
-
-* Sahiwal / साहीवाल
-* Gir / गीर
-* Red Sindhi / लाल सिंधी
-* Tharparkar / थारपारकर
-* Rathi / राठी
-* Kankrej / कांकरेज
-* Jersey / जर्सी
-* Holstein Friesian / होल्स्टीन फ्रिसियन
-
-There is no separate Exotic Cow category in the initial user flow.
+```text
+lib/
+└── l10n/
+    ├── app_en.arb
+    └── app_hi.arb
+```
 
 ---
 
-# 🐃 Buffalo Breeds
+# 🏠 3. Premium Home Screen
 
-![Buffalo Breeds](screenshots/buffalo_breeds.png)
+<div align="center">
 
-Supported initial buffalo breeds:
+<img src="screenshots/home_screen.png" width="300" alt="Pandey Dairy Farming Home Screen"/>
 
-* Murrah / मुर्रा
-* Bhadawari / भदावरी
-* Jaffarabadi / जाफराबादी
-* Mehsana / मेहसाना
+</div>
 
-Each breed can contain:
+The Home Screen contains four main visual categories.
 
-* Image
+<div align="center">
+
+<img src="screenshots/home_cow_card.png" width="45%" alt="Cow Category"/>
+&nbsp;
+<img src="screenshots/home_buffalo_card.png" width="45%" alt="Buffalo Category"/>
+
+<br/><br/>
+
+<img src="screenshots/home_other_card.png" width="45%" alt="Other Products"/>
+&nbsp;
+<img src="screenshots/home_bulk_card.png" width="45%" alt="Bulk Orders"/>
+
+</div>
+
+### Main Categories
+
+```text
+🐄 Cow / गाय
+
+🐃 Buffalo / भैंस
+
+🥛 Other Products / अन्य उत्पाद
+
+🎉 Bulk & Event Orders / थोक एवं समारोह ऑर्डर
+```
+
+The final production UI should use real high-quality images instead of emoji-based cards.
+
+---
+
+# 🐄 4. Cow Breeds
+
+<div align="center">
+
+<img src="screenshots/cow_breeds.png" width="300" alt="Cow Breeds Screen"/>
+&nbsp;&nbsp;
+<img src="screenshots/cow_breed_details.png" width="300" alt="Cow Breed Details"/>
+
+</div>
+
+When the user selects **Cow / गाय**, all cow breeds open directly.
+
+### Supported Cow Breeds
+
+```text
+🐄 Sahiwal / साहीवाल
+🐄 Gir / गीर
+🐄 Red Sindhi / लाल सिंधी
+🐄 Tharparkar / थारपारकर
+🐄 Rathi / राठी
+🐄 Kankrej / कांकरेज
+🐄 Jersey / जर्सी
+🐄 Holstein Friesian / HF
+```
+
+There is no unnecessary separate Exotic Cow category in the main user flow.
+
+Each breed card can show:
+
+* Real breed image
+* English name
+* Hindi name
+* Origin
+* Short description
+* Availability
+* Price
+* View Details
+
+---
+
+# 🐃 5. Buffalo Breeds
+
+<div align="center">
+
+<img src="screenshots/buffalo_breeds.png" width="300" alt="Buffalo Breeds"/>
+&nbsp;&nbsp;
+<img src="screenshots/buffalo_details.png" width="300" alt="Buffalo Details"/>
+
+</div>
+
+### Supported Buffalo Breeds
+
+```text
+🐃 Murrah / मुर्रा
+🐃 Bhadawari / भदावरी
+🐃 Jaffarabadi / जाफराबादी
+🐃 Mehsana / मेहसाना
+```
+
+Each buffalo breed can contain:
+
+* Breed image
 * English name
 * Hindi name
 * Origin
@@ -173,16 +293,18 @@ Each breed can contain:
 
 ---
 
-# 📖 Breed Detail Screen
+# 📖 6. Breed Detail Screen
 
-![Breed Details](screenshots/breed_details.png)
+<div align="center">
 
-When a customer selects a breed, a detailed page opens.
+<img src="screenshots/breed_details.png" width="300" alt="Breed Detail Screen"/>
 
-Example information:
+</div>
+
+Example:
 
 ```text
-Breed: Gir / गीर
+Gir / गीर
 
 Origin:
 Gujarat, India
@@ -203,29 +325,45 @@ Available Quantity:
 __ litres
 ```
 
-Possible actions:
+### Customer Actions
 
-* Select Quantity
-* Add to Cart
-* Buy Now
-* Start Daily Subscription
+```text
+[ Select Quantity ]
 
-The system should avoid unsupported health or medical claims.
+[ Add to Cart ]
+
+[ Buy Now ]
+
+[ Start Daily Subscription ]
+```
 
 ---
 
-# 🥛 Other Dairy Products
+# 🥛 7. Other Dairy Products
 
-![Other Products](screenshots/other_products.png)
+<div align="center">
 
-The **Other Products** section contains:
+<img src="screenshots/other_products.png" width="300" alt="Other Dairy Products"/>
+&nbsp;&nbsp;
+<img src="screenshots/product_details.png" width="300" alt="Product Details"/>
 
-* Paneer / पनीर
-* Curd / दही
-* Ghee / घी
-* Buttermilk / छाछ
-* Butter / मक्खन
-* Lassi / लस्सी
+</div>
+
+### Products
+
+```text
+🥣 Curd / दही
+
+🧀 Paneer / पनीर
+
+🧈 Ghee / घी
+
+🥛 Buttermilk / छाछ
+
+🧈 Butter / मक्खन
+
+🥤 Lassi / लस्सी
+```
 
 For the first MVP, priority products are:
 
@@ -236,7 +374,19 @@ For the first MVP, priority products are:
 
 ---
 
-# 🛒 Normal Customer Order Flow
+# 🛒 8. Customer Ordering System
+
+<div align="center">
+
+<img src="screenshots/cart_screen.png" width="30%" alt="Cart"/>
+&nbsp;
+<img src="screenshots/checkout_screen.png" width="30%" alt="Checkout"/>
+&nbsp;
+<img src="screenshots/order_success.png" width="30%" alt="Order Success"/>
+
+</div>
+
+### Order Flow
 
 ```text
 Select Product
@@ -251,30 +401,26 @@ Select Map Location
       ↓
 Calculate Distance
       ↓
-Calculate Delivery Charge
+Delivery Charge
       ↓
 Choose Payment
       ↓
 Place Order
 ```
 
-Possible milk quantities:
-
-* 500 ml
-* 1 litre
-* 2 litre
-* 5 litre
-* Custom quantity where supported
-
 ---
 
-# 🏘️ Village Management
+# 🏘️ 9. Village Management
 
-![Village Management](screenshots/village_management.png)
+<div align="center">
 
-The application supports village-wise business management.
+<img src="screenshots/village_management.png" width="300" alt="Village Management"/>
+&nbsp;&nbsp;
+<img src="screenshots/village_customers.png" width="300" alt="Village Customers"/>
 
-Example:
+</div>
+
+The system supports village-wise business management.
 
 ```text
 Village A
@@ -287,35 +433,29 @@ Village B
    └── Customer 5
 ```
 
-Village information can contain:
-
-* Village name
-* Hindi name
-* District
-* State
-* PIN code
-* Latitude
-* Longitude
-* Active status
-
-The admin can:
+Admin can:
 
 * Add village
 * Edit village
 * Disable village
-* View village customers
+* View customers
+* View daily milk customers
 * View village orders
 * View pending payments
 
 ---
 
-# 👤 Daily Milk Customer System
+# 👤 10. Daily Milk Customer System
 
-![Daily Customer](screenshots/daily_customer.png)
+<div align="center">
 
-This is one of the main business features.
+<img src="screenshots/daily_customer.png" width="300" alt="Daily Customer"/>
+&nbsp;&nbsp;
+<img src="screenshots/add_daily_customer.png" width="300" alt="Add Daily Customer"/>
 
-If a customer takes milk every day, the admin can manually register the customer.
+</div>
+
+This is one of the strongest real-business features.
 
 Example:
 
@@ -345,62 +485,53 @@ Status:
 Active
 ```
 
-The customer record can contain:
-
-* Name
-* Mobile number
-* Village
-* Address
-* Map location
-* Milk product
-* Breed
-* Morning quantity
-* Evening quantity
-* Price
-* Start date
-* Payment cycle
-* Notes
+Admin can manually add village customers who take milk every day.
 
 ---
 
-# 📅 Daily Milk History
+# 📅 11. Daily Milk History
 
-![Daily History](screenshots/daily_history.png)
+<div align="center">
 
-Every daily delivery can be stored.
+<img src="screenshots/daily_history.png" width="300" alt="Daily Milk History"/>
 
-Example:
+</div>
+
+Every delivery record is stored.
 
 ```text
 01 July → 3 L → ₹240 → Delivered
+
 02 July → 3 L → ₹240 → Delivered
+
 03 July → 2 L → ₹160 → Delivered
+
 04 July → 0 L → Paused
+
 05 July → 3 L → ₹240 → Delivered
 ```
 
-Possible statuses:
+### Delivery Status
 
-* Pending
-* Delivered
-* Skipped
-* Paused
-* Cancelled
-
-History filters:
-
-* Daily
-* Weekly
-* Monthly
-* Custom date range
+```text
+Pending
+Delivered
+Skipped
+Paused
+Cancelled
+```
 
 ---
 
-# 💰 Monthly Milk हिसाब
+# 💰 12. Monthly Milk हिसाब
 
-![Monthly Bill](screenshots/monthly_bill.png)
+<div align="center">
 
-At the end of the month, the system can calculate the customer's milk bill.
+<img src="screenshots/monthly_bill.png" width="300" alt="Monthly Bill"/>
+&nbsp;&nbsp;
+<img src="screenshots/payment_history.png" width="300" alt="Payment History"/>
+
+</div>
 
 Example:
 
@@ -424,7 +555,7 @@ Pending:
 ₹1,960
 ```
 
-Admin actions:
+### Admin Actions
 
 * Record Cash Payment
 * Record QR Payment
@@ -433,25 +564,37 @@ Admin actions:
 * Download Bill
 * Mark Fully Paid
 
-Partial payments are supported.
-
 ---
 
-# 🎉 Bulk & Event Orders
+# 🎉 13. Bulk & Event Orders
 
-![Bulk Orders](screenshots/bulk_orders.png)
+<div align="center">
 
-Customers can place large dairy orders for:
+<img src="screenshots/bulk_orders.png" width="300" alt="Bulk Orders"/>
+&nbsp;&nbsp;
+<img src="screenshots/bulk_order_form.png" width="300" alt="Bulk Order Form"/>
 
-* Wedding / शादी
-* Birthday / जन्मदिन
-* Bhandara / भंडारा
-* Religious Function / धार्मिक कार्यक्रम
-* Family Function / पारिवारिक समारोह
-* School Event / स्कूल कार्यक्रम
-* Business Order / व्यावसायिक ऑर्डर
-* Catering / कैटरिंग
-* Other / अन्य
+</div>
+
+Customers can place large orders for:
+
+```text
+💍 Wedding / शादी
+
+🎂 Birthday / जन्मदिन
+
+🙏 Bhandara / भंडारा
+
+🛕 Religious Function / धार्मिक कार्यक्रम
+
+🎊 Family Function / पारिवारिक समारोह
+
+🏫 School Event / स्कूल कार्यक्रम
+
+🏢 Business Order / व्यावसायिक ऑर्डर
+
+🍽️ Catering / कैटरिंग
+```
 
 Example:
 
@@ -468,17 +611,17 @@ Curd:
 30 kg
 ```
 
-Customers can select multiple products in one bulk order.
-
 ---
 
-# 🎁 Bulk Discount System
+# 🎁 14. Bulk Discount System
 
-![Discount System](screenshots/discount_system.png)
+<div align="center">
 
-Large orders can receive discounts.
+<img src="screenshots/discount_system.png" width="300" alt="Bulk Discount System"/>
 
-Example configuration:
+</div>
+
+Example configurable rules:
 
 ```text
 ₹2,000 – ₹4,999
@@ -494,34 +637,42 @@ Example configuration:
 → Custom Quote
 ```
 
-Important:
-
-Discounts should not be permanently hardcoded.
-
-The admin can:
+Admin can:
 
 * Create discount rules
 * Edit rules
 * Disable rules
-* Add product-specific discounts
-* Add quantity-based discounts
-* Approve custom discounts
+* Create quantity discounts
+* Create product discounts
+* Approve custom quotes
 
 ---
 
-# 📍 Map & Location
+# 📍 15. Map and Live Location
 
-![Map Location](screenshots/map_location.png)
+<div align="center">
 
-Customers can select their delivery location using:
+<img src="screenshots/map_location.png" width="300" alt="Map Location"/>
+&nbsp;&nbsp;
+<img src="screenshots/location_confirm.png" width="300" alt="Confirm Location"/>
 
-* Current Location
-* Choose on Map
-* Drop Pin
-* Search Address
-* Saved Address
+</div>
 
-Application flow:
+Customer options:
+
+```text
+📍 Use Current Location
+
+🗺️ Choose on Map
+
+📌 Drop Pin
+
+🔍 Search Address
+
+🏠 Saved Address
+```
+
+### Location Flow
 
 ```text
 Dairy Location
@@ -535,27 +686,25 @@ Delivery Eligibility
 Delivery Charge
 ```
 
-Saved location data:
-
-* Latitude
-* Longitude
-* Address
-* Village
-* Landmark
-* PIN code
-
 ---
 
-# 🚚 Delivery Charge System
+# 🚚 16. Free Delivery System
 
-The initial business rule is:
+<div align="center">
+
+<img src="screenshots/free_delivery.png" width="300" alt="Free Delivery System"/>
+
+</div>
+
+### Main Business Rule
 
 ```text
-0–2 km
-→ FREE DELIVERY
+0–2 KM
+   ↓
+FREE DELIVERY
 ```
 
-Example configurable delivery rules:
+Example configuration:
 
 ```text
 0–2 km
@@ -571,33 +720,31 @@ Example configurable delivery rules:
 → Custom / Unavailable
 ```
 
-These values should be configurable from the admin system.
-
-For production use, final delivery charges should be validated by the backend.
+These values should be configurable from the Admin Panel.
 
 ---
 
-# 💵 Payment Methods
+# 💵 17. Payment System
 
-![Payment Screen](screenshots/payment_screen.png)
+<div align="center">
 
-Supported payment methods:
+<img src="screenshots/payment_method.png" width="30%" alt="Payment Method"/>
+&nbsp;
+<img src="screenshots/qr_payment.png" width="30%" alt="QR Payment"/>
+&nbsp;
+<img src="screenshots/payment_status.png" width="30%" alt="Payment Status"/>
 
-### 1. Cash on Delivery
+</div>
+
+### Supported Payment Methods
 
 ```text
-Order Placed
-    ↓
-Payment Pending
-    ↓
-Order Delivered
-    ↓
-Cash Received
-    ↓
-Payment Completed
+💵 Cash on Delivery
+
+📱 QR / UPI Payment
 ```
 
-### 2. QR / UPI Payment
+### QR Payment Flow
 
 ```text
 Order Amount
@@ -616,25 +763,25 @@ Upload Screenshot
 Submit Payment
 ```
 
-The real business QR code can be added later.
-
 Payment statuses:
 
-* Pending
-* Verification Pending
-* Verified
-* Failed
-* Rejected
-
-Uploaded screenshots should not automatically mark a payment as successful.
-
-Admin verification is required in the MVP.
+```text
+Pending
+Verification Pending
+Verified
+Failed
+Rejected
+```
 
 ---
 
-# 💍 Bulk Order Payment
+# 💍 18. Bulk Order Payment
 
-Large event orders support advance and partial payments.
+<div align="center">
+
+<img src="screenshots/bulk_payment.png" width="300" alt="Bulk Payment"/>
+
+</div>
 
 Example:
 
@@ -649,15 +796,26 @@ Pending:
 ₹40,000
 ```
 
-The system maintains a complete payment history.
+The system supports:
+
+* Advance payment
+* Partial payment
+* Final payment
+* Payment history
 
 ---
 
-# 🧑‍💼 Admin Panel
+# 🧑‍💼 19. Admin Panel
 
-![Admin Dashboard](screenshots/admin_dashboard.png)
+<div align="center">
 
-The Admin Dashboard can show:
+<img src="screenshots/admin_dashboard.png" width="300" alt="Admin Dashboard"/>
+&nbsp;&nbsp;
+<img src="screenshots/admin_orders.png" width="300" alt="Admin Orders"/>
+
+</div>
+
+Admin Dashboard can show:
 
 ```text
 Total Customers
@@ -673,111 +831,56 @@ Pending Payments
 ₹25,000
 ```
 
-Admin modules:
-
-* Dashboard
-* Villages
-* Customers
-* Daily Milk Customers
-* Daily Delivery Records
-* Cow Breeds
-* Buffalo Breeds
-* Products
-* Normal Orders
-* Bulk Orders
-* Discount Rules
-* Payments
-* Monthly Bills
-* Delivery Settings
-* Reports
-* Settings
-
----
-
-# 📦 Order Status
-
-Normal order statuses:
+### Admin Modules
 
 ```text
-Pending
-   ↓
-Confirmed
-   ↓
-Preparing
-   ↓
-Out for Delivery
-   ↓
-Delivered
-```
-
-Other possible status:
-
-```text
-Cancelled
-```
-
-Bulk order statuses:
-
-```text
-Quote Requested
-      ↓
-Quote Sent
-      ↓
-Awaiting Advance
-      ↓
-Confirmed
-      ↓
-Preparing
-      ↓
-Ready
-      ↓
-Out for Delivery
-      ↓
-Delivered
+Dashboard
+├── Villages
+├── Customers
+├── Daily Milk Customers
+├── Daily Delivery Records
+├── Cow Breeds
+├── Buffalo Breeds
+├── Products
+├── Normal Orders
+├── Bulk Orders
+├── Discount Rules
+├── Payments
+├── Monthly Bills
+├── Delivery Settings
+├── Reports
+└── Settings
 ```
 
 ---
 
-# 🌐 English and Hindi Support
+# 🧠 20. BLoC Architecture
 
-The application supports complete bilingual navigation.
+<div align="center">
 
-English example:
+<img src="screenshots/bloc_architecture.png" width="85%" alt="BLoC Architecture"/>
 
-```text
-Cow
-Buffalo
-Other Products
-Add to Cart
-Place Order
-```
-
-Hindi example:
+</div>
 
 ```text
-गाय
-भैंस
-अन्य उत्पाद
-कार्ट में जोड़ें
-ऑर्डर करें
+User Interface
+      ↓
+Event
+      ↓
+BLoC / Cubit
+      ↓
+Use Case
+      ↓
+Repository
+      ↓
+Remote Data Source
+      ↓
+Dio
+      ↓
+REST API
+      ↓
+Database
 ```
-
-Localization files:
-
-```text
-lib/
-└── l10n/
-    ├── app_en.arb
-    └── app_hi.arb
-```
-
-The selected language is saved locally.
-
----
-
-# 🧠 BLoC State Management
-
-The application uses BLoC/Cubit for scalable state management.
 
 Suggested modules:
 
@@ -797,61 +900,43 @@ PaymentBloc
 MonthlyBillingBloc
 ```
 
-Basic data flow:
-
-```text
-UI
- ↓
-Event
- ↓
-BLoC
- ↓
-Use Case
- ↓
-Repository
- ↓
-REST API
- ↓
-Database
-```
-
 ---
 
-# 🏗️ Application Architecture
+# 🏗️ 21. Complete System Architecture
 
-The project follows:
+<div align="center">
 
-* Feature-First Architecture
-* Clean Architecture
-* BLoC State Management
-* Repository Pattern
-* REST API-ready structure
+<img src="screenshots/system_architecture.png" width="90%" alt="System Architecture"/>
 
-Architecture flow:
+</div>
 
 ```text
-Flutter UI
-    ↓
+Flutter Mobile App
+        ↓
+Presentation Layer
+        ↓
 BLoC / Cubit
-    ↓
-Domain Use Case
-    ↓
+        ↓
+Domain Layer
+        ↓
+Use Cases
+        ↓
 Repository
-    ↓
-Remote Data Source
-    ↓
-Dio
-    ↓
+        ↓
+Data Layer
+        ↓
+Dio API Client
+        ↓
 REST API
-    ↓
-Backend
-    ↓
-Database
+        ↓
+Backend Server
+        ↓
+PostgreSQL Database
 ```
 
 ---
 
-# 📁 Recommended Folder Structure
+# 📁 22. Recommended Project Structure
 
 ```text
 lib/
@@ -901,220 +986,197 @@ lib/
 
 ---
 
-# 🧩 Feature Structure
+# 🛠️ 23. Technology Stack
 
-Each major feature follows:
-
-```text
-feature/
-├── data/
-│   ├── datasources/
-│   ├── models/
-│   └── repositories/
-│
-├── domain/
-│   ├── entities/
-│   ├── repositories/
-│   └── usecases/
-│
-└── presentation/
-    ├── bloc/
-    ├── pages/
-    └── widgets/
-```
-
----
-
-# 🛠️ Technology Stack
-
-## Mobile Application
-
-* Flutter
-* Dart
-
-## State Management
-
-* flutter_bloc
-* Cubit
-* Equatable
-
-## Navigation
-
-* GoRouter
-
-## Networking
-
-* Dio
-
-## Localization
-
-* Flutter ARB Localization
-* English
-* Hindi
-
-## Maps and Location
-
-* Google Maps
-* Geolocator
-* Geocoding
-* Permission Handler
-
-## Local Storage
-
-* SharedPreferences for simple preferences
-* Secure Storage for sensitive local values
-
-## Future Backend
-
-Recommended:
-
-* Node.js
-* Express.js
-* PostgreSQL
-* JWT Authentication
-* REST API
+| Area              | Technology         |
+| ----------------- | ------------------ |
+| Mobile            | Flutter            |
+| Language          | Dart               |
+| State Management  | BLoC / Cubit       |
+| Architecture      | Clean Architecture |
+| Navigation        | GoRouter           |
+| Networking        | Dio                |
+| Localization      | ARB                |
+| Maps              | Google Maps        |
+| Location          | Geolocator         |
+| Permissions       | Permission Handler |
+| Local Preferences | SharedPreferences  |
+| Future Backend    | Node.js            |
+| Backend Framework | Express.js         |
+| Database          | PostgreSQL         |
+| Authentication    | JWT                |
+| API               | REST API           |
 
 ---
 
-# 🔌 REST API Flow
+# 🚀 24. Development Roadmap
+
+<div align="center">
+
+<img src="screenshots/development_roadmap.png" width="90%" alt="Development Roadmap"/>
+
+</div>
+
+### Phase 1
 
 ```text
-Flutter Application
-        ↓
-Dio API Client
-        ↓
-REST API
-        ↓
-Node.js Backend
-        ↓
-PostgreSQL Database
-```
-
-Example future endpoints:
-
-```text
-POST /api/auth/login
-POST /api/auth/register
-
-GET  /api/villages
-GET  /api/breeds
-GET  /api/products
-
-POST /api/orders
-GET  /api/orders
-
-POST /api/bulk-orders
-
-POST /api/daily-customers
-GET  /api/daily-customers
-
-GET  /api/customers/:id/history
-
-POST /api/payments
-
-POST /api/location/delivery-quote
-
-GET  /api/admin/dashboard
-```
-
----
-
-# 🚀 Development Roadmap
-
-## Phase 1 — UI Foundation
-
-```text
-Splash Screen
-      ↓
-ॐ नमः शिवाय Branding
-      ↓
+Splash
+↓
+ॐ नमः शिवाय
+↓
 Language Selection
-      ↓
-English / Hindi
-      ↓
+↓
 Home Screen
-      ↓
+↓
 Cow / Buffalo / Other / Bulk
 ```
 
-## Phase 2 — Product Browsing
+### Phase 2
 
 ```text
 Cow Breeds
+↓
 Buffalo Breeds
+↓
 Breed Details
+↓
 Other Products
 ```
 
-## Phase 3 — Ordering
+### Phase 3
 
 ```text
 Cart
+↓
 Address
+↓
 Map
+↓
 Location
+↓
 Distance
+↓
 Delivery Fee
 ```
 
-## Phase 4 — Checkout
+### Phase 4
 
 ```text
-Cash on Delivery
+COD
+↓
 QR / UPI
+↓
 Orders
+↓
 Order History
 ```
 
-## Phase 5 — Village Business
+### Phase 5
 
 ```text
 Villages
+↓
 Daily Customers
-Daily Milk Records
+↓
+Daily Milk History
+↓
 Monthly हिसाब
-Payments
 ```
 
-## Phase 6 — Bulk Business
+### Phase 6
 
 ```text
 Wedding Orders
+↓
 Birthday Orders
-Function Orders
+↓
 Bulk Discounts
+↓
 Advance Payments
-Pending Balance
 ```
 
-## Phase 7 — Administration
+### Phase 7
 
 ```text
 Admin Dashboard
+↓
 Reports
-Business Analytics
+↓
+Analytics
+↓
 Production Hardening
+```
+
+---
+
+# 📂 Screenshot Folder Structure
+
+Create this folder in the project root:
+
+```text
+screenshots/
+├── banner.png
+├── app_flow.png
+├── splash_screen.png
+├── language_selection.png
+├── home_screen.png
+├── home_cow_card.png
+├── home_buffalo_card.png
+├── home_other_card.png
+├── home_bulk_card.png
+├── cow_breeds.png
+├── cow_breed_details.png
+├── buffalo_breeds.png
+├── buffalo_details.png
+├── breed_details.png
+├── other_products.png
+├── product_details.png
+├── cart_screen.png
+├── checkout_screen.png
+├── order_success.png
+├── village_management.png
+├── village_customers.png
+├── daily_customer.png
+├── add_daily_customer.png
+├── daily_history.png
+├── monthly_bill.png
+├── payment_history.png
+├── bulk_orders.png
+├── bulk_order_form.png
+├── discount_system.png
+├── map_location.png
+├── location_confirm.png
+├── free_delivery.png
+├── payment_method.png
+├── qr_payment.png
+├── payment_status.png
+├── bulk_payment.png
+├── admin_dashboard.png
+├── admin_orders.png
+├── bloc_architecture.png
+├── system_architecture.png
+└── development_roadmap.png
 ```
 
 ---
 
 # 🎯 Project Vision
 
-The long-term goal of **Pandey Dairy Farming** is to become more than a basic milk delivery application.
+**Pandey Dairy Farming** is not designed as a basic student milk-delivery application.
 
 It is designed as a:
 
-> **Bilingual village dairy commerce, daily milk ledger, customer management, breed catalog, bulk event ordering, location-based delivery, payment, and administration platform.**
+> **Bilingual village dairy commerce, breed catalog, daily milk ledger, customer management, monthly billing, bulk event ordering, map-based delivery, payment, and administration platform.**
 
-The application starts small but is designed to grow into a real dairy business management ecosystem.
+The application starts small but can grow into a complete real-world dairy business ecosystem.
 
 ---
 
 <div align="center">
 
-## 🕉️ ॐ नमः शिवाय
+# 🕉️ ॐ नमः शिवाय
 
-### Pandey Dairy Farming
+## Pandey Dairy Farming
 
 ### पांडेय डेयरी फार्मिंग
 
