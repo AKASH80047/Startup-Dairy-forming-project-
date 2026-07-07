@@ -433,13 +433,24 @@ class CartPage extends StatelessWidget {
                       title: Text(isHindi ? 'सीमा से बाहर' : 'Delivery Out of Range'),
                       content: Text(
                         isHindi
-                            ? 'क्षमा करें, हम केवल डेयरी फार्म से १० किमी के दायरे में ही डिलीवरी प्रदान करते हैं।'
-                            : 'Sorry, we only deliver within a 10 km radius of our farm base.',
+                            ? 'क्षमा करें, हम केवल १० किमी के भीतर डिलीवरी करते हैं। क्या आप परीक्षण (Test Mode) के लिए आगे बढ़ना चाहते हैं?'
+                            : 'Sorry, we only deliver within 10 km. Would you like to bypass this for testing?',
                       ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: Text(isHindi ? 'ठीक है' : 'OK'),
+                          child: Text(isHindi ? 'रद्द करें' : 'Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            context.read<CartCubit>().updateDeliveryDistance(1.0);
+                            context.push('/checkout');
+                          },
+                          child: Text(
+                            isHindi ? 'बायपास करें (Test Mode)' : 'Bypass (Test Mode)',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),
