@@ -49,16 +49,15 @@ The application helps manage:
 
 <div align="center">
 
-<img src="screenshots/splash_screen.png" width="23%" alt="Splash Screen"/>
-&nbsp;
-<img src="screenshots/language_selection.png" width="23%" alt="Language Selection"/>
-&nbsp;
-<img src="screenshots/home_screen.png" width="23%" alt="Home Screen"/>
-&nbsp;
-<img src="screenshots/cow_breeds.png" width="23%" alt="Cow Breeds"/>
+  <img src="screenshots/splash_screen.png" width="23%" alt="Splash Screen"/>
+  &nbsp;
+  <img src="screenshots/language_selection.png" width="23%" alt="Language Selection"/>
+  &nbsp;
+  <img src="screenshots/home_screen.png" width="23%" alt="Home Screen"/>
+  &nbsp;
+  <img src="screenshots/cow_breeds.png" width="23%" alt="Cow Breeds"/>
 
 </div>
-
 <br/>
 
 <div align="center">
