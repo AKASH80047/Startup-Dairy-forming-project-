@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:pandey/l10n/app_localizations.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../cart/presentation/bloc/cart_cubit.dart';
@@ -16,12 +17,11 @@ class MapPickerPage extends StatefulWidget {
 }
 
 class _MapPickerPageState extends State<MapPickerPage> {
-  GoogleMapController? _mapController;
+  final MapController _mapController = MapController();
   LatLng _selectedLatLng = const LatLng(
     LocationCubit.farmLatitude,
     LocationCubit.farmLongitude,
   );
-  final Set<Marker> _markers = {};
   
   // Text controllers for manual address fallback
   final TextEditingController _addressController = TextEditingController();
@@ -31,7 +31,6 @@ class _MapPickerPageState extends State<MapPickerPage> {
   @override
   void initState() {
     super.initState();
-    _updateMarker(_selectedLatLng);
     // Request location permissions and auto-center on startup
     context.read<LocationCubit>().fetchCurrentLocation();
   }
@@ -47,33 +46,11 @@ class _MapPickerPageState extends State<MapPickerPage> {
   void _updateMarker(LatLng latLng) {
     setState(() {
       _selectedLatLng = latLng;
-      _markers.clear();
-      _markers.add(
-        Marker(
-          markerId: const MarkerId('delivery_pin'),
-          position: latLng,
-          draggable: true,
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-          onDragEnd: (newPosition) {
-            _selectedLatLng = newPosition;
-            context
-                .read<LocationCubit>()
-                .updateLocationCoordinates(newPosition.latitude, newPosition.longitude);
-          },
-        ),
-      );
     });
   }
 
   void _animateToPosition(double lat, double lon) {
-    _mapController?.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: LatLng(lat, lon),
-          zoom: 15.0,
-        ),
-      ),
-    );
+    _mapController.move(LatLng(lat, lon), 15.0);
   }
 
   @override
@@ -92,7 +69,6 @@ class _MapPickerPageState extends State<MapPickerPage> {
           listener: (context, state) {
             if (state is LocationSuccess) {
               _selectedLatLng = LatLng(state.latitude, state.longitude);
-              _updateMarker(_selectedLatLng);
               _animateToPosition(state.latitude, state.longitude);
               
               if (state.address != null) {
@@ -132,7 +108,7 @@ class _MapPickerPageState extends State<MapPickerPage> {
                       if (state is LocationLoading)
                         Container(
                           color: Colors.black12,
-                          child: const Center(
+                          child: Center(
                             child: CircularProgressIndicator(
                               color: AppConstants.primaryGreen,
                             ),
@@ -226,13 +202,13 @@ class _MapPickerPageState extends State<MapPickerPage> {
   Widget _buildMapWidget(bool isHindi, AppLocalizations l10n, LocationState state) {
     if (state is LocationPermissionDenied || state is LocationPermissionPermanentlyDenied) {
       return Container(
-        color: AppConstants.dividerColor.withOpacity(0.5),
+        color: AppConstants.dividerColor.withValues(alpha: 0.5),
         padding: const EdgeInsets.all(32),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.location_off_rounded,
                 size: 64,
                 color: AppConstants.textSecondary,
@@ -260,13 +236,13 @@ class _MapPickerPageState extends State<MapPickerPage> {
 
     if (state is LocationServicesDisabled) {
       return Container(
-        color: AppConstants.dividerColor.withOpacity(0.5),
+        color: AppConstants.dividerColor.withValues(alpha: 0.5),
         padding: const EdgeInsets.all(32),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.gps_off_rounded,
                 size: 64,
                 color: AppConstants.textSecondary,
@@ -292,22 +268,40 @@ class _MapPickerPageState extends State<MapPickerPage> {
       );
     }
 
-    // Google Map Widget
-    return GoogleMap(
-      initialCameraPosition: CameraPosition(
-        target: _selectedLatLng,
-        zoom: 14.0,
+    // OpenStreetMap Widget using flutter_map
+    return FlutterMap(
+      mapController: _mapController,
+      options: MapOptions(
+        initialCenter: _selectedLatLng,
+        initialZoom: 15.0,
+        onTap: (tapPosition, point) {
+          _updateMarker(point);
+          context
+              .read<LocationCubit>()
+              .updateLocationCoordinates(point.latitude, point.longitude);
+        },
       ),
-      onMapCreated: (controller) {
-        _mapController = controller;
-      },
-      markers: _markers,
-      onTap: (latLng) {
-        _updateMarker(latLng);
-        context
-            .read<LocationCubit>()
-            .updateLocationCoordinates(latLng.latitude, latLng.longitude);
-      },
+      children: [
+        TileLayer(
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'com.example.pandey',
+          tileProvider: NetworkTileProvider(),
+        ),
+        MarkerLayer(
+          markers: [
+            Marker(
+              point: _selectedLatLng,
+              width: 50,
+              height: 50,
+              child: const Icon(
+                Icons.location_pin,
+                color: Colors.redAccent,
+                size: 40,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -348,12 +342,12 @@ class _MapPickerPageState extends State<MapPickerPage> {
         color: AppConstants.surfaceWhite,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, -4),
           )
         ],
-        border: const Border(
+        border: Border(
           top: BorderSide(color: AppConstants.dividerColor, width: 0.5),
         ),
       ),
@@ -385,7 +379,7 @@ class _MapPickerPageState extends State<MapPickerPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: statusColor.withOpacity(0.08),
+              color: statusColor.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(

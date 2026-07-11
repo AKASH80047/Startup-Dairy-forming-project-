@@ -76,10 +76,10 @@ class CartPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: AppConstants.primaryGreen.withOpacity(0.05),
+                color: AppConstants.primaryGreen.withValues(alpha: 0.05),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.shopping_basket_outlined,
                 size: 80,
                 color: AppConstants.primaryGreen,
@@ -134,7 +134,7 @@ class CartPage extends StatelessWidget {
         border: Border.all(color: AppConstants.dividerColor, width: 0.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.02),
+            color: Colors.black.withValues(alpha: 0.02),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -206,7 +206,7 @@ class CartPage extends StatelessWidget {
                 children: [
                   IconButton(
                     iconSize: 20,
-                    icon: const Icon(Icons.remove_circle_outline, color: AppConstants.primaryGreen),
+                    icon: Icon(Icons.remove_circle_outline, color: AppConstants.primaryGreen),
                     onPressed: () {
                       context.read<CartCubit>().updateQuantity(item.id, item.quantity - 1);
                     },
@@ -219,7 +219,7 @@ class CartPage extends StatelessWidget {
                   ),
                   IconButton(
                     iconSize: 20,
-                    icon: const Icon(Icons.add_circle_outline, color: AppConstants.primaryGreen),
+                    icon: Icon(Icons.add_circle_outline, color: AppConstants.primaryGreen),
                     onPressed: () {
                       context.read<CartCubit>().updateQuantity(item.id, item.quantity + 1);
                     },
@@ -245,7 +245,7 @@ class CartPage extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppConstants.surfaceWhite,
         border: Border(
           top: BorderSide(color: AppConstants.dividerColor, width: 0.5),
@@ -254,7 +254,7 @@ class CartPage extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(
+          Icon(
             Icons.pin_drop_rounded,
             color: AppConstants.accentGold,
             size: 28,
@@ -300,7 +300,7 @@ class CartPage extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              backgroundColor: AppConstants.primaryGreen.withOpacity(0.06),
+              backgroundColor: AppConstants.primaryGreen.withValues(alpha: 0.06),
               foregroundColor: AppConstants.primaryGreen,
             ),
             child: Text(
@@ -376,7 +376,7 @@ class CartPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          const Divider(color: AppConstants.dividerColor),
+          Divider(color: AppConstants.dividerColor),
           const SizedBox(height: 12),
           
           // Grand Total Row

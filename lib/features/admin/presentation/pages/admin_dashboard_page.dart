@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pandey/l10n/app_localizations.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/storage_service.dart';
@@ -41,7 +40,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
   final _cNotesController = TextEditingController();
   String _selectedVillage = '';
   String _cAnimalType = 'Cow';
-  String _cPaymentCycle = 'Monthly';
+  final String _cPaymentCycle = 'Monthly';
 
   @override
   void initState() {
@@ -192,7 +191,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
         children: [
           Text(
             isHindi ? 'आज के मुख्य आंकड़े' : 'Today\'s Business Metrics',
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppConstants.primaryGreen),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppConstants.primaryGreen),
           ),
           const SizedBox(height: 16),
 
@@ -245,7 +244,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+        side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -265,11 +264,11 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
               children: [
                 Text(
                   value,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppConstants.textPrimary),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppConstants.textPrimary),
                 ),
                 Text(
                   label,
-                  style: const TextStyle(color: AppConstants.textSecondary, fontSize: 10),
+                  style: TextStyle(color: AppConstants.textSecondary, fontSize: 10),
                 ),
               ],
             ),
@@ -304,7 +303,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
                 child: Center(
                   child: Text(
                     isHindi ? 'कोई सक्रिय बुकिंग रिकॉर्ड नहीं मिला।' : 'No active orders registered.',
-                    style: const TextStyle(color: AppConstants.textSecondary, fontSize: 12),
+                    style: TextStyle(color: AppConstants.textSecondary, fontSize: 12),
                   ),
                 ),
               )
@@ -328,7 +327,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(id, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-              Text(name, style: const TextStyle(fontSize: 10, color: AppConstants.textSecondary)),
+              Text(name, style: TextStyle(fontSize: 10, color: AppConstants.textSecondary)),
             ],
           ),
           Row(
@@ -338,7 +337,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: status == 'Delivered' || status == 'Confirmed' ? Colors.green.withOpacity(0.08) : Colors.amber.withOpacity(0.08),
+                  color: status == 'Delivered' || status == 'Confirmed' ? Colors.green.withValues(alpha: 0.08) : Colors.amber.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -379,7 +378,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
-              side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+              side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
             ),
             child: ListTile(
               leading: Icon(
@@ -389,11 +388,11 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
               title: Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
               subtitle: Text(
                 'Pincode: ${village.pincode} • ${village.district}, ${village.state}',
-                style: const TextStyle(fontSize: 10, color: AppConstants.textSecondary),
+                style: TextStyle(fontSize: 10, color: AppConstants.textSecondary),
               ),
               trailing: Switch(
                 value: village.isActive,
-                activeColor: AppConstants.primaryGreen,
+                activeThumbColor: AppConstants.primaryGreen,
                 onChanged: (_) {
                   context.read<AdminCubit>().toggleVillageStatus(village.id);
                 },
@@ -501,7 +500,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
           ? Center(
               child: Text(
                 isHindi ? 'कोई पंजीकृत दैनिक ग्राहक नहीं मिला।' : 'No registered daily subscribers.',
-                style: const TextStyle(color: AppConstants.textSecondary),
+                style: TextStyle(color: AppConstants.textSecondary),
               ),
             )
           : ListView.builder(
@@ -516,11 +515,11 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
-                    side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+                    side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
                   ),
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: c.status == 'Active' ? Colors.green.withOpacity(0.08) : Colors.red.withOpacity(0.08),
+                      backgroundColor: c.status == 'Active' ? Colors.green.withValues(alpha: 0.08) : Colors.red.withValues(alpha: 0.08),
                       child: Icon(
                         c.animalType == 'Cow' ? Icons.water_drop_outlined : Icons.opacity_rounded,
                         color: c.status == 'Active' ? Colors.green : Colors.red,
@@ -529,7 +528,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
                     title: Text(c.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
                     subtitle: Text(
                       '${c.village} • Qty: $dailyLitre L • Rate: ₹${c.pricePerLitre}/L • ${c.paymentCycle}',
-                      style: const TextStyle(fontSize: 10, color: AppConstants.textSecondary),
+                      style: TextStyle(fontSize: 10, color: AppConstants.textSecondary),
                     ),
                     trailing: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -590,7 +589,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
                       ),
                       const SizedBox(height: 12),
                       DropdownButtonFormField<String>(
-                        value: _selectedVillage,
+                        initialValue: _selectedVillage,
                         decoration: const InputDecoration(labelText: 'Select Village'),
                         items: villages.map((v) {
                           final name = isHindi ? v.nameHindi : v.nameEnglish;
@@ -642,27 +641,33 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text('Animal Type:', style: TextStyle(fontSize: 12)),
-                          Row(
-                            children: [
-                              Radio<String>(
-                                value: 'Cow',
-                                groupValue: _cAnimalType,
-                                activeColor: AppConstants.primaryGreen,
-                                onChanged: (v) {
-                                  if (v != null) setDialogState(() => _cAnimalType = v);
-                                },
-                              ),
-                              const Text('Cow', style: TextStyle(fontSize: 12)),
-                              Radio<String>(
-                                value: 'Buffalo',
-                                groupValue: _cAnimalType,
-                                activeColor: AppConstants.primaryGreen,
-                                onChanged: (v) {
-                                  if (v != null) setDialogState(() => _cAnimalType = v);
-                                },
-                              ),
-                              const Text('Buffalo', style: TextStyle(fontSize: 12)),
-                            ],
+                          RadioGroup<String>(
+                            groupValue: _cAnimalType,
+                            onChanged: (v) {
+                              if (v != null) setDialogState(() => _cAnimalType = v);
+                            },
+                            child: Row(
+                              children: [
+                                Radio<String>(
+                                  value: 'Cow',
+                                  groupValue: _cAnimalType,
+                                  onChanged: (v) {
+                                    if (v != null) setDialogState(() => _cAnimalType = v);
+                                  },
+                                  activeColor: AppConstants.primaryGreen,
+                                ),
+                                const Text('Cow', style: TextStyle(fontSize: 12)),
+                                Radio<String>(
+                                  value: 'Buffalo',
+                                  groupValue: _cAnimalType,
+                                  onChanged: (v) {
+                                    if (v != null) setDialogState(() => _cAnimalType = v);
+                                  },
+                                  activeColor: AppConstants.primaryGreen,
+                                ),
+                                const Text('Buffalo', style: TextStyle(fontSize: 12)),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -717,7 +722,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
       return Center(
         child: Text(
           isHindi ? 'कोई ऑर्डर इतिहास नहीं मिला।' : 'No regular orders logged.',
-          style: const TextStyle(color: AppConstants.textSecondary),
+          style: TextStyle(color: AppConstants.textSecondary),
         ),
       );
     }
@@ -733,7 +738,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
-            side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+            side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
           ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -748,7 +753,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
                       value: order.status,
                       iconEnabledColor: AppConstants.primaryGreen,
                       underline: Container(),
-                      style: const TextStyle(color: AppConstants.primaryGreen, fontSize: 12, fontWeight: FontWeight.bold),
+                      style: TextStyle(color: AppConstants.primaryGreen, fontSize: 12, fontWeight: FontWeight.bold),
                       items: ['Pending', 'Confirmed', 'Preparing', 'Out for Delivery', 'Delivered', 'Cancelled']
                           .map((st) => DropdownMenuItem<String>(value: st, child: Text(st)))
                           .toList(),
@@ -762,14 +767,14 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
                 ),
                 const SizedBox(height: 8),
                 Text('Customer: ${order.customerName} (${order.customerPhone})', style: const TextStyle(fontSize: 12)),
-                Text('Address: ${order.address.addressLine}, ${order.address.village}', style: const TextStyle(fontSize: 11, color: AppConstants.textSecondary)),
+                Text('Address: ${order.address.addressLine}, ${order.address.village}', style: TextStyle(fontSize: 11, color: AppConstants.textSecondary)),
                 const SizedBox(height: 8),
-                const Divider(color: AppConstants.dividerColor),
+                Divider(color: AppConstants.dividerColor),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Total: ₹${order.grandTotal.toStringAsFixed(0)}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                    Text('Paid Via: ${order.paymentMethod.toUpperCase()}', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: AppConstants.accentGold)),
+                    Text('Paid Via: ${order.paymentMethod.toUpperCase()}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: AppConstants.accentGold)),
                   ],
                 ),
               ],
@@ -786,7 +791,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
       return Center(
         child: Text(
           isHindi ? 'कोई थोक ऑर्डर इतिहास नहीं मिला।' : 'No bulk event orders logged.',
-          style: const TextStyle(color: AppConstants.textSecondary),
+          style: TextStyle(color: AppConstants.textSecondary),
         ),
       );
     }
@@ -802,7 +807,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
-            side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+            side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
           ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -812,12 +817,12 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(order.id, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppConstants.primaryGreen)),
+                    Text(order.id, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppConstants.primaryGreen)),
                     DropdownButton<String>(
                       value: order.status,
                       iconEnabledColor: AppConstants.primaryGreen,
                       underline: Container(),
-                      style: const TextStyle(color: AppConstants.primaryGreen, fontSize: 12, fontWeight: FontWeight.bold),
+                      style: TextStyle(color: AppConstants.primaryGreen, fontSize: 12, fontWeight: FontWeight.bold),
                       items: ['Awaiting Advance', 'Confirmed', 'Out for Delivery', 'Delivered', 'Cancelled']
                           .map((st) => DropdownMenuItem<String>(value: st, child: Text(st)))
                           .toList(),
@@ -832,9 +837,9 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> with SingleTick
                 const SizedBox(height: 8),
                 Text('Event: ${order.eventType} • Expected Guests: ${order.expectedGuests}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
                 Text('Customer: ${order.customerName} (${order.customerPhone})', style: const TextStyle(fontSize: 11)),
-                Text('Address: ${order.address.addressLine}, ${order.address.village}', style: const TextStyle(fontSize: 11, color: AppConstants.textSecondary)),
+                Text('Address: ${order.address.addressLine}, ${order.address.village}', style: TextStyle(fontSize: 11, color: AppConstants.textSecondary)),
                 const SizedBox(height: 8),
-                const Divider(color: AppConstants.dividerColor),
+                Divider(color: AppConstants.dividerColor),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

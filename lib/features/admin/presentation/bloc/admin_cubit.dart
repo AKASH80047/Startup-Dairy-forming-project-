@@ -16,10 +16,12 @@ class AdminCubit extends Cubit<AdminState> {
     emit(AdminLoading());
     try {
       List<AdminVillageEntity> villages = _storageService.getVillages();
-      if (villages.isEmpty) {
-        // Prefill default villages for mock database
-        villages = const [
-          AdminVillageEntity(
+      
+      // Check if we need to prefill the new Siddharthnagar cities
+      final hasSiddharthnagar = villages.any((v) => v.district.toLowerCase() == 'siddharthnagar');
+      if (!hasSiddharthnagar) {
+        final List<AdminVillageEntity> defaultVillages = [
+          const AdminVillageEntity(
             id: 'v_gopalpura',
             nameEnglish: 'Gopalpura',
             nameHindi: 'गोपालपुरा',
@@ -28,7 +30,7 @@ class AdminCubit extends Cubit<AdminState> {
             pincode: '302015',
             isActive: true,
           ),
-          AdminVillageEntity(
+          const AdminVillageEntity(
             id: 'v_sodala',
             nameEnglish: 'Sodala',
             nameHindi: 'सोडाला',
@@ -37,7 +39,7 @@ class AdminCubit extends Cubit<AdminState> {
             pincode: '302019',
             isActive: true,
           ),
-          AdminVillageEntity(
+          const AdminVillageEntity(
             id: 'v_vaishali',
             nameEnglish: 'Vaishali Nagar',
             nameHindi: 'वैशाली नगर',
@@ -46,16 +48,116 @@ class AdminCubit extends Cubit<AdminState> {
             pincode: '302021',
             isActive: true,
           ),
-          AdminVillageEntity(
+          const AdminVillageEntity(
             id: 'v_mansarovar',
             nameEnglish: 'Mansarovar',
             nameHindi: 'मानसरोवर',
             district: 'Jaipur',
             state: 'Rajasthan',
             pincode: '302020',
-            isActive: false, // Disabled by default to demo disable status
+            isActive: false,
+          ),
+          // Siddharthnagar, UP Cities
+          const AdminVillageEntity(
+            id: 'v_sn_naugarh',
+            nameEnglish: 'Naugarh',
+            nameHindi: 'नौगढ़',
+            district: 'Siddharthnagar',
+            state: 'Uttar Pradesh',
+            pincode: '272207',
+            isActive: true,
+          ),
+          const AdminVillageEntity(
+            id: 'v_sn_bansi',
+            nameEnglish: 'Bansi',
+            nameHindi: 'बांसी',
+            district: 'Siddharthnagar',
+            state: 'Uttar Pradesh',
+            pincode: '272153',
+            isActive: true,
+          ),
+          const AdminVillageEntity(
+            id: 'v_sn_tetri',
+            nameEnglish: 'Tetri Bazar',
+            nameHindi: 'तेतरी बाज़ार',
+            district: 'Siddharthnagar',
+            state: 'Uttar Pradesh',
+            pincode: '272207',
+            isActive: true,
+          ),
+          const AdminVillageEntity(
+            id: 'v_sn_shohratgarh',
+            nameEnglish: 'Shohratgarh',
+            nameHindi: 'शोहरतगढ़',
+            district: 'Siddharthnagar',
+            state: 'Uttar Pradesh',
+            pincode: '272205',
+            isActive: true,
+          ),
+          const AdminVillageEntity(
+            id: 'v_sn_uska',
+            nameEnglish: 'Uska Bazar',
+            nameHindi: 'उसका बाज़ार',
+            district: 'Siddharthnagar',
+            state: 'Uttar Pradesh',
+            pincode: '272206',
+            isActive: true,
+          ),
+          const AdminVillageEntity(
+            id: 'v_sn_itwa',
+            nameEnglish: 'Itwa',
+            nameHindi: 'इटवा',
+            district: 'Siddharthnagar',
+            state: 'Uttar Pradesh',
+            pincode: '272192',
+            isActive: true,
+          ),
+          const AdminVillageEntity(
+            id: 'v_sn_domariaganj',
+            nameEnglish: 'Domariaganj',
+            nameHindi: 'डुमरियागंज',
+            district: 'Siddharthnagar',
+            state: 'Uttar Pradesh',
+            pincode: '272189',
+            isActive: true,
+          ),
+          const AdminVillageEntity(
+            id: 'v_sn_barhni',
+            nameEnglish: 'Barhni',
+            nameHindi: 'बढ़नी',
+            district: 'Siddharthnagar',
+            state: 'Uttar Pradesh',
+            pincode: '272201',
+            isActive: true,
+          ),
+          const AdminVillageEntity(
+            id: 'v_sn_birdpur',
+            nameEnglish: 'Birdpur',
+            nameHindi: 'बर्डपुर',
+            district: 'Siddharthnagar',
+            state: 'Uttar Pradesh',
+            pincode: '272202',
+            isActive: true,
+          ),
+          const AdminVillageEntity(
+            id: 'v_sn_khesraha',
+            nameEnglish: 'Khesraha',
+            nameHindi: 'खेसरहा',
+            district: 'Siddharthnagar',
+            state: 'Uttar Pradesh',
+            pincode: '272152',
+            isActive: true,
           ),
         ];
+
+        final Map<String, AdminVillageEntity> uniqueVillages = {};
+        for (var v in defaultVillages) {
+          uniqueVillages[v.id] = v;
+        }
+        for (var v in villages) {
+          uniqueVillages[v.id] = v;
+        }
+        villages = uniqueVillages.values.toList();
         _storageService.saveVillages(villages);
       }
 

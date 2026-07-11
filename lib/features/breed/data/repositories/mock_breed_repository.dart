@@ -16,7 +16,7 @@ class MockBreedRepository implements BreedRepository {
       originEnglish: 'Montgomery, Punjab',
       originHindi: 'मोंटगोमरी, पंजाब',
       descriptionEnglish:
-          'Known for high heat tolerance, tick resistance, and yielding rich milk with dense fat content.',
+          'Known for high heat tolerance, tick resistance, and yieldi ng rich milk with dense fat content.',
       descriptionHindi:
           'गर्मी सहन करने की उच्च क्षमता, किलनी (टिक) प्रतिरोधक और गाढ़े वसा वाले पौष्टिक दूध के लिए प्रसिद्ध।',
       imageUrl:

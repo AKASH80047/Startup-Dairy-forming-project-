@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'app/app.dart';
 import 'core/services/storage_service.dart';
 import 'features/breed/data/repositories/mock_breed_repository.dart';
@@ -10,6 +12,11 @@ import 'features/product/domain/repositories/product_repository.dart';
 void main() async {
   // Ensure that widget binding is initialized before SharedPreferences starts
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase backend
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   
   // Initialize shared preferences instances for the local storage service
   final SharedPreferences prefs = await SharedPreferences.getInstance();

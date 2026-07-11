@@ -114,7 +114,7 @@ class _ProductListPageState extends State<ProductListPage> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppConstants.textSecondary.withOpacity(0.04),
+            color: AppConstants.textSecondary.withValues(alpha: 0.04),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -155,9 +155,9 @@ class _ProductListPageState extends State<ProductListPage> {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            Colors.black.withOpacity(0.2),
+                            Colors.black.withValues(alpha: 0.2),
                             Colors.transparent,
-                            Colors.black.withOpacity(0.3),
+                            Colors.black.withValues(alpha: 0.3),
                           ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
@@ -167,7 +167,7 @@ class _ProductListPageState extends State<ProductListPage> {
                   ),
                   if (!product.isAvailable)
                     Container(
-                      color: Colors.black.withOpacity(0.5),
+                      color: Colors.black.withValues(alpha: 0.5),
                       child: Center(
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),

@@ -299,4 +299,103 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get registerSubscriberLabel => 'दैनिक ग्राहक दर्ज करें';
+
+  @override
+  String get choosePaymentMethod => 'भुगतान का तरीका चुनें';
+
+  @override
+  String get cashOnDelivery => 'डिलीवरी पर नकद भुगतान';
+
+  @override
+  String get onlinePayment => 'ऑनलाइन भुगतान';
+
+  @override
+  String get upi => 'यूपीआई (UPI)';
+
+  @override
+  String get payViaBusinessQR => 'QR से भुगतान';
+
+  @override
+  String get payAdvance => 'अग्रिम भुगतान करें';
+
+  @override
+  String get payPartialAmount => 'आंशिक भुगतान करें';
+
+  @override
+  String get payRemainingBalance => 'शेष राशि का भुगतान करें';
+
+  @override
+  String get paymentSuccessful => 'भुगतान सफल';
+
+  @override
+  String get paymentProcessing => 'भुगतान प्रक्रिया में है';
+
+  @override
+  String get paymentFailed => 'भुगतान विफल';
+
+  @override
+  String get orderIdLabel => 'ऑर्डर आईडी';
+
+  @override
+  String get amountLabel => 'राशि';
+
+  @override
+  String get statusLabel => 'स्थिति';
+
+  @override
+  String get paidLabel => 'सफल भुगतान';
+
+  @override
+  String get paymentConfirmingDesc => 'हम आपके भुगतान की पुष्टि कर रहे हैं।';
+
+  @override
+  String get doNotPayAgainDesc => 'कृपया तुरंत दोबारा भुगतान न करें।';
+
+  @override
+  String get checkStatusButton => 'स्थिति जांचें';
+
+  @override
+  String get paymentFailedDesc => 'आपके भुगतान की पुष्टि नहीं हो सकी।';
+
+  @override
+  String get retryPaymentButton => 'दोबारा भुगतान करें';
+
+  @override
+  String get chooseAnotherMethod => 'दूसरा तरीका चुनें';
+
+  @override
+  String get backToOrderButton => 'ऑर्डर पर वापस जाएं';
+
+  @override
+  String get utrLabel => 'ट्रांजैक्शन UTR नंबर';
+
+  @override
+  String get uploadScreenshot => 'भुगतान स्क्रीनशॉट अपलोड करें';
+
+  @override
+  String get submitVerification => 'सत्यापन के लिए भेजें';
+
+  @override
+  String get verificationPending => 'सत्यापन लंबित';
+
+  @override
+  String get paymentStatusLabel => 'भुगतान की स्थिति';
+
+  @override
+  String get selectDeliveryLocation => 'डिलीवरी स्थान चुनें';
+
+  @override
+  String get stateLabel => 'राज्य / केंद्र शासित प्रदेश';
+
+  @override
+  String get districtLabel => 'जिला';
+
+  @override
+  String get tehsilLabel => 'तहसील / उप-जिला';
+
+  @override
+  String get villageLabel => 'गाँव';
+
+  @override
+  String get saveAndContinue => 'सुरक्षित करें और आगे बढ़ें';
 }

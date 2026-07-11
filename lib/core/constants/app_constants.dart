@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../enum/theme_type.dart';
 
 class AppConstants {
   // Brand Names
@@ -16,27 +17,119 @@ class AppConstants {
   // Storage Keys
   static const String keyLanguageCode = 'selected_language_code';
 
-  // Colors - Premium Rural-Modern Palette
-  static const Color primaryGreen = Color(0xFF1B4332); // Deep natural green
-  static const Color primaryGreenDark = Color(
-    0xFF0F2D22,
-  ); // Darker shade of natural green
-  static const Color secondaryGreen = Color(
-    0xFF40916C,
-  ); // Mid-tone earthy green
-  static const Color accentGold = Color(0xFFD4AF37); // Subtle gold
-  static const Color backgroundCream = Color(
-    0xFFF9F6F0,
-  ); // Warm cream background
-  static const Color surfaceWhite = Color(0xFFFFFFFF); // Soft off-white
-  static const Color textPrimary = Color(
-    0xFF1A2621,
-  ); // Deep charcoal with hint of green
-  static const Color textSecondary = Color(0xFF52615B); // Earthy grey-green
-  static const Color dividerColor = Color(0xFFE2EBE7); // Very soft sage border
-  static const Color accentOrange = Color(
-    0xFFD87D38,
-  ); // Warm terracotta secondary accent
+  // Active theme tracking
+  static ThemeType activeTheme = ThemeType.light;
+
+  // Colors - Premium Rural-Modern Palette (Dynamic depending on activeTheme)
+  static Color get primaryGreen {
+    switch (activeTheme) {
+      case ThemeType.dark:
+        return const Color(0xFF52B788); // Lighter emerald green for dark mode readability
+      case ThemeType.gold:
+        return const Color(0xFF8C6A15); // Luxurious deep gold
+      case ThemeType.light:
+        return const Color(0xFF1B4332); // Deep natural green
+    }
+  }
+
+  static Color get primaryGreenDark {
+    switch (activeTheme) {
+      case ThemeType.dark:
+        return const Color(0xFF1B4332);
+      case ThemeType.gold:
+        return const Color(0xFF5C4308);
+      case ThemeType.light:
+        return const Color(0xFF0F2D22);
+    }
+  }
+
+  static Color get secondaryGreen {
+    switch (activeTheme) {
+      case ThemeType.dark:
+        return const Color(0xFF74C69D);
+      case ThemeType.gold:
+        return const Color(0xFFB59449);
+      case ThemeType.light:
+        return const Color(0xFF40916C);
+    }
+  }
+
+  static Color get accentGold {
+    switch (activeTheme) {
+      case ThemeType.dark:
+        return const Color(0xFFF4D35E);
+      case ThemeType.gold:
+        return const Color(0xFFE5BA53);
+      case ThemeType.light:
+        return const Color(0xFFD4AF37);
+    }
+  }
+
+  static Color get backgroundCream {
+    switch (activeTheme) {
+      case ThemeType.dark:
+        return const Color(0xFF0F1412); // Pitch black/charcoal green for OLED contrast
+      case ThemeType.gold:
+        return const Color(0xFFFAF7F0); // Wheat/ivory background
+      case ThemeType.light:
+        return const Color(0xFFF9F6F0); // Warm cream background
+    }
+  }
+
+  static Color get surfaceWhite {
+    switch (activeTheme) {
+      case ThemeType.dark:
+        return const Color(0xFF1B221E); // Dark surface box
+      case ThemeType.gold:
+        return const Color(0xFFFFFDF9);
+      case ThemeType.light:
+        return const Color(0xFFFFFFFF);
+    }
+  }
+
+  static Color get textPrimary {
+    switch (activeTheme) {
+      case ThemeType.dark:
+        return const Color(0xFFE2EBE7); // High contrast text
+      case ThemeType.gold:
+        return const Color(0xFF2C2518);
+      case ThemeType.light:
+        return const Color(0xFF1A2621);
+    }
+  }
+
+  static Color get textSecondary {
+    switch (activeTheme) {
+      case ThemeType.dark:
+        return const Color(0xFF8B9E96);
+      case ThemeType.gold:
+        return const Color(0xFF70654D);
+      case ThemeType.light:
+        return const Color(0xFF52615B);
+    }
+  }
+
+  static Color get dividerColor {
+    switch (activeTheme) {
+      case ThemeType.dark:
+        return const Color(0xFF2D3A34);
+      case ThemeType.gold:
+        return const Color(0xFFE8E1CE);
+      case ThemeType.light:
+        return const Color(0xFFE2EBE7);
+    }
+  }
+
+  static Color get accentOrange {
+    switch (activeTheme) {
+      case ThemeType.dark:
+        return const Color(0xFFFF9F1C);
+      case ThemeType.gold:
+        return const Color(0xFFE76F51);
+      case ThemeType.light:
+        return const Color(0xFFD87D38);
+    }
+  }
 
   // Category High-Quality Unsplash Images
   static const String imgCategoryCow =

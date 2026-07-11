@@ -30,10 +30,10 @@ class OrderSuccessPage extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(28),
                   decoration: BoxDecoration(
-                    color: AppConstants.primaryGreen.withOpacity(0.08),
+                    color: AppConstants.primaryGreen.withValues(alpha: 0.08),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.check_circle_rounded,
                     size: 88,
                     color: AppConstants.primaryGreen,
@@ -66,7 +66,7 @@ class OrderSuccessPage extends StatelessWidget {
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
-                  side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+                  side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(20),
@@ -79,15 +79,15 @@ class OrderSuccessPage extends StatelessWidget {
                         children: [
                           Text(
                             l10n.orderNumberLabel,
-                            style: const TextStyle(fontSize: 12, color: AppConstants.textSecondary),
+                            style: TextStyle(fontSize: 12, color: AppConstants.textSecondary),
                           ),
                           Text(
                             order.id,
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppConstants.primaryGreen),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppConstants.primaryGreen),
                           ),
                         ],
                       ),
-                      const Divider(height: 24, color: AppConstants.dividerColor),
+                      Divider(height: 24, color: AppConstants.dividerColor),
 
                       // Delivery Schedule Slot
                       Row(
@@ -95,7 +95,7 @@ class OrderSuccessPage extends StatelessWidget {
                         children: [
                           Text(
                             l10n.estimatedDeliveryLabel,
-                            style: const TextStyle(fontSize: 12, color: AppConstants.textSecondary),
+                            style: TextStyle(fontSize: 12, color: AppConstants.textSecondary),
                           ),
                           Text(
                             order.deliverySlot == 'morning'
@@ -113,12 +113,14 @@ class OrderSuccessPage extends StatelessWidget {
                         children: [
                           Text(
                             isHindi ? 'भुगतान विधि' : 'Payment Mode',
-                            style: const TextStyle(fontSize: 12, color: AppConstants.textSecondary),
+                            style: TextStyle(fontSize: 12, color: AppConstants.textSecondary),
                           ),
                           Text(
                             order.paymentMethod == 'cod'
                                 ? (isHindi ? 'कैश ऑन डिलीवरी (COD)' : 'Cash on Delivery (COD)')
-                                : (isHindi ? 'खाता (लोकल क्रेडिट)' : 'Village Credit (Khata)'),
+                                : order.paymentMethod == 'upi'
+                                    ? (isHindi ? 'ऑनलाइन यूपीआई (सफल)' : 'Online UPI (Success / Paid)')
+                                    : (isHindi ? 'खाता (लोकल क्रेडिट)' : 'Village Credit (Khata)'),
                             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                           ),
                         ],
@@ -127,12 +129,12 @@ class OrderSuccessPage extends StatelessWidget {
 
                       // Delivery Address info
                       CrossFieldAddressBlock(address: order.address, isHindi: isHindi),
-                      const Divider(height: 24, color: AppConstants.dividerColor),
+                      Divider(height: 24, color: AppConstants.dividerColor),
 
                       // List of items ordered
                       Text(
                         l10n.itemsOrderedLabel,
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppConstants.textSecondary),
+                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppConstants.textSecondary),
                       ),
                       const SizedBox(height: 8),
                       ...order.items.map((item) {
@@ -154,7 +156,7 @@ class OrderSuccessPage extends StatelessWidget {
                           ),
                         );
                       }),
-                      const Divider(height: 24, color: AppConstants.dividerColor),
+                      Divider(height: 24, color: AppConstants.dividerColor),
 
                       // Totals Summary
                       Row(
@@ -162,11 +164,11 @@ class OrderSuccessPage extends StatelessWidget {
                         children: [
                           Text(
                             l10n.totalAmountLabel,
-                            style: const TextStyle(fontWeight: FontWeight.bold, color: AppConstants.primaryGreen, fontSize: 13),
+                            style: TextStyle(fontWeight: FontWeight.bold, color: AppConstants.primaryGreen, fontSize: 13),
                           ),
                           Text(
                             '₹${order.grandTotal.toStringAsFixed(0)}',
-                            style: const TextStyle(fontWeight: FontWeight.w900, color: AppConstants.primaryGreen, fontSize: 15),
+                            style: TextStyle(fontWeight: FontWeight.w900, color: AppConstants.primaryGreen, fontSize: 15),
                           ),
                         ],
                       ),
@@ -213,7 +215,7 @@ class CrossFieldAddressBlock extends StatelessWidget {
         children: [
           Text(
             isHindi ? 'डिलिवरी पता:' : 'Deliver to:',
-            style: const TextStyle(fontSize: 11, color: AppConstants.textSecondary),
+            style: TextStyle(fontSize: 11, color: AppConstants.textSecondary),
           ),
           const SizedBox(height: 4),
           Text(
@@ -222,7 +224,7 @@ class CrossFieldAddressBlock extends StatelessWidget {
           ),
           Text(
             '${isHindi ? "गांव/कस्बा" : "Village"}: ${address.village} • Pincode: ${address.pincode}',
-            style: const TextStyle(fontSize: 11, color: AppConstants.textSecondary),
+            style: TextStyle(fontSize: 11, color: AppConstants.textSecondary),
           ),
         ],
       ),

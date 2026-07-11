@@ -10,6 +10,9 @@ import '../../features/breed/presentation/pages/breed_detail_page.dart';
 import '../../features/product/presentation/pages/product_list_page.dart';
 import '../../features/cart/presentation/pages/cart_page.dart';
 import '../../features/location/presentation/pages/map_picker_page.dart';
+import '../../features/location/presentation/pages/lgd_states_page.dart';
+import '../../features/location/presentation/pages/lgd_villages_page.dart';
+import '../../features/location/presentation/pages/select_location_page.dart';
 import '../../features/checkout/presentation/pages/checkout_page.dart';
 import '../../features/checkout/presentation/pages/order_success_page.dart';
 import '../../features/checkout/presentation/pages/order_history_page.dart';
@@ -19,6 +22,14 @@ import '../../features/bulk_order/presentation/pages/bulk_order_success_page.dar
 import '../../features/bulk_order/domain/entities/bulk_order_entity.dart';
 import '../../features/admin/presentation/pages/admin_dashboard_page.dart';
 import '../../features/checkout/presentation/pages/mock_gateway_page.dart';
+import '../../features/auth/presentation/pages/login_page.dart';
+import '../../features/auth/presentation/pages/profile_page.dart';
+import '../../features/payment/presentation/pages/payment_method_page.dart';
+import '../../features/payment/presentation/pages/payment_processing_page.dart';
+import '../../features/payment/presentation/pages/payment_success_page.dart';
+import '../../features/payment/presentation/pages/payment_pending_page.dart';
+import '../../features/payment/presentation/pages/payment_failed_page.dart';
+import '../../features/payment/domain/entities/payment_session.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -104,6 +115,80 @@ class AppRouter {
           return MockGatewayPage(order: order);
         },
       ),
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => const LoginPage(),
+      ),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) => const ProfilePage(),
+      ),
+      GoRoute(
+        path: '/payment-method',
+        builder: (context, state) {
+          final order = state.extra as OrderEntity;
+          return PaymentMethodPage(order: order);
+        },
+      ),
+      GoRoute(
+        path: '/payment-processing',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, Object?>;
+          final order = extra['order'] as OrderEntity;
+          final method = extra['method'] as String;
+          final utr = extra['utr'] as String?;
+          final session = extra['session'] as PaymentSession?;
+          return PaymentProcessingPage(
+            order: order,
+            method: method,
+            utr: utr,
+            session: session,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/payment-success',
+        builder: (context, state) {
+          final order = state.extra as OrderEntity;
+          return PaymentSuccessPage(order: order);
+        },
+      ),
+      GoRoute(
+        path: '/payment-pending',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, Object?>;
+          final order = extra['order'] as OrderEntity;
+          final utr = extra['utr'] as String?;
+          return PaymentPendingPage(
+            order: order,
+            utr: utr,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/payment-failed',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, Object?>;
+          final order = extra['order'] as OrderEntity;
+          final message = extra['message'] as String;
+          return PaymentFailedPage(
+            order: order,
+            message: message,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/lgd-states',
+        builder: (context, state) => const LgdStatesPage(),
+      ),
+      GoRoute(
+        path: '/lgd-villages',
+        builder: (context, state) => const LgdVillagesPage(),
+      ),
+      GoRoute(
+        path: '/select-location',
+        builder: (context, state) => const SelectLocationPage(),
+      ),
     ],
   );
 }
@@ -139,10 +224,10 @@ class PlaceholderScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: AppConstants.primaryGreen.withOpacity(0.05),
+                  color: AppConstants.primaryGreen.withValues(alpha: 0.05),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.construction_rounded,
                   size: 64,
                   color: AppConstants.primaryGreen,

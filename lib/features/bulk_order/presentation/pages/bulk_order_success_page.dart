@@ -34,10 +34,10 @@ class BulkOrderSuccessPage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: AppConstants.primaryGreen.withOpacity(0.08),
+                  color: AppConstants.primaryGreen.withValues(alpha: 0.08),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.check_circle_rounded,
                   size: 80,
                   color: AppConstants.primaryGreen,
@@ -58,7 +58,7 @@ class BulkOrderSuccessPage extends StatelessWidget {
               Text(
                 l10n.bulkOrderSuccessSub,
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: AppConstants.textSecondary, fontSize: 13),
+                style: TextStyle(color: AppConstants.textSecondary, fontSize: 13),
               ),
               const SizedBox(height: 32),
 
@@ -68,7 +68,7 @@ class BulkOrderSuccessPage extends StatelessWidget {
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
-                  side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+                  side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -80,7 +80,7 @@ class BulkOrderSuccessPage extends StatelessWidget {
                         children: [
                           Text(
                             isHindi ? 'ऑर्डर आईडी:' : 'Order ID:',
-                            style: const TextStyle(fontSize: 12, color: AppConstants.textSecondary),
+                            style: TextStyle(fontSize: 12, color: AppConstants.textSecondary),
                           ),
                           Text(
                             order.id,
@@ -88,7 +88,7 @@ class BulkOrderSuccessPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const Divider(color: AppConstants.dividerColor, height: 24),
+                      Divider(color: AppConstants.dividerColor, height: 24),
 
                       // Event specs
                       _buildSummaryRow(l10n.eventTypeLabel, isHindi ? _translateEventType(order.eventType) : order.eventType),
@@ -96,12 +96,12 @@ class BulkOrderSuccessPage extends StatelessWidget {
                       _buildSummaryRow(l10n.eventDateLabel, dateString),
                       const SizedBox(height: 10),
                       _buildSummaryRow(l10n.expectedGuestsLabel, '${order.expectedGuests}'),
-                      const Divider(color: AppConstants.dividerColor, height: 24),
+                      Divider(color: AppConstants.dividerColor, height: 24),
 
                       // Items summary list
                       Text(
                         l10n.itemsOrderedLabel,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: AppConstants.primaryGreen),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: AppConstants.primaryGreen),
                       ),
                       const SizedBox(height: 10),
                       ...order.items.map((item) {
@@ -123,7 +123,7 @@ class BulkOrderSuccessPage extends StatelessWidget {
                           ),
                         );
                       }),
-                      const Divider(color: AppConstants.dividerColor, height: 24),
+                      Divider(color: AppConstants.dividerColor, height: 24),
 
                       // Cost breakdowns
                       _buildSummaryRow(isHindi ? 'कुल उप-योग:' : 'Subtotal:', '₹${order.subtotal.toStringAsFixed(0)}'),
@@ -137,7 +137,7 @@ class BulkOrderSuccessPage extends StatelessWidget {
                       ],
                       const SizedBox(height: 10),
                       _buildSummaryRow(isHindi ? 'डिलीवरी शुल्क:' : 'Delivery Charge:', '₹${order.deliveryCharge.toStringAsFixed(0)}'),
-                      const Divider(color: AppConstants.dividerColor, height: 24),
+                      Divider(color: AppConstants.dividerColor, height: 24),
                       _buildSummaryRow(
                         isHindi ? 'कुल देय राशि:' : 'Grand Total:',
                         '₹${order.grandTotal.toStringAsFixed(0)}',

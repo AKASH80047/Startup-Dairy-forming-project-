@@ -60,13 +60,13 @@ class _CategoryCardState extends State<CategoryCard>
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: AppConstants.textSecondary.withOpacity(0.06),
+                color: AppConstants.textSecondary.withValues(alpha: 0.06),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
             ],
             border: Border.all(
-              color: AppConstants.dividerColor.withOpacity(0.8),
+              color: AppConstants.dividerColor.withValues(alpha: 0.8),
               width: 1.0,
             ),
           ),
@@ -94,7 +94,7 @@ class _CategoryCardState extends State<CategoryCard>
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
                             color: AppConstants.dividerColor,
-                            child: const Icon(
+                            child: Icon(
                               Icons.broken_image_rounded,
                               size: 40,
                               color: AppConstants.textSecondary,
@@ -108,10 +108,10 @@ class _CategoryCardState extends State<CategoryCard>
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Colors.black.withOpacity(0.3),
+                                Colors.black.withValues(alpha: 0.3),
                                 Colors.transparent,
                                 Colors.transparent,
-                                Colors.black.withOpacity(0.4),
+                                Colors.black.withValues(alpha: 0.4),
                               ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
@@ -148,17 +148,17 @@ class _CategoryCardState extends State<CategoryCard>
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    color: AppConstants.textSecondary.withOpacity(0.8),
+                                    color: AppConstants.textSecondary.withValues(alpha: 0.8),
                                   ),
                             ),
                           ),
                           Container(
                             padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
-                              color: AppConstants.primaryGreen.withOpacity(0.06),
+                              color: AppConstants.primaryGreen.withValues(alpha: 0.06),
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.arrow_forward_rounded,
                               size: 14,
                               color: AppConstants.accentGold,

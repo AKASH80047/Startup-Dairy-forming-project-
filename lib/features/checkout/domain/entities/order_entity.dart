@@ -34,6 +34,7 @@ class OrderEntity extends Equatable {
 
   OrderEntity copyWith({
     String? status,
+    String? paymentMethod,
   }) {
     return OrderEntity(
       id: id,
@@ -41,7 +42,7 @@ class OrderEntity extends Equatable {
       customerPhone: customerPhone,
       address: address,
       deliverySlot: deliverySlot,
-      paymentMethod: paymentMethod,
+      paymentMethod: paymentMethod ?? this.paymentMethod,
       items: items,
       subtotal: subtotal,
       deliveryCharge: deliveryCharge,

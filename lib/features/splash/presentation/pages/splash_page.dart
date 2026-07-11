@@ -103,11 +103,11 @@ class _SplashPageState extends State<SplashPage> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppConstants.accentGold.withOpacity(0.4),
+                        color: AppConstants.accentGold.withValues(alpha: 0.4),
                         width: 1.5,
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'ॐ',
                       style: TextStyle(
                         fontSize: 64,
@@ -138,7 +138,7 @@ class _SplashPageState extends State<SplashPage> {
                     Text(
                       AppConstants.shivayaEn,
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: AppConstants.primaryGreen.withOpacity(0.7),
+                            color: AppConstants.primaryGreen.withValues(alpha: 0.7),
                             fontWeight: FontWeight.bold,
                             letterSpacing: 2.0,
                           ),
@@ -178,10 +178,10 @@ class _SplashPageState extends State<SplashPage> {
                         vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        color: AppConstants.primaryGreen.withOpacity(0.05),
+                        color: AppConstants.primaryGreen.withValues(alpha: 0.05),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: AppConstants.primaryGreen.withOpacity(0.1),
+                          color: AppConstants.primaryGreen.withValues(alpha: 0.1),
                         ),
                       ),
                       child: Column(

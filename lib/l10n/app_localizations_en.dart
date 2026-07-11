@@ -299,4 +299,103 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get registerSubscriberLabel => 'Register Subscriber';
+
+  @override
+  String get choosePaymentMethod => 'Choose Payment Method';
+
+  @override
+  String get cashOnDelivery => 'Cash on Delivery';
+
+  @override
+  String get onlinePayment => 'Online Payment';
+
+  @override
+  String get upi => 'UPI';
+
+  @override
+  String get payViaBusinessQR => 'Pay via Business QR';
+
+  @override
+  String get payAdvance => 'Pay Advance';
+
+  @override
+  String get payPartialAmount => 'Pay Partial Amount';
+
+  @override
+  String get payRemainingBalance => 'Pay Remaining Balance';
+
+  @override
+  String get paymentSuccessful => 'Payment Successful';
+
+  @override
+  String get paymentProcessing => 'Payment Processing';
+
+  @override
+  String get paymentFailed => 'Payment Failed';
+
+  @override
+  String get orderIdLabel => 'Order ID';
+
+  @override
+  String get amountLabel => 'Amount';
+
+  @override
+  String get statusLabel => 'Status';
+
+  @override
+  String get paidLabel => 'Paid';
+
+  @override
+  String get paymentConfirmingDesc => 'We are confirming your payment.';
+
+  @override
+  String get doNotPayAgainDesc => 'Please do not pay again immediately.';
+
+  @override
+  String get checkStatusButton => 'Check Status';
+
+  @override
+  String get paymentFailedDesc => 'Your payment could not be confirmed.';
+
+  @override
+  String get retryPaymentButton => 'Retry Payment';
+
+  @override
+  String get chooseAnotherMethod => 'Choose Another Method';
+
+  @override
+  String get backToOrderButton => 'Back to Order';
+
+  @override
+  String get utrLabel => 'Transaction UTR Number';
+
+  @override
+  String get uploadScreenshot => 'Upload Payment Screenshot';
+
+  @override
+  String get submitVerification => 'Submit for Verification';
+
+  @override
+  String get verificationPending => 'Verification Pending';
+
+  @override
+  String get paymentStatusLabel => 'Payment Status';
+
+  @override
+  String get selectDeliveryLocation => 'Select Delivery Location';
+
+  @override
+  String get stateLabel => 'State / UT';
+
+  @override
+  String get districtLabel => 'District';
+
+  @override
+  String get tehsilLabel => 'Tehsil / Sub-District';
+
+  @override
+  String get villageLabel => 'Village';
+
+  @override
+  String get saveAndContinue => 'Save & Continue';
 }

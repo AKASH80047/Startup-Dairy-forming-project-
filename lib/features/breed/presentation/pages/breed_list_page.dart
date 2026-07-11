@@ -115,7 +115,7 @@ class _BreedListPageState extends State<BreedListPage> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: AppConstants.textSecondary.withOpacity(0.06),
+            color: AppConstants.textSecondary.withValues(alpha: 0.06),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -125,211 +125,220 @@ class _BreedListPageState extends State<BreedListPage> {
           width: 0.5,
         ),
       ),
-      child: ClipRRect(
+      child: InkWell(
+        onTap: () {
+          context.push('/breed-detail/${breed.id}');
+        },
         borderRadius: BorderRadius.circular(19),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Breed image with tag overlays
-            SizedBox(
-              height: 180,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Image.network(
-                    breed.imageUrl,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return const ShimmerLoader(
-                        width: double.infinity,
-                        height: double.infinity,
-                        borderRadius: 0,
-                      );
-                    },
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: AppConstants.dividerColor,
-                        child: const Icon(
-                          Icons.broken_image_rounded,
-                          size: 48,
-                          color: AppConstants.textSecondary,
-                        ),
-                      );
-                    },
-                  ),
-                  // Gradient shadow
-                  Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.black.withOpacity(0.4),
-                            Colors.transparent,
-                            Colors.transparent,
-                            Colors.black.withOpacity(0.3),
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                        ),
-                      ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(19),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Breed image with tag overlays
+              Container(
+                height: 180,
+                color: const Color(0xFFF3F6F4),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.network(
+                      breed.imageUrl,
+                      fit: BoxFit.contain,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return const ShimmerLoader(
+                          width: double.infinity,
+                          height: double.infinity,
+                          borderRadius: 0,
+                        );
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: AppConstants.dividerColor,
+                          child: Icon(
+                            Icons.broken_image_rounded,
+                            size: 48,
+                            color: AppConstants.textSecondary,
+                          ),
+                        );
+                      },
                     ),
-                  ),
-                  // Availability Badge (Top Right)
-                  Positioned(
-                    top: 16,
-                    right: 16,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: breed.isAvailable
-                            ? AppConstants.primaryGreen
-                            : AppConstants.textSecondary,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        breed.isAvailable ? l10n.availableLabel : l10n.outOfStockLabel,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  // Breed Title overlay (Bottom Left)
-                  Positioned(
-                    bottom: 16,
-                    left: 16,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          breedName,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            shadows: [
-                              Shadow(
-                                color: Colors.black45,
-                                offset: Offset(0, 1),
-                                blurRadius: 4,
-                              )
+                    // Gradient shadow
+                    Positioned.fill(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.black.withValues(alpha: 0.4),
+                              Colors.transparent,
+                              Colors.transparent,
+                              Colors.black.withValues(alpha: 0.3),
                             ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            
-            // Details section
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Origin row
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.pin_drop_rounded,
-                        size: 16,
-                        color: AppConstants.accentGold,
-                      ),
-                      const SizedBox(width: 6),
-                      Text(
-                        '${l10n.originLabel}: ',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: AppConstants.textSecondary,
-                            ),
-                      ),
-                      Text(
-                        breedOrigin,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: AppConstants.primaryGreen,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  // Description
-                  Text(
-                    breedDesc,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          height: 1.4,
+                    // Availability Badge (Top Right)
+                    Positioned(
+                      top: 16,
+                      right: 16,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
                         ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Divider(color: AppConstants.dividerColor),
-                  const SizedBox(height: 16),
-                  
-                  // Primary Info (Price per Litre + CTA Action)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
+                        decoration: BoxDecoration(
+                          color: breed.isAvailable
+                              ? AppConstants.primaryGreen
+                              : AppConstants.textSecondary,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          breed.isAvailable ? l10n.availableLabel : l10n.outOfStockLabel,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Breed Title overlay (Bottom Left)
+                    Positioned(
+                      bottom: 16,
+                      left: 16,
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            isHindi ? 'दूध का मूल्य' : 'Milk Price',
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
-                          const SizedBox(height: 4),
-                          RichText(
-                            text: TextSpan(
-                              text: '₹${breed.pricePerLitre.toStringAsFixed(0)}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(
-                                    color: AppConstants.primaryGreen,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                              children: [
-                                TextSpan(
-                                  text: isHindi ? '/लीटर' : '/L',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                        color: AppConstants.textSecondary,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                ),
+                            breedName,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              shadows: [
+                                Shadow(
+                                  color: Colors.black45,
+                                  offset: Offset(0, 1),
+                                  blurRadius: 4,
+                                )
                               ],
                             ),
                           ),
                         ],
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          context.push('/breed-detail/${breed.id}');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 12,
-                          ),
-                        ),
-                        child: Text(isHindi ? 'विवरण देखें' : 'View Details'),
-                      ),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              
+              // Details section
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Origin row
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.pin_drop_rounded,
+                          size: 16,
+                          color: AppConstants.accentGold,
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          '${l10n.originLabel}: ',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: AppConstants.textSecondary,
+                              ),
+                        ),
+                        Text(
+                          breedOrigin,
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                color: AppConstants.primaryGreen,
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    
+                    // Description snippet
+                    Text(
+                      breedDesc,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppConstants.textSecondary,
+                            height: 1.3,
+                          ),
+                    ),
+                    const SizedBox(height: 16),
+                    Divider(color: AppConstants.dividerColor),
+                    const SizedBox(height: 16),
+                    
+                    // Primary Info (Price per Litre + CTA Action)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              isHindi ? 'मूल्य प्रति लीटर' : 'Price per Litre',
+                              style: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            const SizedBox(height: 4),
+                            RichText(
+                              text: TextSpan(
+                                text: '₹${breed.pricePerLitre.toStringAsFixed(0)}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      color: AppConstants.primaryGreen,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                children: [
+                                  TextSpan(
+                                    text: isHindi ? '/लीटर' : '/L',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          color: AppConstants.textSecondary,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            context.push('/breed-detail/${breed.id}');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 12,
+                            ),
+                          ),
+                          child: Text(isHindi ? 'विवरण देखें' : 'View Details'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

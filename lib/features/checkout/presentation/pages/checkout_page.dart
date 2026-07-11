@@ -10,6 +10,8 @@ import '../../../location/presentation/bloc/location_state.dart';
 import '../../domain/entities/order_entity.dart';
 import '../bloc/checkout_cubit.dart';
 import '../bloc/checkout_state.dart';
+import '../../../auth/presentation/bloc/auth_cubit.dart';
+import '../../../auth/presentation/bloc/auth_state.dart';
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
@@ -28,6 +30,27 @@ class _CheckoutPageState extends State<CheckoutPage> {
   String _selectedPayment = 'cod'; // 'cod' or 'credit' or 'upi'
 
   @override
+  void initState() {
+    super.initState();
+    // Pre-populate customer details if authenticated
+    final authState = context.read<AuthCubit>().state;
+    if (authState is Authenticated) {
+      _nameController.text = authState.user.displayName ?? '';
+      // Strip country code (+91) if present
+      final phone = authState.user.phoneNumber ?? '';
+      _phoneController.text = phone.startsWith('+91') 
+          ? phone.substring(3) 
+          : phone;
+    }
+    // Reset checkout state when entering the page to prevent stale states
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        context.read<CheckoutCubit>().resetCheckout();
+      }
+    });
+  }
+
+  @override
   void dispose() {
     _nameController.dispose();
     _phoneController.dispose();
@@ -39,6 +62,56 @@ class _CheckoutPageState extends State<CheckoutPage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final bool isHindi = Localizations.localeOf(context).languageCode == 'hi';
+    final authState = context.watch<AuthCubit>().state;
+
+    if (authState is! Authenticated) {
+      return Scaffold(
+        backgroundColor: AppConstants.backgroundCream,
+        appBar: AppBar(
+          title: Text(l10n.checkoutTitle),
+          elevation: 0,
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.lock_person_rounded,
+                  size: 80,
+                  color: AppConstants.primaryGreen,
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  isHindi ? 'लॉगिन आवश्यक है' : 'Login Required',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: AppConstants.primaryGreen,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  isHindi
+                      ? 'चेकआउट करने और ऑर्डर देने के लिए कृपया पहले अपने खाते में लॉगिन करें।'
+                      : 'Please sign in to your account first to proceed to checkout and place your order.',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 32),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => context.push('/login'),
+                    child: Text(isHindi ? 'लॉगिन करने के लिए आगे बढ़ें' : 'Proceed to Login'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       backgroundColor: AppConstants.backgroundCream,
@@ -48,12 +121,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       ),
       body: BlocConsumer<CheckoutCubit, CheckoutState>(
         listener: (context, state) {
-          if (state is CheckoutSuccess) {
-            // 1. Clear shopping cart
-            context.read<CartCubit>().clearCart();
-            // 2. Redirect to success screen
-            context.go('/order-success', extra: state.order);
-          } else if (state is CheckoutError) {
+          if (state is CheckoutError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Error: ${state.message}')),
             );
@@ -70,7 +138,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.location_off_rounded, size: 64, color: AppConstants.accentOrange),
+                    Icon(Icons.location_off_rounded, size: 64, color: AppConstants.accentOrange),
                     const SizedBox(height: 16),
                     Text(
                       isHindi ? 'लोकेशन सेट नहीं है' : 'Location Not Set',
@@ -140,28 +208,36 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         onPressed: state is CheckoutLoading
                             ? null
                             : () {
-                                if (_formKey.currentState!.validate()) {
-                                  final order = OrderEntity(
-                                    id: 'PDF-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
-                                    customerName: _nameController.text.trim(),
-                                    customerPhone: _phoneController.text.trim(),
-                                    address: address,
-                                    deliverySlot: _selectedSlot,
-                                    paymentMethod: _selectedPayment,
-                                    items: cartState.cart.items,
-                                    subtotal: cartState.cart.subtotal,
-                                    deliveryCharge: cartState.cart.deliveryCharge,
-                                    grandTotal: cartState.cart.grandTotal,
-                                    createdAt: DateTime.now(),
-                                  );
-                                  if (_selectedPayment == 'upi') {
-                                    context.push('/mock-gateway', extra: order);
-                                  } else {
-                                    context.read<CheckoutCubit>().placeOrder(order);
+                                  if (_formKey.currentState!.validate()) {
+                                    final order = OrderEntity(
+                                      id: 'PDF-${DateTime.now().millisecondsSinceEpoch.toString().substring(7)}',
+                                      customerName: _nameController.text.trim(),
+                                      customerPhone: _phoneController.text.trim(),
+                                      address: address,
+                                      deliverySlot: _selectedSlot,
+                                      paymentMethod: _selectedPayment,
+                                      items: cartState.cart.items,
+                                      subtotal: cartState.cart.subtotal,
+                                      deliveryCharge: cartState.cart.deliveryCharge,
+                                      grandTotal: cartState.cart.grandTotal,
+                                      createdAt: DateTime.now(),
+                                    );
+                                    
+                                    if (_selectedPayment == 'upi') {
+                                      context.push('/payment-method', extra: order);
+                                    } else {
+                                      context.push('/payment-processing', extra: {
+                                        'order': order,
+                                        'method': _selectedPayment,
+                                      });
+                                    }
                                   }
-                                }
-                              },
-                        child: Text(l10n.placeOrderLabel),
+                                },
+                          child: Text(
+                            _selectedPayment == 'upi'
+                                ? (isHindi ? 'भुगतान विकल्प चुनें' : 'Proceed to Payment')
+                                : (isHindi ? 'ऑर्डर सबमिट करें' : 'Place Order'),
+                          ),
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -181,11 +257,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const CircularProgressIndicator(color: AppConstants.primaryGreen),
+                            CircularProgressIndicator(color: AppConstants.primaryGreen),
                             const SizedBox(height: 20),
                             Text(
                               isHindi ? 'ऑर्डर सुरक्षित किया जा रहा है...' : 'Securing your order...',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: AppConstants.primaryGreen,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -211,7 +287,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         style: TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.bold,
-          color: AppConstants.primaryGreen.withOpacity(0.8),
+          color: AppConstants.primaryGreen.withValues(alpha: 0.8),
           letterSpacing: 0.5,
         ),
       ),
@@ -223,14 +299,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+        side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Icon(Icons.location_on_rounded, color: AppConstants.accentGold, size: 24),
+            Icon(Icons.location_on_rounded, color: AppConstants.accentGold, size: 24),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -243,7 +319,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   const SizedBox(height: 4),
                   Text(
                     '${isHindi ? "गांव/कस्बा" : "Village"}: ${address.village} • Pincode: ${address.pincode}',
-                    style: const TextStyle(color: AppConstants.textSecondary, fontSize: 11),
+                    style: TextStyle(color: AppConstants.textSecondary, fontSize: 11),
                   ),
                 ],
               ),
@@ -259,7 +335,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+        side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -383,7 +459,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         children: [
           Text(
             isHindi ? 'अग्रिम भुगतान क्यूआर स्कैन करें' : 'Scan QR to Pay',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppConstants.primaryGreen),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppConstants.primaryGreen),
           ),
           const SizedBox(height: 12),
           Image.network(
@@ -399,7 +475,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             errorBuilder: (context, error, stackTrace) => const Icon(Icons.qr_code_2_rounded, size: 80),
           ),
           const SizedBox(height: 8),
-          const Text(
+          Text(
             'UPI ID: pandeydairy@ybl',
             style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppConstants.textSecondary),
           ),
@@ -436,7 +512,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
         decoration: BoxDecoration(
-          color: isSelected ? AppConstants.primaryGreen.withOpacity(0.08) : AppConstants.surfaceWhite,
+          color: isSelected ? AppConstants.primaryGreen.withValues(alpha: 0.08) : AppConstants.surfaceWhite,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isSelected ? AppConstants.primaryGreen : AppConstants.dividerColor,
@@ -463,7 +539,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             const SizedBox(height: 2),
             Text(
               subtitle,
-              style: const TextStyle(fontSize: 9, color: AppConstants.textSecondary),
+              style: TextStyle(fontSize: 9, color: AppConstants.textSecondary),
               textAlign: TextAlign.center,
             ),
           ],
@@ -477,7 +553,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+        side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -507,7 +583,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 ),
               );
             }),
-            const Divider(color: AppConstants.dividerColor),
+            Divider(color: AppConstants.dividerColor),
             const SizedBox(height: 8),
             
             // Subtotal Row
@@ -536,7 +612,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ],
             ),
             const SizedBox(height: 12),
-            const Divider(color: AppConstants.dividerColor),
+            Divider(color: AppConstants.dividerColor),
             const SizedBox(height: 8),
 
             // Grand Total Row
@@ -545,11 +621,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
               children: [
                 Text(
                   l10n.totalAmountLabel,
-                  style: const TextStyle(fontWeight: FontWeight.bold, color: AppConstants.primaryGreen, fontSize: 14),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: AppConstants.primaryGreen, fontSize: 14),
                 ),
                 Text(
                   '₹${cart.grandTotal.toStringAsFixed(0)}',
-                  style: const TextStyle(fontWeight: FontWeight.w900, color: AppConstants.primaryGreen, fontSize: 16),
+                  style: TextStyle(fontWeight: FontWeight.w900, color: AppConstants.primaryGreen, fontSize: 16),
                 ),
               ],
             ),

@@ -5,6 +5,7 @@ import '../../../../core/constants/app_constants.dart';
 import '../../domain/entities/order_entity.dart';
 import '../bloc/checkout_cubit.dart';
 import '../bloc/checkout_state.dart';
+import '../../../cart/presentation/bloc/cart_cubit.dart';
 
 class MockGatewayPage extends StatefulWidget {
   final OrderEntity order;
@@ -39,7 +40,7 @@ class _MockGatewayPageState extends State<MockGatewayPage> {
       _processing = true;
       _statusText = 'Verifying transaction UTR on blockchain ledger...';
     });
-    await Future.delayed(const Duration(seconds: 1500));
+    await Future.delayed(const Duration(milliseconds: 50));
     if (mounted) {
       // Complete order creation
       context.read<CheckoutCubit>().placeOrder(widget.order);
@@ -64,7 +65,9 @@ class _MockGatewayPageState extends State<MockGatewayPage> {
     return BlocListener<CheckoutCubit, CheckoutState>(
       listener: (context, state) {
         if (state is CheckoutSuccess) {
-          // Success checkout redirects to order success receipt
+          // Clear shopping cart
+          context.read<CartCubit>().clearCart();
+          // Navigate to success screen
           context.go('/order-success', extra: state.order);
         } else if (state is CheckoutError) {
           setState(() {
@@ -90,10 +93,10 @@ class _MockGatewayPageState extends State<MockGatewayPage> {
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: AppConstants.primaryGreen.withOpacity(0.08),
+                    color: AppConstants.primaryGreen.withValues(alpha: 0.08),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.security_rounded,
                     size: 72,
                     color: AppConstants.primaryGreen,
@@ -114,7 +117,7 @@ class _MockGatewayPageState extends State<MockGatewayPage> {
                   isHindi
                       ? 'कृपया इस स्क्रीन को बंद न करें या पीछे न जाएं'
                       : 'Please do not close this window or navigate back.',
-                  style: const TextStyle(color: AppConstants.textSecondary, fontSize: 12),
+                  style: TextStyle(color: AppConstants.textSecondary, fontSize: 12),
                 ),
                 const SizedBox(height: 32),
                 
@@ -123,7 +126,7 @@ class _MockGatewayPageState extends State<MockGatewayPage> {
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
-                    side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+                    side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -138,23 +141,23 @@ class _MockGatewayPageState extends State<MockGatewayPage> {
                             ),
                             Text(
                               '₹${widget.order.grandTotal.toStringAsFixed(2)}',
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppConstants.primaryGreen),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppConstants.primaryGreen),
                             ),
                           ],
                         ),
                         const SizedBox(height: 12),
-                        const Divider(color: AppConstants.dividerColor),
+                        Divider(color: AppConstants.dividerColor),
                         const SizedBox(height: 12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               isHindi ? 'ट्रांजैक्शन आईडी:' : 'Reference ID:',
-                              style: const TextStyle(color: AppConstants.textSecondary, fontSize: 11),
+                              style: TextStyle(color: AppConstants.textSecondary, fontSize: 11),
                             ),
                             Text(
                               widget.order.id,
-                              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 11, color: AppConstants.textPrimary),
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 11, color: AppConstants.textPrimary),
                             ),
                           ],
                         ),
@@ -166,13 +169,13 @@ class _MockGatewayPageState extends State<MockGatewayPage> {
                 
                 // Loader & Status
                 if (_processing) ...[
-                  const CircularProgressIndicator(color: AppConstants.primaryGreen),
+                  CircularProgressIndicator(color: AppConstants.primaryGreen),
                   const SizedBox(height: 16),
                 ],
                 Text(
                   _statusText,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: AppConstants.textSecondary, fontSize: 13, fontStyle: FontStyle.italic),
+                  style: TextStyle(color: AppConstants.textSecondary, fontSize: 13, fontStyle: FontStyle.italic),
                 ),
                 
                 const Spacer(),

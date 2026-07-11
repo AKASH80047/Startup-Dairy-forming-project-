@@ -80,10 +80,10 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: AppConstants.primaryGreen.withOpacity(0.05),
+                color: AppConstants.primaryGreen.withValues(alpha: 0.05),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.receipt_long_outlined,
                 size: 80,
                 color: AppConstants.primaryGreen,
@@ -133,7 +133,7 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+        side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
       ),
       child: ExpansionTile(
         expandedCrossAxisAlignment: CrossAxisAlignment.start,
@@ -143,10 +143,10 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
         leading: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: AppConstants.primaryGreen.withOpacity(0.08),
+            color: AppConstants.primaryGreen.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Icon(Icons.shopping_bag_outlined, color: AppConstants.primaryGreen, size: 24),
+          child: Icon(Icons.shopping_bag_outlined, color: AppConstants.primaryGreen, size: 24),
         ),
         title: Text(
           order.id,
@@ -154,14 +154,14 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
         ),
         subtitle: Text(
           '${l10n.placedOnLabel}: $dateString $timeString • Total: ₹${order.grandTotal.toStringAsFixed(0)}',
-          style: const TextStyle(color: AppConstants.textSecondary, fontSize: 10),
+          style: TextStyle(color: AppConstants.textSecondary, fontSize: 10),
         ),
         children: [
-          const Divider(color: AppConstants.dividerColor),
+          Divider(color: AppConstants.dividerColor),
           const SizedBox(height: 8),
 
           // Items summary
-          const Text(
+          Text(
             'Items Summary',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: AppConstants.textSecondary),
           ),
@@ -182,7 +182,7 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
           const SizedBox(height: 12),
 
           // Delivery details
-          const Text(
+          Text(
             'Delivery Details',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: AppConstants.textSecondary),
           ),
@@ -193,16 +193,16 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
           ),
           Text(
             'Village: ${order.address.village} • Pincode: ${order.address.pincode}',
-            style: const TextStyle(fontSize: 10, color: AppConstants.textSecondary),
+            style: TextStyle(fontSize: 10, color: AppConstants.textSecondary),
           ),
           const SizedBox(height: 6),
           Text(
             'Slot: ${order.deliverySlot == "morning" ? "Morning (6 AM - 9 AM)" : "Evening (5 PM - 8 PM)"}',
-            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: AppConstants.primaryGreen),
+            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: AppConstants.primaryGreen),
           ),
           Text(
-            'Payment: ${order.paymentMethod == "cod" ? "Cash on Delivery" : "Village Credit"}',
-            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: AppConstants.accentGold),
+            'Payment: ${order.paymentMethod == "cod" ? (isHindi ? "कैश ऑन डिलीवरी (COD)" : "Cash on Delivery") : order.paymentMethod == "upi" ? (isHindi ? "ऑनलाइन यूपीआई (सफल)" : "Online UPI (Paid)") : (isHindi ? "खाता (क्रेडिट)" : "Village Credit (Khata)")}',
+            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: AppConstants.accentGold),
           ),
         ],
       ),

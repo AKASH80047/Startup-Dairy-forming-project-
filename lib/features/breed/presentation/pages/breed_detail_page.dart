@@ -7,6 +7,7 @@ import '../../../../core/enum/a2_status.dart';
 import '../../../../core/widgets/shimmer_loader.dart';
 import '../bloc/breed_cubit.dart';
 import '../bloc/breed_state.dart';
+import '../widgets/breed_image_widget.dart';
 import '../../domain/entities/breed_entity.dart';
 import '../../../cart/domain/entities/cart_item.dart';
 import '../../../cart/presentation/bloc/cart_cubit.dart';
@@ -108,52 +109,17 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
           child: CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
-              // Hero collapsing banner
+              // Pinned standard AppBar
               SliverAppBar(
-                expandedHeight: 280,
                 pinned: true,
-                stretch: true,
-                leading: Container(
-                  margin: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.3),
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back_rounded, color: Colors.white),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ),
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Hero(
-                        tag: 'breed_img_${breed.id}',
-                        child: Image.network(
-                          breed.imageUrl,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => Container(
-                            color: AppConstants.dividerColor,
-                            child: const Icon(Icons.broken_image_rounded, size: 64),
-                          ),
-                        ),
-                      ),
-                      // Top-down and bottom-up shadow gradients
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.black.withOpacity(0.35),
-                              Colors.transparent,
-                              Colors.black.withOpacity(0.45),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                      ),
-                    ],
+                elevation: 0,
+                backgroundColor: AppConstants.surfaceWhite,
+                foregroundColor: AppConstants.primaryGreen,
+                title: Text(
+                  breedName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
                 ),
               ),
@@ -161,6 +127,12 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
               // Information details
               SliverList(
                 delegate: SliverChildListDelegate([
+                  // Dedicated responsive breed image widget at the top
+                  BreedImageWidget(
+                    imageUrl: breed.imageUrl,
+                    breedName: breedName,
+                    borderRadius: 0,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
@@ -197,8 +169,8 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                               decoration: BoxDecoration(
                                 color: breed.isAvailable 
-                                    ? AppConstants.primaryGreen.withOpacity(0.08)
-                                    : Colors.redAccent.withOpacity(0.08),
+                                    ? AppConstants.primaryGreen.withValues(alpha: 0.08)
+                                    : Colors.redAccent.withValues(alpha: 0.08),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(
@@ -278,37 +250,56 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
     bool isHindi,
     String village,
   ) {
-    return GridView.count(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      crossAxisSpacing: 16,
-      mainAxisSpacing: 16,
-      childAspectRatio: 2.2,
+    return Column(
       children: [
-        _buildSpecCard(
-          context,
-          Icons.pin_drop_rounded,
-          l10n.sourceVillageLabel,
-          village,
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: _buildSpecCard(
+                  context,
+                  Icons.pin_drop_rounded,
+                  l10n.sourceVillageLabel,
+                  village,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildSpecCard(
+                  context,
+                  Icons.water_drop_rounded,
+                  l10n.fatPercentageLabel,
+                  '${breed.averageFatMin}% - ${breed.averageFatMax}%',
+                ),
+              ),
+            ],
+          ),
         ),
-        _buildSpecCard(
-          context,
-          Icons.water_drop_rounded,
-          l10n.fatPercentageLabel,
-          '${breed.averageFatMin}% - ${breed.averageFatMax}%',
-        ),
-        _buildSpecCard(
-          context,
-          Icons.speed_rounded,
-          l10n.yieldLabel,
-          '${breed.averageYieldMin.toStringAsFixed(0)}-${breed.averageYieldMax.toStringAsFixed(0)} ${isHindi ? 'ली/दिन' : 'L/day'}',
-        ),
-        _buildSpecCard(
-          context,
-          Icons.local_shipping_rounded,
-          isHindi ? 'डिलीवरी शुल्क' : 'Delivery Charge',
-          isHindi ? 'मुफ़्त (2 किमी)' : 'Free (within 2km)',
+        const SizedBox(height: 16),
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: _buildSpecCard(
+                  context,
+                  Icons.speed_rounded,
+                  l10n.yieldLabel,
+                  '${breed.averageYieldMin.toStringAsFixed(0)}-${breed.averageYieldMax.toStringAsFixed(0)} ${isHindi ? 'ली/दिन' : 'L/day'}',
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildSpecCard(
+                  context,
+                  Icons.local_shipping_rounded,
+                  isHindi ? 'डिलीवरी शुल्क' : 'Delivery Charge',
+                  isHindi ? 'मुफ़्त (2 किमी)' : 'Free (within 2km)',
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -316,7 +307,7 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
 
   Widget _buildSpecCard(BuildContext context, IconData icon, String title, String value) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
         color: AppConstants.surfaceWhite,
         borderRadius: BorderRadius.circular(12),
@@ -337,7 +328,7 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
                         color: AppConstants.textSecondary,
                         fontSize: 10,
                       ),
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
@@ -348,7 +339,7 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
                       ),
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
@@ -367,19 +358,19 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
 
     switch (status) {
       case A2Status.verified:
-        cardColor = AppConstants.primaryGreen.withOpacity(0.06);
+        cardColor = AppConstants.primaryGreen.withValues(alpha: 0.06);
         textColor = AppConstants.primaryGreen;
         statusText = l10n.verifiedLabel;
         icon = Icons.verified_rounded;
         break;
       case A2Status.notVerified:
-        cardColor = AppConstants.accentOrange.withOpacity(0.08);
+        cardColor = AppConstants.accentOrange.withValues(alpha: 0.08);
         textColor = AppConstants.accentOrange;
         statusText = l10n.notVerifiedLabel;
         icon = Icons.warning_amber_rounded;
         break;
       case A2Status.unknown:
-        cardColor = Colors.grey.withOpacity(0.08);
+        cardColor = Colors.grey.withValues(alpha: 0.08);
         textColor = AppConstants.textSecondary;
         statusText = '${l10n.a2StatusLabel}: ${l10n.unknownLabel}';
         icon = Icons.help_outline_rounded;
@@ -418,12 +409,12 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppConstants.accentGold.withOpacity(0.3), width: 1),
+        border: Border.all(color: AppConstants.accentGold.withValues(alpha: 0.3), width: 1),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(
+          Icon(
             Icons.info_outline_rounded,
             size: 16,
             color: AppConstants.accentOrange,
@@ -434,7 +425,7 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
               isHindi
                   ? '* वसा और उपज के मान बैच परीक्षण पर आधारित औसत संकेतक हैं। वास्तविक परिणाम भिन्न हो सकते हैं।'
                   : '* Fat and yield values are approximate indicators based on farm batch records. Actual test values may vary.',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 11,
                 color: AppConstants.textSecondary,
                 fontStyle: FontStyle.italic,
@@ -497,11 +488,11 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
               contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: AppConstants.dividerColor),
+                borderSide: BorderSide(color: AppConstants.dividerColor),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: AppConstants.primaryGreen, width: 1.5),
+                borderSide: BorderSide(color: AppConstants.primaryGreen, width: 1.5),
               ),
               suffixText: 'ml',
             ),
@@ -524,12 +515,12 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
         color: AppConstants.surfaceWhite,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, -4),
           )
         ],
-        border: const Border(
+        border: Border(
           top: BorderSide(color: AppConstants.dividerColor, width: 0.5),
         ),
       ),
@@ -567,7 +558,7 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
                       SnackBar(
                         content: Text(
                           isHindi
-                              ? '${breedName} के लिए दैनिक सदस्यता शुरू की जा रही है'
+                              ? '$breedName के लिए दैनिक सदस्यता शुरू की जा रही है'
                               : 'Initiating daily subscription setup for ${breed.nameEnglish}',
                         ),
                       ),
@@ -589,7 +580,7 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
                         final int customVal = int.tryParse(_customQtyController.text) ?? 1000;
                         final double customPrice = breed.pricePerLitre * (customVal / 1000.0);
                         final item = CartItem(
-                          id: '${breed.id}_custom_${customVal}',
+                          id: '${breed.id}_custom_$customVal',
                           productId: breed.id,
                           nameEnglish: '${breed.nameEnglish} Milk (Custom)',
                           nameHindi: '${breed.nameHindi} दूध (कस्टम)',
@@ -605,7 +596,7 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
                             ? 0.5 
                             : (_selectedQuantity == '2L' ? 2.0 : 1.0);
                         final item = CartItem(
-                          id: '${breed.id}_${_selectedQuantity}',
+                          id: '${breed.id}_$_selectedQuantity',
                           productId: breed.id,
                           nameEnglish: '${breed.nameEnglish} Milk',
                           nameHindi: '${breed.nameHindi} दूध',
@@ -622,7 +613,7 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppConstants.primaryGreen.withOpacity(0.12),
+                      backgroundColor: AppConstants.primaryGreen.withValues(alpha: 0.12),
                       foregroundColor: AppConstants.primaryGreen,
                     ),
                     child: Text(l10n.addToCartLabel),

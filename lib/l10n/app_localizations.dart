@@ -673,6 +673,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Register Subscriber'**
   String get registerSubscriberLabel;
+
+  /// No description provided for @choosePaymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Payment Method'**
+  String get choosePaymentMethod;
+
+  /// No description provided for @cashOnDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash on Delivery'**
+  String get cashOnDelivery;
+
+  /// No description provided for @onlinePayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Online Payment'**
+  String get onlinePayment;
+
+  /// No description provided for @upi.
+  ///
+  /// In en, this message translates to:
+  /// **'UPI'**
+  String get upi;
+
+  /// No description provided for @payViaBusinessQR.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay via Business QR'**
+  String get payViaBusinessQR;
+
+  /// No description provided for @payAdvance.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay Advance'**
+  String get payAdvance;
+
+  /// No description provided for @payPartialAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay Partial Amount'**
+  String get payPartialAmount;
+
+  /// No description provided for @payRemainingBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay Remaining Balance'**
+  String get payRemainingBalance;
+
+  /// No description provided for @paymentSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Successful'**
+  String get paymentSuccessful;
+
+  /// No description provided for @paymentProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Processing'**
+  String get paymentProcessing;
+
+  /// No description provided for @paymentFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Failed'**
+  String get paymentFailed;
+
+  /// No description provided for @orderIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Order ID'**
+  String get orderIdLabel;
+
+  /// No description provided for @amountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get amountLabel;
+
+  /// No description provided for @statusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get statusLabel;
+
+  /// No description provided for @paidLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get paidLabel;
+
+  /// No description provided for @paymentConfirmingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'We are confirming your payment.'**
+  String get paymentConfirmingDesc;
+
+  /// No description provided for @doNotPayAgainDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Please do not pay again immediately.'**
+  String get doNotPayAgainDesc;
+
+  /// No description provided for @checkStatusButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Check Status'**
+  String get checkStatusButton;
+
+  /// No description provided for @paymentFailedDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Your payment could not be confirmed.'**
+  String get paymentFailedDesc;
+
+  /// No description provided for @retryPaymentButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry Payment'**
+  String get retryPaymentButton;
+
+  /// No description provided for @chooseAnotherMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Another Method'**
+  String get chooseAnotherMethod;
+
+  /// No description provided for @backToOrderButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Order'**
+  String get backToOrderButton;
+
+  /// No description provided for @utrLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction UTR Number'**
+  String get utrLabel;
+
+  /// No description provided for @uploadScreenshot.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Payment Screenshot'**
+  String get uploadScreenshot;
+
+  /// No description provided for @submitVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit for Verification'**
+  String get submitVerification;
+
+  /// No description provided for @verificationPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification Pending'**
+  String get verificationPending;
+
+  /// No description provided for @paymentStatusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Status'**
+  String get paymentStatusLabel;
+
+  /// No description provided for @selectDeliveryLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Delivery Location'**
+  String get selectDeliveryLocation;
+
+  /// No description provided for @stateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'State / UT'**
+  String get stateLabel;
+
+  /// No description provided for @districtLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get districtLabel;
+
+  /// No description provided for @tehsilLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tehsil / Sub-District'**
+  String get tehsilLabel;
+
+  /// No description provided for @villageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Village'**
+  String get villageLabel;
+
+  /// No description provided for @saveAndContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Save & Continue'**
+  String get saveAndContinue;
 }
 
 class _AppLocalizationsDelegate

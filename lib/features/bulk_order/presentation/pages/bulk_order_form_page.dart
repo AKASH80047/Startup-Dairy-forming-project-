@@ -330,7 +330,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                       decoration: BoxDecoration(
                         color: isCurrent
                             ? AppConstants.primaryGreen
-                            : (isCompleted ? AppConstants.primaryGreen.withOpacity(0.1) : Colors.white),
+                            : (isCompleted ? AppConstants.primaryGreen.withValues(alpha: 0.1) : Colors.white),
                         shape: BoxShape.circle,
                         border: Border.all(
                           color: isCurrent || isCompleted ? AppConstants.primaryGreen : AppConstants.dividerColor,
@@ -339,7 +339,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                       ),
                       child: Center(
                         child: isCompleted
-                            ? const Icon(Icons.check, size: 14, color: AppConstants.primaryGreen)
+                            ? Icon(Icons.check, size: 14, color: AppConstants.primaryGreen)
                             : Text(
                                 '${index + 1}',
                                 style: TextStyle(
@@ -433,7 +433,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
           ),
           const SizedBox(height: 16),
           DropdownButtonFormField<String>(
-            value: _selectedEventType,
+            initialValue: _selectedEventType,
             decoration: InputDecoration(
               labelText: l10n.eventTypeLabel,
               prefixIcon: const Icon(Icons.event_note_rounded),
@@ -507,7 +507,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
           isHindi
               ? '* थोक ऑर्डर के लिए अतिरिक्त छूट देय राशि पर लागू होगी।'
               : '* Special event volume discount automatically applies at checkout step.',
-          style: const TextStyle(fontSize: 10, color: AppConstants.accentGold, fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 10, color: AppConstants.accentGold, fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 16),
         ..._bulkProducts.map((prod) {
@@ -523,14 +523,14 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
-              side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+              side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
             ),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Row(
                 children: [
                   CircleAvatar(
-                    backgroundColor: AppConstants.primaryGreen.withOpacity(0.08),
+                    backgroundColor: AppConstants.primaryGreen.withValues(alpha: 0.08),
                     child: Icon(prod['icon'] as IconData, color: AppConstants.primaryGreen),
                   ),
                   const SizedBox(width: 14),
@@ -539,14 +539,14 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                        Text('₹$price / $unit', style: const TextStyle(color: AppConstants.textSecondary, fontSize: 11)),
+                        Text('₹$price / $unit', style: TextStyle(color: AppConstants.textSecondary, fontSize: 11)),
                       ],
                     ),
                   ),
                   Row(
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.remove_circle_outline, color: AppConstants.textSecondary),
+                        icon: Icon(Icons.remove_circle_outline, color: AppConstants.textSecondary),
                         onPressed: qty <= 0
                             ? null
                             : () {
@@ -564,7 +564,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.add_circle_outline, color: AppConstants.primaryGreen),
+                        icon: Icon(Icons.add_circle_outline, color: AppConstants.primaryGreen),
                         onPressed: () {
                           setState(() {
                             _quantities[id] = qty + step;
@@ -590,7 +590,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(isHindi ? 'अनुमानित उप-योग:' : 'Estimated Subtotal:', style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text('₹${_subtotal.toStringAsFixed(2)}', style: const TextStyle(fontWeight: FontWeight.bold, color: AppConstants.primaryGreen, fontSize: 16)),
+              Text('₹${_subtotal.toStringAsFixed(2)}', style: TextStyle(fontWeight: FontWeight.bold, color: AppConstants.primaryGreen, fontSize: 16)),
             ],
           ),
         ),
@@ -676,7 +676,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
           color: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
-            side: const BorderSide(color: AppConstants.dividerColor, width: 0.5),
+            side: BorderSide(color: AppConstants.dividerColor, width: 0.5),
           ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -693,7 +693,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                 ],
                 const SizedBox(height: 8),
                 _buildInvoiceRow(isHindi ? 'डिलीवरी शुल्क:' : 'Delivery Charge:', '₹${_deliveryCharge.toStringAsFixed(0)}'),
-                const Divider(color: AppConstants.dividerColor, height: 24),
+                Divider(color: AppConstants.dividerColor, height: 24),
                 _buildInvoiceRow(
                   isHindi ? 'कुल देय राशि:' : 'Grand Total:',
                   '₹${_grandTotal.toStringAsFixed(0)}',
@@ -701,7 +701,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                   fontSize: 16,
                   textColor: AppConstants.primaryGreen,
                 ),
-                const Divider(color: AppConstants.dividerColor, height: 24),
+                Divider(color: AppConstants.dividerColor, height: 24),
                 _buildInvoiceRow(
                   isHindi ? 'न्यूनतम अग्रिम राशि (20%):' : 'Min Advance Required (20%):',
                   '₹${_minAdvance.toStringAsFixed(0)}',
@@ -719,7 +719,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
         const SizedBox(height: 10),
         Text(
           l10n.minimumAdvanceWarning,
-          style: const TextStyle(fontSize: 11, color: AppConstants.textSecondary),
+          style: TextStyle(fontSize: 11, color: AppConstants.textSecondary),
         ),
         const SizedBox(height: 12),
         TextFormField(
@@ -760,7 +760,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   decoration: BoxDecoration(
-                    color: _paymentMethod == 'upi' ? AppConstants.primaryGreen.withOpacity(0.06) : Colors.white,
+                    color: _paymentMethod == 'upi' ? AppConstants.primaryGreen.withValues(alpha: 0.06) : Colors.white,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: _paymentMethod == 'upi' ? AppConstants.primaryGreen : AppConstants.dividerColor,
@@ -769,7 +769,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                   ),
                   child: Column(
                     children: [
-                      const Icon(Icons.qr_code_rounded, color: AppConstants.primaryGreen),
+                      Icon(Icons.qr_code_rounded, color: AppConstants.primaryGreen),
                       const SizedBox(height: 6),
                       Text(isHindi ? 'यूपीआई / क्यूआर' : 'UPI / QR Scan', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
                     ],
@@ -784,7 +784,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   decoration: BoxDecoration(
-                    color: _paymentMethod == 'cod' ? AppConstants.primaryGreen.withOpacity(0.06) : Colors.white,
+                    color: _paymentMethod == 'cod' ? AppConstants.primaryGreen.withValues(alpha: 0.06) : Colors.white,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: _paymentMethod == 'cod' ? AppConstants.primaryGreen : AppConstants.dividerColor,
@@ -793,7 +793,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                   ),
                   child: Column(
                     children: [
-                      const Icon(Icons.handshake_outlined, color: AppConstants.primaryGreen),
+                      Icon(Icons.handshake_outlined, color: AppConstants.primaryGreen),
                       const SizedBox(height: 6),
                       Text(isHindi ? 'नकद (कैश)' : 'Cash Payment', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
                     ],
@@ -810,7 +810,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
           Center(
             child: Column(
               children: [
-                const Text(
+                Text(
                   'Scan QR to Pay Advance',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppConstants.primaryGreen),
                 ),
@@ -836,7 +836,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                const Text(
+                Text(
                   'UPI ID: pandeydairy@ybl',
                   style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppConstants.textSecondary),
                 ),
@@ -885,7 +885,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
   Widget _buildSectionHeader(String title) {
     return Text(
       title,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 15,
         fontWeight: FontWeight.bold,
         color: AppConstants.primaryGreen,

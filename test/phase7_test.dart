@@ -29,7 +29,7 @@ void main() {
     test('Initializes with default mock villages pre-populated', () {
       expect(adminCubit.state, isA<AdminLoaded>());
       final state = adminCubit.state as AdminLoaded;
-      expect(state.villages.length, 4);
+      expect(state.villages.length, 14);
       expect(state.villages.first.nameEnglish, 'Gopalpura');
     });
 
@@ -48,7 +48,7 @@ void main() {
 
       expect(adminCubit.state, isA<AdminLoaded>());
       final state = adminCubit.state as AdminLoaded;
-      expect(state.villages.length, 5);
+      expect(state.villages.length, 15);
       expect(state.villages.last.nameEnglish, 'Malviya Nagar');
     });
 

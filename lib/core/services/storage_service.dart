@@ -19,6 +19,8 @@ class StorageService {
 
   StorageService(this._prefs);
 
+  static const String _keyThemeType = 'selected_theme_type';
+
   /// Saves the selected language code ('en' or 'hi') to local storage.
   Future<bool> saveLanguageCode(String languageCode) async {
     return await _prefs.setString(AppConstants.keyLanguageCode, languageCode);
@@ -27,6 +29,16 @@ class StorageService {
   /// Retrieves the selected language code from local storage. Returns null if not set.
   String? getLanguageCode() {
     return _prefs.getString(AppConstants.keyLanguageCode);
+  }
+
+  /// Saves the selected theme type to local storage.
+  Future<bool> saveThemeType(String themeType) async {
+    return await _prefs.setString(_keyThemeType, themeType);
+  }
+
+  /// Retrieves the selected theme type from local storage.
+  String? getThemeType() {
+    return _prefs.getString(_keyThemeType);
   }
 
   /// Caches the delivery address to restore on next startup.

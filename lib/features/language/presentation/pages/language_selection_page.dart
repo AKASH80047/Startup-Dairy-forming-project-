@@ -32,7 +32,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                 child: Text(
                   isHindiSelected ? AppConstants.shivayaHi : AppConstants.shivayaEn,
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: AppConstants.primaryGreen.withOpacity(0.6),
+                        color: AppConstants.primaryGreen.withValues(alpha: 0.6),
                         fontWeight: FontWeight.bold,
                         letterSpacing: 2.0,
                       ),
@@ -133,7 +133,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: AppConstants.primaryGreen.withOpacity(0.06),
+                    color: AppConstants.primaryGreen.withValues(alpha: 0.06),
                     blurRadius: 16,
                     offset: const Offset(0, 8),
                   )
@@ -158,7 +158,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                       child: Container(
                         width: 12,
                         height: 12,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           color: AppConstants.primaryGreen,
                           shape: BoxShape.circle,
                         ),
