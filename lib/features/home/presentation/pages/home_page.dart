@@ -321,39 +321,55 @@ class HomePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.85,
-                  children: [
-                    CategoryCard(
-                      titleEn: 'Cow',
-                      titleHi: 'गाय',
-                      imageUrl: AppConstants.imgCategoryCow,
-                      onTap: () => context.push('/cows'),
-                    ),
-                    CategoryCard(
-                      titleEn: 'Buffalo',
-                      titleHi: 'भैंस',
-                      imageUrl: AppConstants.imgCategoryBuffalo,
-                      onTap: () => context.push('/buffalos'),
-                    ),
-                    CategoryCard(
-                      titleEn: 'Other Products',
-                      titleHi: 'अन्य उत्पाद',
-                      imageUrl: AppConstants.imgCategoryOtherProducts,
-                      onTap: () => context.push('/products'),
-                    ),
-                    CategoryCard(
-                      titleEn: 'Bulk & Event Orders',
-                      titleHi: 'थोक एवं समारोह ऑर्डर',
-                      imageUrl: AppConstants.imgCategoryBulkOrders,
-                      onTap: () => context.push('/bulk-orders'),
-                    ),
-                  ],
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final double width = constraints.maxWidth;
+                    int crossAxisCount = 2;
+                    double aspectRatio = 0.85;
+                    
+                    if (width > 1000) {
+                      crossAxisCount = 4;
+                      aspectRatio = 1.1;
+                    } else if (width > 600) {
+                      crossAxisCount = 3;
+                      aspectRatio = 0.95;
+                    }
+                    
+                    return GridView.count(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount: crossAxisCount,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: aspectRatio,
+                      children: [
+                        CategoryCard(
+                          titleEn: 'Cow',
+                          titleHi: 'गाय',
+                          imageUrl: AppConstants.imgCategoryCow,
+                          onTap: () => context.push('/cows'),
+                        ),
+                        CategoryCard(
+                          titleEn: 'Buffalo',
+                          titleHi: 'भैंस',
+                          imageUrl: AppConstants.imgCategoryBuffalo,
+                          onTap: () => context.push('/buffalos'),
+                        ),
+                        CategoryCard(
+                          titleEn: 'Other Products',
+                          titleHi: 'अन्य उत्पाद',
+                          imageUrl: AppConstants.imgCategoryOtherProducts,
+                          onTap: () => context.push('/products'),
+                        ),
+                        CategoryCard(
+                          titleEn: 'Bulk & Event Orders',
+                          titleHi: 'थोक एवं समारोह ऑर्डर',
+                          imageUrl: AppConstants.imgCategoryBulkOrders,
+                          onTap: () => context.push('/bulk-orders'),
+                        ),
+                      ],
+                    );
+                  },
                 ),
                 const SizedBox(height: 32),
               ],

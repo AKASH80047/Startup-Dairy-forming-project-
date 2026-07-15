@@ -50,17 +50,31 @@ class _ProductListPageState extends State<ProductListPage> {
                   ),
                 );
               }
-              return GridView.builder(
-                padding: const EdgeInsets.all(20.0),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.72,
-                ),
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  return _buildProductCard(context, products[index], isHindi, l10n);
+              return LayoutBuilder(
+                builder: (context, constraints) {
+                  final double width = constraints.maxWidth;
+                  int crossAxisCount = 2;
+                  double aspectRatio = 0.72;
+                  if (width > 1000) {
+                    crossAxisCount = 4;
+                    aspectRatio = 0.85;
+                  } else if (width > 600) {
+                    crossAxisCount = 3;
+                    aspectRatio = 0.78;
+                  }
+                  return GridView.builder(
+                    padding: const EdgeInsets.all(20.0),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: aspectRatio,
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return _buildProductCard(context, products[index], isHindi, l10n);
+                    },
+                  );
                 },
               );
             } else if (state is ProductError) {
@@ -74,26 +88,40 @@ class _ProductListPageState extends State<ProductListPage> {
   }
 
   Widget _buildShimmerGrid() {
-    return GridView.builder(
-      padding: const EdgeInsets.all(20.0),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-        childAspectRatio: 0.72,
-      ),
-      itemCount: 4,
-      itemBuilder: (context, index) {
-        return ShimmerLoader(
-          width: double.infinity,
-          height: double.infinity,
-          borderRadius: 16,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
-            ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double width = constraints.maxWidth;
+        int crossAxisCount = 2;
+        double aspectRatio = 0.72;
+        if (width > 1000) {
+          crossAxisCount = 4;
+          aspectRatio = 0.85;
+        } else if (width > 600) {
+          crossAxisCount = 3;
+          aspectRatio = 0.78;
+        }
+        return GridView.builder(
+          padding: const EdgeInsets.all(20.0),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            childAspectRatio: aspectRatio,
           ),
+          itemCount: 4,
+          itemBuilder: (context, index) {
+            return ShimmerLoader(
+              width: double.infinity,
+              height: double.infinity,
+              borderRadius: 16,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+            );
+          },
         );
       },
     );
