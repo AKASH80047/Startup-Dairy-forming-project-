@@ -113,7 +113,7 @@ abstract class AppLocalizations {
   /// The brand devotional line
   ///
   /// In en, this message translates to:
-  /// **'Om Namah Shivaya'**
+  /// **'दुग्धं पूर्णं पोषणम्।जीवनस्य महद् धनम्॥'**
   String get omNamahShivaya;
 
   /// Title of the language selection screen

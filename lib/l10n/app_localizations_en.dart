@@ -15,7 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tagline => 'Pure • Fresh • From Our Roots';
 
   @override
-  String get omNamahShivaya => 'Om Namah Shivaya';
+  String get omNamahShivaya => 'दुग्धं पूर्णं पोषणम्।जीवनस्य महद् धनम्॥';
 
   @override
   String get chooseLanguage => 'Choose Your Language';
