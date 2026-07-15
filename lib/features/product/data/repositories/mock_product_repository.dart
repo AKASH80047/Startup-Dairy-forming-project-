@@ -13,7 +13,7 @@ class MockProductRepository implements ProductRepository {
       descriptionHindi:
           'शुद्ध और ताजे भैंस के दूध से तैयार किया गया अत्यंत नरम और स्वादिष्ट पनीर।',
       imageUrl:
-          'https://www.greendna.in/cdn/shop/products/paneer1_500x.jpg?v=1593586837',
+          'https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=600&auto=format&fit=crop',
       price: 220.0,
       unitEnglish: '500g',
       unitHindi: '५०० ग्राम',
@@ -29,7 +29,7 @@ class MockProductRepository implements ProductRepository {
       descriptionHindi:
           'पारंपरिक घरेलू तरीके से जमाया हुआ गाढ़ा और मलाईदार दही, जो पाचन के लिए सर्वोत्तम है।',
       imageUrl:
-          'https://iorganicmilk.com/cdn/shop/articles/how-to-make-curd-or-dahi-at-home-thick-curd-recipe-iorganic-by-mak-biotek.jpg?v=1660135972',
+          'https://images.unsplash.com/photo-1571244856003-885e3eca834b?q=80&w=600&auto=format&fit=crop',
       price: 45.0,
       unitEnglish: '500ml',
       unitHindi: '५०० मिलीलीटर',
@@ -45,7 +45,7 @@ class MockProductRepository implements ProductRepository {
       descriptionHindi:
           'सर्वोत्तम मक्खन से पारंपरिक विधि द्वारा तैयार दानेदार घी, जो सुगंध और स्वाद से भरपूर है।',
       imageUrl:
-          'https://aarogyamastu.in/wp-content/uploads/2022/06/a2-cow-desi-ghee.jpg',
+          'https://images.unsplash.com/photo-1589733901241-5e5148685df5?q=80&w=600&auto=format&fit=crop',
       price: 750.0,
       unitEnglish: '1L',
       unitHindi: '१ लीटर',
@@ -60,7 +60,7 @@ class MockProductRepository implements ProductRepository {
           'Refreshing traditional buttermilk blended with roasted cumin, fresh coriander, and black salt.',
       descriptionHindi:
           'भुने जीरे, ताजी धनिया और काले नमक के मिश्रण से तैयार ठंडी और पाचक मसाला छाछ।',
-      imageUrl: 'https://content.jwplatform.com/thumbs/5aDzadMp-720.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?q=80&w=600&auto=format&fit=crop',
       price: 20.0,
       unitEnglish: '500ml',
       unitHindi: '५०० मिलीलीटर',

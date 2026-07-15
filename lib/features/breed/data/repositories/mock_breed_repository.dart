@@ -20,7 +20,7 @@ class MockBreedRepository implements BreedRepository {
       descriptionHindi:
           'गर्मी सहन करने की उच्च क्षमता, किलनी (टिक) प्रतिरोधक और गाढ़े वसा वाले पौष्टिक दूध के लिए प्रसिद्ध।',
       imageUrl:
-          'https://breeds.okstate.edu/cattle/site-files/images/sahiwal.jpg',
+          'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.verified,
       averageFatMin: 4.5,
       averageFatMax: 5.2,
@@ -44,7 +44,7 @@ class MockBreedRepository implements BreedRepository {
       descriptionHindi:
           'अपनी घुमावदार सींगों और उभरे हुए माथे के लिए प्रसिद्ध। उच्च गुणवत्ता और पोषक तत्वों से भरपूर दूध का स्रोत।',
       imageUrl:
-          'https://girorganic.com/cdn/shop/articles/what-is-gir-cow-453725.jpg?v=1673547600',
+          'https://images.unsplash.com/photo-1546445317-29f4545e6d49?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.verified,
       averageFatMin: 4.4,
       averageFatMax: 4.9,
@@ -68,7 +68,7 @@ class MockBreedRepository implements BreedRepository {
       descriptionHindi:
           'गहरे लाल-भूरे रंग की यह गाय रोगों से लड़ने और गर्म जलवायु में रहने की अद्भुत क्षमता रखती है।',
       imageUrl:
-          'https://akm-img-a-in.tosshub.com/lingo/ktak/images/story/202305/red_sindhi_cow-sixteen_nine.jpg?size=1200:675',
+          'https://images.unsplash.com/photo-1527153857715-3908f2bac5e8?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.unknown,
       averageFatMin: 4.3,
       averageFatMax: 5.0,
@@ -92,7 +92,7 @@ class MockBreedRepository implements BreedRepository {
       descriptionHindi:
           'सफेद रंग की शानदार दोहरे उद्देश्य वाली नस्ल, जो रेगिस्तान के अत्यंत कठिन वातावरण में भी सहज रहती है।',
       imageUrl:
-          'https://breeds.okstate.edu/cattle/site-files/images/tharparkar.jpg',
+          'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.unknown,
       averageFatMin: 4.2,
       averageFatMax: 4.8,
@@ -115,7 +115,7 @@ class MockBreedRepository implements BreedRepository {
           'Docile, efficient milk producer requiring less feed maintenance, ideal for local village farms.',
       descriptionHindi:
           'शांत स्वभाव और कम चारे के रख-रखाव में भी अच्छा दूध देने वाली स्थानीय डेयरी किसानों के लिए आदर्श गाय।',
-      imageUrl: 'https://cpimg.tistatic.com/05418407/b/4/Dairy-Rathi-Cow.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1532911557891-d12f6b98dddc?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.unknown,
       averageFatMin: 4.0,
       averageFatMax: 4.7,
@@ -138,7 +138,7 @@ class MockBreedRepository implements BreedRepository {
           'Known for its giant horns and unique heavy walk. Milk is rich in essential nutrients.',
       descriptionHindi:
           'विशाल सींगों और अपनी विशेष "सवाई चाल" के लिए प्रसिद्ध। इसका दूध आवश्यक पोषक तत्वों से भरपूर होता है।',
-      imageUrl: 'https://cpimg.tistatic.com/03814100/b/5/Kankrej-Cows.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1574355355826-cf55d64287c2?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.unknown,
       averageFatMin: 4.1,
       averageFatMax: 4.8,
@@ -162,7 +162,7 @@ class MockBreedRepository implements BreedRepository {
       descriptionHindi:
           'मक्खन वसा की उच्च मात्रा वाले दूध का उत्पादन करने वाली विदेशी नस्ल। संतुलित आहार से दूध उत्पादन बेहतर होता है।',
       imageUrl:
-          'https://cpimg.tistatic.com/07978449/b/4/Cross-Breed-HF-Cow.jpg',
+          'https://images.unsplash.com/photo-1605118086055-58079df9cc2b?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.notVerified,
       averageFatMin: 4.8,
       averageFatMax: 5.5,
@@ -185,7 +185,7 @@ class MockBreedRepository implements BreedRepository {
           'Highest milk yield volume producer globally. Striking black and white patched coat.',
       descriptionHindi:
           'दुनिया में सबसे अधिक मात्रा में दूध देने वाली नस्ल। काले और सफेद धब्बों वाला आकर्षक शरीर।',
-      imageUrl: 'https://www.dairymitra.com/uploads/product/16714427017786.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1484557985045-edf25e08da73?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.notVerified,
       averageFatMin: 3.5,
       averageFatMax: 4.0,
@@ -211,7 +211,7 @@ class MockBreedRepository implements BreedRepository {
       descriptionHindi:
           'डेयरी फार्मिंग का "काला सोना"। घुमावदार सींगों और मलाईदार उच्च वसा वाले दूध के लिए विश्व प्रसिद्ध।',
       imageUrl:
-          'https://cpimg.tistatic.com/05880257/b/4/Pure-Murrah-Buffalo.jpg',
+          'https://images.unsplash.com/photo-1559863345-02eae058c2c2?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.unknown,
       averageFatMin: 6.8,
       averageFatMax: 7.8,
@@ -235,7 +235,7 @@ class MockBreedRepository implements BreedRepository {
       descriptionHindi:
           'प्रसिद्ध तांबे जैसी काया। दूध में अत्यधिक वसा प्रतिशत (अक्सर 8% से अधिक) के लिए प्रसिद्ध।',
       imageUrl:
-          'https://epashupalan.com/wp-content/uploads/2020/04/Bhadawari-Buffalo.jpeg',
+          'https://images.unsplash.com/photo-1568043210943-0e8aac4b9734?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.unknown,
       averageFatMin: 7.5,
       averageFatMax: 8.5,
@@ -258,7 +258,7 @@ class MockBreedRepository implements BreedRepository {
           'Giant heavy buffalo breed yielding thick milk with high butterfat content.',
       descriptionHindi:
           'भारी शरीर वाली विशाल नस्ल, जो मक्खन वसा की प्रचुरता वाला गाढ़ा दूध देती है।',
-      imageUrl: 'https://4.imimg.com/data4/HJ/YQ/ANDROID-54944911/product.jpeg',
+      imageUrl: 'https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.unknown,
       averageFatMin: 7.0,
       averageFatMax: 8.2,
@@ -282,7 +282,7 @@ class MockBreedRepository implements BreedRepository {
       descriptionHindi:
           'मुर्रा और सुरती का विश्वसनीय संकरण, जो लंबे समय तक नियमित दूध देने और शांत स्वभाव के लिए जाना जाता है।',
       imageUrl:
-          'https://tiimg.tistatic.com/fp/1/005/259/mehsana-buffalo-353.jpg',
+          'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop',
       a2Status: A2Status.unknown,
       averageFatMin: 6.5,
       averageFatMax: 7.5,

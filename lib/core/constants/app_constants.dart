@@ -135,9 +135,9 @@ class AppConstants {
   static const String imgCategoryCow =
       'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?q=80&w=600&auto=format&fit=crop';
   static const String imgCategoryBuffalo =
-      'https://upload.wikimedia.org/wikipedia/commons/8/8e/Murrah_buffalo.JPG';
+      'https://images.unsplash.com/photo-1568043210943-0e8aac4b9734?q=80&w=600&auto=format&fit=crop';
   static const String imgCategoryOtherProducts =
-      'https://img-cdn.publive.online/fit-in/1280x960/filters:format(webp)/newsdrum-in/media/media_files/2025/08/06/paneer-ghee-adultration-2025-08-06-17-08-06.jpg';
+      'https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=600&auto=format&fit=crop';
   static const String imgCategoryBulkOrders =
-      'https://www.rajbhog.com/wp-content/uploads/2024/08/RF-Blog_sep2_2023-870x635-1.jpg';
+      'https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=600&auto=format&fit=crop';
 }
