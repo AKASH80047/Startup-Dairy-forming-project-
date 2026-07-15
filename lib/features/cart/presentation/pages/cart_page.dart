@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pandey/l10n/app_localizations.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/widgets/shimmer_loader.dart';
+import '../../../../core/utils/web_image_helper.dart';
 import '../bloc/cart_cubit.dart';
 import '../bloc/cart_state.dart';
 import '../../domain/entities/cart_item.dart';
@@ -146,7 +147,7 @@ class CartPage extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
-              item.imageUrl,
+              getWebSafeImageUrl(item.imageUrl),
               width: 72,
               height: 72,
               fit: BoxFit.cover,

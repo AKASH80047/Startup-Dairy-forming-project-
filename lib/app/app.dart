@@ -126,52 +126,6 @@ class PandeyApp extends StatelessWidget {
                   locale: state.locale,
                   localizationsDelegates: AppLocalizations.localizationsDelegates,
                   supportedLocales: AppLocalizations.supportedLocales,
-                  builder: (context, child) {
-                    final mediaQuery = MediaQuery.of(context);
-                    final width = mediaQuery.size.width;
-                    if (width > 600) {
-                      final theme = Theme.of(context);
-                      final isDark = theme.brightness == Brightness.dark;
-                      final Color outerBg = isDark
-                          ? const Color(0xFF0C100E)
-                          : const Color(0xFFE5DFD3);
-                      
-                      const double targetWidth = 500.0;
-                      
-                      return Scaffold(
-                        backgroundColor: outerBg,
-                        body: Center(
-                          child: Container(
-                            constraints: const BoxConstraints(maxWidth: targetWidth),
-                            margin: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              color: theme.scaffoldBackgroundColor,
-                              borderRadius: BorderRadius.circular(24),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.06),
-                                  blurRadius: 20,
-                                  offset: const Offset(0, 8),
-                                ),
-                              ],
-                              border: Border.all(
-                                color: theme.dividerColor,
-                                width: 1.0,
-                              ),
-                            ),
-                            child: MediaQuery(
-                              data: mediaQuery.copyWith(
-                                size: Size(targetWidth, mediaQuery.size.height - 48),
-                              ),
-                              child: child!,
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                    return child!;
-                  },
                 );
               },
             );

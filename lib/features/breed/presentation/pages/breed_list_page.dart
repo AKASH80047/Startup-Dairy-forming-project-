@@ -5,6 +5,7 @@ import 'package:pandey/l10n/app_localizations.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/enum/animal_type.dart';
 import '../../../../core/widgets/shimmer_loader.dart';
+import '../../../../core/utils/web_image_helper.dart';
 import '../bloc/breed_cubit.dart';
 import '../bloc/breed_state.dart';
 import '../../domain/entities/breed_entity.dart';
@@ -143,7 +144,7 @@ class _BreedListPageState extends State<BreedListPage> {
                   fit: StackFit.expand,
                   children: [
                     Image.network(
-                      breed.imageUrl,
+                      getWebSafeImageUrl(breed.imageUrl),
                       fit: BoxFit.contain,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;

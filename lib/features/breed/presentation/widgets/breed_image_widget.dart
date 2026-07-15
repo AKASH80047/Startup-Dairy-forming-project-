@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/utils/web_image_helper.dart';
 
 class BreedImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -54,7 +55,7 @@ class BreedImageWidget extends StatelessWidget {
                 fit: hasHeight ? StackFit.expand : StackFit.loose,
                 children: [
                   Image.network(
-                    imageUrl,
+                    getWebSafeImageUrl(imageUrl),
                     width: double.infinity,
                     height: height,
                     fit: hasHeight ? BoxFit.contain : BoxFit.fitWidth,
@@ -271,7 +272,7 @@ class _FullScreenBreedImageState extends State<FullScreenBreedImage> {
                       boundaryMargin: const EdgeInsets.all(100),
                       clipBehavior: Clip.none,
                       child: Image.network(
-                        widget.imageUrl,
+                        getWebSafeImageUrl(widget.imageUrl),
                         width: screenSize.width,
                         height: screenSize.height,
                         fit: BoxFit.contain,

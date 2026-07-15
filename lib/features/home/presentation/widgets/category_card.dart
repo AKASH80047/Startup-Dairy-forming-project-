@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/widgets/shimmer_loader.dart';
+import '../../../../core/utils/web_image_helper.dart';
 
 class CategoryCard extends StatefulWidget {
   final String titleEn;
@@ -81,7 +82,7 @@ class _CategoryCardState extends State<CategoryCard>
                     fit: StackFit.expand,
                     children: [
                       Image.network(
-                        widget.imageUrl,
+                        getWebSafeImageUrl(widget.imageUrl),
                         fit: BoxFit.cover,
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;

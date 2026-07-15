@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pandey/l10n/app_localizations.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/storage_service.dart';
+import '../../../../core/utils/web_image_helper.dart';
 import '../../../location/presentation/bloc/location_cubit.dart';
 import '../../../location/presentation/bloc/location_state.dart';
 import '../../../location/domain/entities/user_address.dart';
@@ -816,7 +817,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                 ),
                 const SizedBox(height: 12),
                 Image.network(
-                  'https://business.paytm.com/s3assets/images/allinoneqr/retina/bnr-pwe1919@2x.webp?version=1782836885',
+                  getWebSafeImageUrl('https://business.paytm.com/s3assets/images/allinoneqr/retina/bnr-pwe1919@2x.webp?version=1782836885'),
                   width: 220,
                   errorBuilder: (context, error, stackTrace) => const SizedBox(),
                 ),
@@ -829,7 +830,7 @@ class _BulkOrderFormPageState extends State<BulkOrderFormPage> {
                     border: Border.all(color: AppConstants.dividerColor, width: 0.5),
                   ),
                   child: Image.network(
-                    'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=pandeydairy@ybl%26pn=Pandey%26am=${double.tryParse(_advanceController.text) ?? _minAdvance}',
+                    getWebSafeImageUrl('https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=pandeydairy@ybl%26pn=Pandey%26am=${double.tryParse(_advanceController.text) ?? _minAdvance}'),
                     width: 150,
                     height: 150,
                     errorBuilder: (context, error, stackTrace) => const Icon(Icons.qr_code_2_rounded, size: 100),

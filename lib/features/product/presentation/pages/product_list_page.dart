@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pandey/l10n/app_localizations.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/widgets/shimmer_loader.dart';
+import '../../../../core/utils/web_image_helper.dart';
 import '../bloc/product_cubit.dart';
 import '../bloc/product_state.dart';
 import '../../domain/entities/product_entity.dart';
@@ -135,7 +136,7 @@ class _ProductListPageState extends State<ProductListPage> {
                 fit: StackFit.expand,
                 children: [
                   Image.network(
-                    product.imageUrl,
+                    getWebSafeImageUrl(product.imageUrl),
                     fit: BoxFit.cover,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
