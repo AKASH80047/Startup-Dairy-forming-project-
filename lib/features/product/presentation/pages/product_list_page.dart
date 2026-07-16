@@ -18,10 +18,28 @@ class ProductListPage extends StatefulWidget {
 }
 
 class _ProductListPageState extends State<ProductListPage> {
+  final TextEditingController _searchController = TextEditingController();
+  String _selectedCategory = 'All';
+
+  final List<Map<String, String>> _categories = [
+    {'en': 'All', 'hi': 'सभी'},
+    {'en': 'Milk', 'hi': 'दूध'},
+    {'en': 'Ghee', 'hi': 'घी'},
+    {'en': 'Paneer', 'hi': 'पनीर'},
+    {'en': 'Curd', 'hi': 'दही'},
+    {'en': 'Buttermilk', 'hi': 'छाछ'},
+  ];
+
   @override
   void initState() {
     super.initState();
     context.read<ProductCubit>().fetchProducts();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -36,53 +54,157 @@ class _ProductListPageState extends State<ProductListPage> {
         elevation: 0,
       ),
       body: SafeArea(
-        child: BlocBuilder<ProductCubit, ProductState>(
-          builder: (context, state) {
-            if (state is ProductLoading) {
-              return _buildShimmerGrid();
-            } else if (state is ProductLoaded) {
-              final products = state.products;
-              if (products.isEmpty) {
-                return Center(
-                  child: Text(
-                    l10n.noProductsMessage,
-                    style: Theme.of(context).textTheme.bodyLarge,
+        child: Column(
+          children: [
+            // E-commerce Search & Categories Filter Panel
+            _buildFilterHeader(isHindi),
+
+            // Product Grid
+            Expanded(
+              child: BlocBuilder<ProductCubit, ProductState>(
+                builder: (context, state) {
+                  if (state is ProductLoading) {
+                    return _buildShimmerGrid();
+                  } else if (state is ProductLoaded) {
+                    final query = _searchController.text.trim().toLowerCase();
+                    final filteredProducts = state.products.where((p) {
+                      final name = isHindi ? p.nameHindi : p.nameEnglish;
+                      final desc = isHindi ? p.descriptionHindi : p.descriptionEnglish;
+                      final matchSearch = query.isEmpty ||
+                          name.toLowerCase().contains(query) ||
+                          desc.toLowerCase().contains(query);
+
+                      final matchCategory = _selectedCategory == 'All' ||
+                          p.nameEnglish.toLowerCase().contains(_selectedCategory.toLowerCase()) ||
+                          p.nameHindi.contains(_selectedCategory);
+
+                      return matchSearch && matchCategory;
+                    }).toList();
+
+                    if (filteredProducts.isEmpty) {
+                      return Center(
+                        child: Text(
+                          l10n.noProductsMessage,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      );
+                    }
+
+                    return LayoutBuilder(
+                      builder: (context, constraints) {
+                        final double width = constraints.maxWidth;
+                        int crossAxisCount = 2;
+                        double aspectRatio = 0.70;
+                        if (width > 1000) {
+                          crossAxisCount = 5;
+                          aspectRatio = 0.82;
+                        } else if (width > 600) {
+                          crossAxisCount = 3;
+                          aspectRatio = 0.74;
+                        }
+                        return GridView.builder(
+                          padding: const EdgeInsets.all(16.0),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                            childAspectRatio: aspectRatio,
+                          ),
+                          itemCount: filteredProducts.length,
+                          itemBuilder: (context, index) {
+                            return _buildProductCard(context, filteredProducts[index], isHindi, l10n);
+                          },
+                        );
+                      },
+                    );
+                  } else if (state is ProductError) {
+                    return _buildErrorWidget(context, state.message, l10n);
+                  }
+                  return const SizedBox();
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFilterHeader(bool isHindi) {
+    return Container(
+      color: AppConstants.surfaceWhite,
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Column(
+        children: [
+          // Search Box
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppConstants.backgroundCream,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppConstants.dividerColor, width: 0.5),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  Icon(Icons.search_rounded, color: AppConstants.textSecondary, size: 20),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: TextField(
+                      controller: _searchController,
+                      onChanged: (_) => setState(() {}),
+                      decoration: InputDecoration(
+                        hintText: isHindi ? 'उत्पाद खोजें...' : 'Search dairy products...',
+                        border: InputBorder.none,
+                        isDense: true,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          // Horizontal Category Tabs
+          SizedBox(
+            height: 38,
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              scrollDirection: Axis.horizontal,
+              itemCount: _categories.length,
+              itemBuilder: (context, index) {
+                final cat = _categories[index];
+                final catName = isHindi ? cat['hi']! : cat['en']!;
+                final isSelected = _selectedCategory == cat['en'];
+
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: ChoiceChip(
+                    label: Text(
+                      catName,
+                      style: TextStyle(
+                        color: isSelected ? AppConstants.backgroundCream : AppConstants.primaryGreen,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
+                    selected: isSelected,
+                    selectedColor: AppConstants.primaryGreen,
+                    backgroundColor: AppConstants.backgroundCream,
+                    checkmarkColor: AppConstants.backgroundCream,
+                    onSelected: (val) {
+                      setState(() {
+                        _selectedCategory = cat['en']!;
+                      });
+                    },
                   ),
                 );
-              }
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  final double width = constraints.maxWidth;
-                  int crossAxisCount = 2;
-                  double aspectRatio = 0.72;
-                  if (width > 1000) {
-                    crossAxisCount = 4;
-                    aspectRatio = 0.85;
-                  } else if (width > 600) {
-                    crossAxisCount = 3;
-                    aspectRatio = 0.78;
-                  }
-                  return GridView.builder(
-                    padding: const EdgeInsets.all(20.0),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: aspectRatio,
-                    ),
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      return _buildProductCard(context, products[index], isHindi, l10n);
-                    },
-                  );
-                },
-              );
-            } else if (state is ProductError) {
-              return _buildErrorWidget(context, state.message, l10n);
-            }
-            return const SizedBox();
-          },
-        ),
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -92,20 +214,20 @@ class _ProductListPageState extends State<ProductListPage> {
       builder: (context, constraints) {
         final double width = constraints.maxWidth;
         int crossAxisCount = 2;
-        double aspectRatio = 0.72;
+        double aspectRatio = 0.70;
         if (width > 1000) {
-          crossAxisCount = 4;
-          aspectRatio = 0.85;
+          crossAxisCount = 5;
+          aspectRatio = 0.82;
         } else if (width > 600) {
           crossAxisCount = 3;
-          aspectRatio = 0.78;
+          aspectRatio = 0.74;
         }
         return GridView.builder(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(16.0),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: crossAxisCount,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
             childAspectRatio: aspectRatio,
           ),
           itemCount: 4,
@@ -136,6 +258,7 @@ class _ProductListPageState extends State<ProductListPage> {
     final String prodName = isHindi ? product.nameHindi : product.nameEnglish;
     final String prodDesc = isHindi ? product.descriptionHindi : product.descriptionEnglish;
     final String prodUnit = isHindi ? product.unitHindi : product.unitEnglish;
+    final double originalPrice = product.price * 1.15; // Mock original price
 
     return Container(
       decoration: BoxDecoration(
@@ -143,7 +266,7 @@ class _ProductListPageState extends State<ProductListPage> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppConstants.textSecondary.withValues(alpha: 0.04),
+            color: Colors.black.withValues(alpha: 0.03),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -160,36 +283,65 @@ class _ProductListPageState extends State<ProductListPage> {
           children: [
             // Product image
             Expanded(
+              flex: 5,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
                   AppImage(
                     path: product.imageUrl,
                     fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return const ShimmerLoader(
-                        width: double.infinity,
-                        height: double.infinity,
-                        borderRadius: 0,
-                      );
-                    },
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      color: AppConstants.dividerColor,
-                      child: const Icon(Icons.broken_image_rounded, size: 36),
-                    ),
                   ),
                   Positioned.fill(
                     child: Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            Colors.black.withValues(alpha: 0.2),
+                            Colors.black.withValues(alpha: 0.1),
                             Colors.transparent,
-                            Colors.black.withValues(alpha: 0.3),
+                            Colors.black.withValues(alpha: 0.25),
                           ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Rating Badge
+                  Positioned(
+                    bottom: 8,
+                    right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.65),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: const Text(
+                        '4.9 ★',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 9,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Discount Badge
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: const Text(
+                        '15% OFF',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 9,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -220,92 +372,105 @@ class _ProductListPageState extends State<ProductListPage> {
             ),
             
             // Product details & price tag
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    prodName,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: AppConstants.primaryGreen,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    prodDesc,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontSize: 11,
-                        ),
-                  ),
-                  const SizedBox(height: 8),
-                  
-                  // Price and unit tag
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '₹${product.price.toStringAsFixed(0)}',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: AppConstants.primaryGreen,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
-                          ),
-                          Text(
-                            prodUnit,
-                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                  fontSize: 10,
-                                ),
-                          ),
-                        ],
+            Expanded(
+              flex: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      prodName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: AppConstants.primaryGreen,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
                       ),
-                      
-                      // Quick Add button
-                      if (product.isAvailable)
-                        GestureDetector(
-                          onTap: () {
-                            final item = CartItem(
-                              id: '${product.id}_standard',
-                              productId: product.id,
-                              nameEnglish: product.nameEnglish,
-                              nameHindi: product.nameHindi,
-                              imageUrl: product.imageUrl,
-                              price: product.price,
-                              unit: product.unitEnglish,
-                              quantity: 1,
-                              isMilk: false,
-                            );
-                            context.read<CartCubit>().addItem(item);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(l10n.productAdded)),
-                            );
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: AppConstants.primaryGreen,
-                              borderRadius: BorderRadius.circular(8),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      prodDesc,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: AppConstants.textSecondary,
+                        fontSize: 10,
+                      ),
+                    ),
+                    const Spacer(),
+                    
+                    // Price and unit tag
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '₹${originalPrice.toStringAsFixed(0)}',
+                              style: TextStyle(
+                                color: AppConstants.textSecondary,
+                                fontSize: 9,
+                                decoration: TextDecoration.lineThrough,
+                              ),
                             ),
-                            child: const Icon(
-                              Icons.add_rounded,
-                              color: Colors.white,
-                              size: 18,
+                            Text(
+                              '₹${product.price.toStringAsFixed(0)}',
+                              style: TextStyle(
+                                color: AppConstants.primaryGreen,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                              ),
+                            ),
+                            Text(
+                              prodUnit,
+                              style: TextStyle(
+                                color: AppConstants.textSecondary,
+                                fontSize: 8,
+                              ),
+                            ),
+                          ],
+                        ),
+                        
+                        // Quick Add button
+                        if (product.isAvailable)
+                          GestureDetector(
+                            onTap: () {
+                              final item = CartItem(
+                                id: '${product.id}_standard',
+                                productId: product.id,
+                                nameEnglish: product.nameEnglish,
+                                nameHindi: product.nameHindi,
+                                imageUrl: product.imageUrl,
+                                price: product.price,
+                                unit: product.unitEnglish,
+                                quantity: 1,
+                                isMilk: false,
+                              );
+                              context.read<CartCubit>().addItem(item);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(l10n.productAdded)),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: AppConstants.primaryGreen,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: const Icon(
+                                Icons.add_rounded,
+                                color: Colors.white,
+                                size: 16,
+                              ),
                             ),
                           ),
-                        ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

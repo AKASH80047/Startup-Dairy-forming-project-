@@ -30,6 +30,10 @@ import '../../features/payment/presentation/pages/payment_success_page.dart';
 import '../../features/payment/presentation/pages/payment_pending_page.dart';
 import '../../features/payment/presentation/pages/payment_failed_page.dart';
 import '../../features/payment/domain/entities/payment_session.dart';
+import '../../features/fodder/presentation/pages/fodder_marketplace_page.dart';
+import '../../features/fodder/presentation/pages/fodder_detail_page.dart';
+import '../../features/fodder/presentation/pages/upload_fodder_page.dart';
+import '../../features/fodder/domain/entities/fodder_item_entity.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -188,6 +192,84 @@ class AppRouter {
       GoRoute(
         path: '/select-location',
         builder: (context, state) => const SelectLocationPage(),
+      ),
+      GoRoute(
+        path: '/fodder',
+        builder: (context, state) => const FodderMarketplacePage(),
+      ),
+      GoRoute(
+        path: '/upload-fodder',
+        builder: (context, state) => const UploadFodderPage(),
+      ),
+      GoRoute(
+        path: '/fodder-detail',
+        builder: (context, state) {
+          final item = state.extra as FodderItemEntity;
+          return FodderDetailPage(item: item);
+        },
+      ),
+      GoRoute(
+        path: '/buy-sell-animals',
+        builder: (context, state) => const PlaceholderScreen(
+          titleEn: 'Buy & Sell Animals',
+          titleHi: 'पशु खरीदें और बेचें',
+        ),
+      ),
+      GoRoute(
+        path: '/organic',
+        builder: (context, state) => const PlaceholderScreen(
+          titleEn: 'Organic Products',
+          titleHi: 'जैविक उत्पाद',
+        ),
+      ),
+      GoRoute(
+        path: '/veterinary',
+        builder: (context, state) => const PlaceholderScreen(
+          titleEn: 'Veterinary Doctors',
+          titleHi: 'पशु चिकित्सक',
+        ),
+      ),
+      GoRoute(
+        path: '/equipment',
+        builder: (context, state) => const PlaceholderScreen(
+          titleEn: 'Farm Equipment',
+          titleHi: 'कृषि उपकरण',
+        ),
+      ),
+      GoRoute(
+        path: '/seeds-feed',
+        builder: (context, state) => const PlaceholderScreen(
+          titleEn: 'Seeds & Feed',
+          titleHi: 'बीज और चारा',
+        ),
+      ),
+      GoRoute(
+        path: '/transport',
+        builder: (context, state) => const PlaceholderScreen(
+          titleEn: 'Transport',
+          titleHi: 'परिवहन',
+        ),
+      ),
+      GoRoute(
+        path: '/schemes',
+        builder: (context, state) => const PlaceholderScreen(
+          titleEn: 'Government Schemes',
+          titleHi: 'सरकारी योजनाएं',
+        ),
+      ),
+      GoRoute(
+        path: '/community',
+        builder: (context, state) => const PlaceholderScreen(
+          titleEn: 'Farmer Community',
+          titleHi: 'किसान समुदाय',
+        ),
+      ),
+      GoRoute(
+        path: '/my-dairy',
+        builder: (context, state) => const PlaceholderScreen(
+          titleEn: 'My Dairy',
+          titleHi: 'मेरी डेयरी',
+        ),
       ),
     ],
   );

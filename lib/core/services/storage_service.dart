@@ -19,6 +19,8 @@ class StorageService {
 
   StorageService(this._prefs);
 
+  SharedPreferences get prefs => _prefs;
+
   static const String _keyThemeType = 'selected_theme_type';
 
   /// Saves the selected language code ('en' or 'hi') to local storage.

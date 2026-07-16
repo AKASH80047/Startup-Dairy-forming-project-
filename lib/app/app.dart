@@ -31,6 +31,10 @@ import '../features/payment/domain/usecases/verify_payment.dart';
 import '../features/payment/presentation/bloc/payment_bloc.dart';
 import 'router/app_router.dart';
 import 'theme/app_theme.dart';
+import '../features/fodder/data/repositories/fodder_repository_impl.dart';
+import '../features/fodder/domain/usecases/get_fodder_items_usecase.dart';
+import '../features/fodder/domain/usecases/upload_fodder_item_usecase.dart';
+import '../features/fodder/presentation/bloc/fodder_cubit.dart';
 
 class PandeyApp extends StatelessWidget {
   final StorageService storageService;
@@ -107,6 +111,17 @@ class PandeyApp extends StatelessWidget {
                 createPaymentSession: CreatePaymentSession(repository),
                 verifyPayment: VerifyPayment(repository),
                 getPaymentStatus: GetPaymentStatus(repository),
+              );
+            },
+          ),
+          BlocProvider<FodderCubit>(
+            create: (context) {
+              final repository = FodderRepositoryImpl(
+                sharedPreferences: storageService.prefs,
+              );
+              return FodderCubit(
+                getFodderItemsUseCase: GetFodderItemsUseCase(repository),
+                uploadFodderItemUseCase: UploadFodderItemUseCase(repository),
               );
             },
           ),

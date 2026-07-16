@@ -7,6 +7,7 @@ import '../../../../core/enum/theme_type.dart';
 import '../../../language/presentation/bloc/language_cubit.dart';
 import '../../../cart/presentation/bloc/cart_cubit.dart';
 import '../../../cart/presentation/bloc/cart_state.dart';
+import '../../../cart/domain/entities/cart_item.dart';
 import '../../../theme/presentation/bloc/theme_cubit.dart';
 import '../../../auth/presentation/bloc/auth_cubit.dart';
 import '../../../auth/presentation/bloc/auth_state.dart';
@@ -27,6 +28,87 @@ class HomePage extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
     final bool isDesktop = screenWidth > 800;
 
+    final List<Map<String, dynamic>> categories = [
+      {
+        'titleEn': 'Milk',
+        'titleHi': 'दूध',
+        'image': AppConstants.imgCategoryMilk,
+        'onTap': () => _showMilkChoiceBottomSheet(context, isHindi),
+      },
+      {
+        'titleEn': 'Fodder Market',
+        'titleHi': 'चारा बाजार',
+        'image': AppConstants.imgCategoryFodder,
+        'onTap': () => context.push('/fodder'),
+      },
+      {
+        'titleEn': 'Buy & Sell Animals',
+        'titleHi': 'पशु खरीदें और बेचें',
+        'image': AppConstants.imgCategoryCow,
+        'onTap': () => context.push('/buy-sell-animals'),
+      },
+      {
+        'titleEn': 'Organic Products',
+        'titleHi': 'जैविक उत्पाद',
+        'image': AppConstants.imgCategoryOrganic,
+        'onTap': () => context.push('/organic'),
+      },
+      {
+        'titleEn': 'Veterinary',
+        'titleHi': 'पशु चिकित्सक',
+        'image': AppConstants.imgCategoryVeterinary,
+        'onTap': () => context.push('/veterinary'),
+      },
+      {
+        'titleEn': 'Dairy Products',
+        'titleHi': 'डेयरी उत्पाद',
+        'image': AppConstants.imgCategoryOtherProducts,
+        'onTap': () => context.push('/products'),
+      },
+      {
+        'titleEn': 'Farm Equipment',
+        'titleHi': 'कृषि उपकरण',
+        'image': AppConstants.imgCategoryEquipment,
+        'onTap': () => context.push('/equipment'),
+      },
+      {
+        'titleEn': 'Seeds & Feed',
+        'titleHi': 'बीज और चारा',
+        'image': AppConstants.imgCategorySeeds,
+        'onTap': () => context.push('/seeds-feed'),
+      },
+      {
+        'titleEn': 'Transport',
+        'titleHi': 'परिवहन',
+        'image': AppConstants.imgCategoryTransport,
+        'onTap': () => context.push('/transport'),
+      },
+      {
+        'titleEn': 'Government Schemes',
+        'titleHi': 'सरकारी योजनाएं',
+        'image': AppConstants.imgCategorySchemes,
+        'onTap': () => context.push('/schemes'),
+      },
+      {
+        'titleEn': 'Farmer Community',
+        'titleHi': 'किसान समुदाय',
+        'image': AppConstants.imgCategoryCommunity,
+        'onTap': () => context.push('/community'),
+      },
+      {
+        'titleEn': 'My Dairy',
+        'titleHi': 'मेरी डेयरी',
+        'image': AppConstants.imgCategoryMyDairy,
+        'onTap': () => context.push('/my-dairy'),
+      },
+      {
+        'titleEn': 'Admin Panel',
+        'titleHi': 'एडमिन पैनल',
+        'image': AppConstants.imgCategoryOtherProducts,
+        'onTap': () => context.push('/admin'),
+      },
+    ];
+
     if (isDesktop) {
       return Scaffold(
         backgroundColor: AppConstants.backgroundCream,
@@ -39,142 +121,7 @@ class HomePage extends StatelessWidget {
                   constraints: const BoxConstraints(maxWidth: 1200),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const HomeHeroBanner(),
-                        const SizedBox(height: 32),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 20),
-                                decoration: BoxDecoration(
-                                  color: AppConstants.primaryGreen.withValues(alpha: 0.04),
-                                  borderRadius: BorderRadius.circular(16),
-                                  border: Border.all(
-                                    color: AppConstants.primaryGreen.withValues(alpha: 0.08),
-                                  ),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      isHindi ? AppConstants.shivayaHi : AppConstants.shivayaEn,
-                                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                            color: AppConstants.accentGold,
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 2,
-                                          ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      l10n.tagline,
-                                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                            color: AppConstants.primaryGreen,
-                                            fontWeight: FontWeight.w600,
-                                            fontStyle: FontStyle.italic,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 24),
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 24,
-                                  vertical: 24,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppConstants.accentGold.withValues(alpha: 0.12),
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.local_shipping_rounded,
-                                      color: AppConstants.accentOrange,
-                                      size: 28,
-                                    ),
-                                    const SizedBox(width: 16),
-                                    Expanded(
-                                      child: Text(
-                                        l10n.freeDeliveryMsg,
-                                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                              color: AppConstants.primaryGreenDark,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 36),
-                        Text(
-                          isHindi ? 'मुख्य श्रेणियाँ' : 'Explore Categories',
-                          style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                                color: AppConstants.primaryGreen,
-                                fontWeight: FontWeight.w900,
-                              ),
-                        ),
-                        const SizedBox(height: 20),
-                        LayoutBuilder(
-                          builder: (context, constraints) {
-                            final double width = constraints.maxWidth;
-                            int crossAxisCount = 2;
-                            double aspectRatio = 0.85;
-                            
-                            if (width > 1000) {
-                              crossAxisCount = 4;
-                              aspectRatio = 1.1;
-                            } else if (width > 600) {
-                              crossAxisCount = 3;
-                              aspectRatio = 0.95;
-                            }
-                            
-                            return GridView.count(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: crossAxisCount,
-                              crossAxisSpacing: 16,
-                              mainAxisSpacing: 16,
-                              childAspectRatio: aspectRatio,
-                              children: [
-                                CategoryCard(
-                                  titleEn: 'Cow',
-                                  titleHi: 'गाय',
-                                  imageUrl: AppConstants.imgCategoryCow,
-                                  onTap: () => context.push('/cows'),
-                                ),
-                                CategoryCard(
-                                  titleEn: 'Buffalo',
-                                  titleHi: 'भैंस',
-                                  imageUrl: AppConstants.imgCategoryBuffalo,
-                                  onTap: () => context.push('/buffalos'),
-                                ),
-                                CategoryCard(
-                                  titleEn: 'Other Products',
-                                  titleHi: 'अन्य उत्पाद',
-                                  imageUrl: AppConstants.imgCategoryOtherProducts,
-                                  onTap: () => context.push('/products'),
-                                ),
-                                CategoryCard(
-                                  titleEn: 'Bulk & Event Orders',
-                                  titleHi: 'थोक एवं समारोह ऑर्डर',
-                                  imageUrl: AppConstants.imgCategoryBulkOrders,
-                                  onTap: () => context.push('/bulk-orders'),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 48),
-                      ],
-                    ),
+                    child: _buildHomePageBody(context, true, isHindi, l10n, categories),
                   ),
                 ),
               ),
@@ -188,122 +135,39 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppConstants.backgroundCream,
       appBar: AppBar(
-        title: InkWell(
-          onTap: () => context.push('/map-picker'),
-          borderRadius: BorderRadius.circular(8),
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.45,
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.location_on_rounded,
-                      size: 16,
-                      color: AppConstants.accentGold,
-                    ),
-                    const SizedBox(width: 4),
-                    Flexible(
-                      child: Text(
-                        l10n.deliveryLocation,
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: AppConstants.textSecondary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(width: 2),
-                    Icon(
-                      Icons.arrow_drop_down_rounded,
-                      size: 18,
-                      color: AppConstants.textSecondary,
-                    ),
-                  ],
+        backgroundColor: AppConstants.surfaceWhite,
+        elevation: 0.5,
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/logo.png',
+              height: 36,
+              errorBuilder: (context, error, stackTrace) => Text(
+                isHindi ? '🕉️ पांडेय डेयरी' : '🕉️ Pandey Dairy',
+                style: TextStyle(
+                  color: AppConstants.primaryGreen,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
-                const SizedBox(height: 2),
-                BlocBuilder<LocationCubit, LocationState>(
-                  builder: (context, state) {
-                    String displayLocation = isHindi ? 'गोपालपुरा (जयपुर)' : 'Gopalpura (Jaipur)';
-                    if (state is LocationSuccess && state.address != null) {
-                      final addr = state.address!;
-                      displayLocation = addr.village.isNotEmpty
-                          ? '${addr.village}, ${addr.pincode}'
-                          : addr.addressLine;
-                    }
-                    return Text(
-                      displayLocation,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: AppConstants.primaryGreen,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    );
-                  },
-                ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
         actions: [
-          // Account/Profile Icon
-          BlocBuilder<AuthCubit, AuthState>(
-            builder: (context, state) {
-              final isLoggedIn = state is Authenticated;
-              return IconButton(
-                icon: Icon(
-                  isLoggedIn ? Icons.account_circle_rounded : Icons.account_circle_outlined,
-                  color: AppConstants.primaryGreen,
-                ),
-                onPressed: () {
-                  if (isLoggedIn) {
-                    context.push('/profile');
-                  } else {
-                    context.push('/login');
-                  }
-                },
-              );
-            },
-          ),
-          // Theme Switch Action Icon
-          IconButton(
-            onPressed: () => _showThemeBottomSheet(context),
-            icon: Icon(
-              Icons.palette_outlined,
-              color: AppConstants.primaryGreen,
-            ),
-          ),
-          // Language Switch Action Chip
+          // Language Toggle Button
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 12),
             child: InkWell(
               onTap: () {
-                context
-                    .read<LanguageCubit>()
-                    .changeLanguage(isHindi ? 'en' : 'hi');
+                final newCode = isHindi ? 'en' : 'hi';
+                context.read<LanguageCubit>().changeLanguage(newCode);
               },
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(16),
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 6,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
-                  color: AppConstants.primaryGreen.withValues(alpha: 0.06),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: AppConstants.primaryGreen.withValues(alpha: 0.1),
-                    width: 1,
-                  ),
+                  border: Border.all(color: AppConstants.primaryGreen.withValues(alpha: 0.2)),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -378,14 +242,6 @@ class HomePage extends StatelessWidget {
               color: AppConstants.primaryGreen,
             ),
           ),
-          // Admin Panel Toggle Icon
-          IconButton(
-            onPressed: () => context.push('/admin'),
-            icon: Icon(
-              Icons.admin_panel_settings_outlined,
-              color: AppConstants.primaryGreen,
-            ),
-          ),
           const SizedBox(width: 8),
         ],
       ),
@@ -398,144 +254,7 @@ class HomePage extends StatelessWidget {
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 16),
-                
-                // Devotional Header Banner
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  decoration: BoxDecoration(
-                    color: AppConstants.primaryGreen.withValues(alpha: 0.04),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: AppConstants.primaryGreen.withValues(alpha: 0.08),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        isHindi ? AppConstants.shivayaHi : AppConstants.shivayaEn,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: AppConstants.accentGold,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2,
-                            ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        l10n.tagline,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: AppConstants.primaryGreen,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.italic,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-                
-                const SizedBox(height: 16),
-
-                // Free Delivery Message Banner
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppConstants.accentGold.withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.local_shipping_rounded,
-                        color: AppConstants.accentOrange,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          l10n.freeDeliveryMsg,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: AppConstants.primaryGreenDark,
-                                fontWeight: FontWeight.bold,
-                              ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-
-                // Premium Category Card Layout (Grid)
-                Text(
-                  isHindi ? 'मुख्य श्रेणियाँ' : 'Explore Categories',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: AppConstants.primaryGreen,
-                        fontWeight: FontWeight.w900,
-                      ),
-                ),
-                const SizedBox(height: 16),
-
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    final double width = constraints.maxWidth;
-                    int crossAxisCount = 2;
-                    double aspectRatio = 0.85;
-                    
-                    if (width > 1000) {
-                      crossAxisCount = 4;
-                      aspectRatio = 1.1;
-                    } else if (width > 600) {
-                      crossAxisCount = 3;
-                      aspectRatio = 0.95;
-                    }
-                    
-                    return GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: crossAxisCount,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: aspectRatio,
-                      children: [
-                        CategoryCard(
-                          titleEn: 'Cow',
-                          titleHi: 'गाय',
-                          imageUrl: AppConstants.imgCategoryCow,
-                          onTap: () => context.push('/cows'),
-                        ),
-                        CategoryCard(
-                          titleEn: 'Buffalo',
-                          titleHi: 'भैंस',
-                          imageUrl: AppConstants.imgCategoryBuffalo,
-                          onTap: () => context.push('/buffalos'),
-                        ),
-                        CategoryCard(
-                          titleEn: 'Other Products',
-                          titleHi: 'अन्य उत्पाद',
-                          imageUrl: AppConstants.imgCategoryOtherProducts,
-                          onTap: () => context.push('/products'),
-                        ),
-                        CategoryCard(
-                          titleEn: 'Bulk & Event Orders',
-                          titleHi: 'थोक एवं समारोह ऑर्डर',
-                          imageUrl: AppConstants.imgCategoryBulkOrders,
-                          onTap: () => context.push('/bulk-orders'),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-                const SizedBox(height: 32),
-              ],
-            ),
+            child: _buildHomePageBody(context, false, isHindi, l10n, categories),
           ),
         ),
       ),
@@ -696,6 +415,601 @@ class HomePage extends StatelessWidget {
               ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildCategoryGrid({
+    required List<Map<String, dynamic>> categories,
+    required int crossAxisCount,
+    required double aspectRatio,
+  }) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: categories.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: aspectRatio,
+      ),
+      itemBuilder: (context, index) {
+        final cat = categories[index];
+        return CategoryCard(
+          titleEn: cat['titleEn']!,
+          titleHi: cat['titleHi']!,
+          imageUrl: cat['image']!,
+          onTap: cat['onTap']!,
+        );
+      },
+    );
+  }
+
+  void _showMilkChoiceBottomSheet(BuildContext context, bool isHindi) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppConstants.backgroundCream,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  isHindi ? 'दूध का चयन करें' : 'Select Milk Type',
+                  style: TextStyle(
+                    color: AppConstants.primaryGreen,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  isHindi
+                      ? 'दूध ऑर्डर करने या सदस्यता के लिए नस्लें देखें'
+                      : 'Browse breeds for milk ordering or subscription',
+                  style: TextStyle(
+                    color: AppConstants.textSecondary,
+                    fontSize: 12,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                ListTile(
+                  leading: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppConstants.primaryGreen.withValues(alpha: 0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Text('🐄', style: TextStyle(fontSize: 20)),
+                  ),
+                  title: Text(
+                    isHindi ? 'गाय का दूध' : 'Cow Milk',
+                    style: TextStyle(
+                      color: AppConstants.primaryGreen,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    isHindi ? 'गीर, साहिवाल, थारपारकर आदि नस्लें' : 'Gir, Sahiwal, Tharparkar breeds',
+                    style: TextStyle(color: AppConstants.textSecondary, fontSize: 11),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    context.push('/cows');
+                  },
+                ),
+                const SizedBox(height: 12),
+                ListTile(
+                  leading: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppConstants.primaryGreen.withValues(alpha: 0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Text('🐃', style: TextStyle(fontSize: 20)),
+                  ),
+                  title: Text(
+                    isHindi ? 'भैंस का दूध' : 'Buffalo Milk',
+                    style: TextStyle(
+                      color: AppConstants.primaryGreen,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    isHindi ? 'मुर्राह, मेहसाणा, जाफराबादी आदि नस्लें' : 'Murrah, Mehsana, Jaffarabadi breeds',
+                    style: TextStyle(color: AppConstants.textSecondary, fontSize: 11),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    context.push('/buffalos');
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildHomePageBody(
+    BuildContext context,
+    bool isDesktop,
+    bool isHindi,
+    AppLocalizations l10n,
+    List<Map<String, dynamic>> categories,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 16),
+        // Flipkart/Amazon Search Bar
+        GestureDetector(
+          onTap: () => context.push('/products'),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              color: AppConstants.surfaceWhite,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppConstants.dividerColor, width: 0.5),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.02),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.search_rounded, color: AppConstants.textSecondary, size: 20),
+                const SizedBox(width: 12),
+                Text(
+                  isHindi ? 'मक्खन, घी, दूध या चारा खोजें...' : 'Search butter, ghee, milk, or fodder...',
+                  style: TextStyle(color: AppConstants.textSecondary, fontSize: 13),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // Hero Banners (Slider Carousel)
+        const HomeHeroBanner(),
+        const SizedBox(height: 24),
+
+        // Shop by Category quick links
+        Text(
+          isHindi ? 'कैटेगरी के अनुसार खरीदें' : 'Shop By Category',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: AppConstants.primaryGreen,
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 12),
+        _buildCircularCategoryRow(context, isHindi),
+        const SizedBox(height: 24),
+
+        // Deals of the day
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              isHindi ? 'आज के धमाकेदार ऑफर्स' : 'Deals of the Day',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: AppConstants.primaryGreen,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            TextButton(
+              onPressed: () => context.push('/products'),
+              child: Text(
+                isHindi ? 'सभी देखें' : 'View All',
+                style: TextStyle(color: AppConstants.accentGold, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+        _buildDealsRow(context, isHindi),
+        const SizedBox(height: 16),
+
+        // Devotional / branding banner
+        _buildDevotionalBanner(context, isHindi, l10n),
+        const SizedBox(height: 24),
+
+        // Ecosystem Categories Grid
+        Text(
+          isHindi ? 'डेयरी इकोसिस्टम और सेवाएं' : 'Our Complete Ecosystem',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: AppConstants.primaryGreen,
+                fontWeight: FontWeight.w900,
+              ),
+        ),
+        const SizedBox(height: 16),
+
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final double width = constraints.maxWidth;
+            int crossAxisCount = 2;
+            double aspectRatio = 0.85;
+
+            if (width > 1000) {
+              crossAxisCount = 5;
+              aspectRatio = 1.0;
+            } else if (width > 600) {
+              crossAxisCount = 3;
+              aspectRatio = 0.95;
+            }
+
+            return _buildCategoryGrid(
+              categories: categories,
+              crossAxisCount: crossAxisCount,
+              aspectRatio: aspectRatio,
+            );
+          },
+        ),
+        const SizedBox(height: 32),
+      ],
+    );
+  }
+
+  Widget _buildCircularCategoryRow(BuildContext context, bool isHindi) {
+    final List<Map<String, dynamic>> circularCats = [
+      {
+        'titleEn': 'Cow Milk',
+        'titleHi': 'गाय का दूध',
+        'icon': '🐄',
+        'route': '/cows',
+      },
+      {
+        'titleEn': 'Buffalo Milk',
+        'titleHi': 'भैंस का दूध',
+        'icon': '🐃',
+        'route': '/buffalos',
+      },
+      {
+        'titleEn': 'Pure Ghee',
+        'titleHi': 'शुद्ध घी',
+        'icon': '🍯',
+        'route': '/products',
+      },
+      {
+        'titleEn': 'Fresh Paneer',
+        'titleHi': 'ताजा पनीर',
+        'icon': '🧀',
+        'route': '/products',
+      },
+      {
+        'titleEn': 'Fodder Market',
+        'titleHi': 'चारा बाजार',
+        'icon': '🌾',
+        'route': '/fodder',
+      },
+      {
+        'titleEn': 'Doctors Hub',
+        'titleHi': 'डॉक्टर',
+        'icon': '🩺',
+        'route': '/veterinary',
+      },
+      {
+        'titleEn': 'Equipment',
+        'titleHi': 'कृषि उपकरण',
+        'icon': '🚜',
+        'route': '/equipment',
+      },
+    ];
+
+    return SizedBox(
+      height: 90,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: circularCats.length,
+        itemBuilder: (context, index) {
+          final item = circularCats[index];
+          final String label = isHindi ? item['titleHi'] : item['titleEn'];
+          return Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: InkWell(
+              onTap: () => context.push(item['route']),
+              borderRadius: BorderRadius.circular(12),
+              child: Column(
+                children: [
+                  Container(
+                    width: 54,
+                    height: 54,
+                    decoration: BoxDecoration(
+                      color: AppConstants.primaryGreen.withValues(alpha: 0.08),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppConstants.primaryGreen.withValues(alpha: 0.15),
+                        width: 1,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        item['icon'],
+                        style: const TextStyle(fontSize: 24),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: AppConstants.textPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildDealsRow(BuildContext context, bool isHindi) {
+    final List<Map<String, dynamic>> deals = [
+      {
+        'id': 'prod_ghee_gir',
+        'titleEn': 'Gir Cow A2 Ghee',
+        'titleHi': 'गीर गाय A2 घी',
+        'price': 950.0,
+        'originalPrice': 1100.0,
+        'unit': '500 ml',
+        'discount': '14% OFF',
+        'image': 'assets/images/ghee_bowl.jpg',
+        'rating': '4.9 ★',
+      },
+      {
+        'id': 'prod_paneer_sahiwal',
+        'titleEn': 'Fresh Sahiwal Paneer',
+        'titleHi': 'ताजा साहिवाल पनीर',
+        'price': 120.0,
+        'originalPrice': 150.0,
+        'unit': '250 gm',
+        'discount': '20% OFF',
+        'image': 'assets/images/paneer_block.jpg',
+        'rating': '4.8 ★',
+      },
+      {
+        'id': 'prod_milk_murrah',
+        'titleEn': 'Murrah Buffalo A2 Milk',
+        'titleHi': 'मुर्राह भैंस A2 दूध',
+        'price': 80.0,
+        'originalPrice': 90.0,
+        'unit': '1 Litre',
+        'discount': '11% OFF',
+        'image': 'assets/images/milk_jug.jpg',
+        'rating': '4.9 ★',
+      },
+    ];
+
+    return SizedBox(
+      height: 200,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: deals.length,
+        itemBuilder: (context, index) {
+          final item = deals[index];
+          final String title = isHindi ? item['titleHi'] : item['titleEn'];
+          final String unit = item['unit'];
+          final String discount = item['discount'];
+          final String rating = item['rating'];
+          final double price = item['price'];
+          final double originalPrice = item['originalPrice'];
+
+          return Container(
+            width: 150,
+            margin: const EdgeInsets.only(right: 16, bottom: 8),
+            decoration: BoxDecoration(
+              color: AppConstants.surfaceWhite,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: AppConstants.dividerColor, width: 0.5),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.03),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        AppImage(
+                          path: item['image'],
+                          fit: BoxFit.cover,
+                        ),
+                        Positioned(
+                          top: 6,
+                          left: 6,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              discount,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 6,
+                          right: 6,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withValues(alpha: 0.6),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              rating,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 6,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: TextStyle(
+                              color: AppConstants.textPrimary,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            unit,
+                            style: TextStyle(
+                              color: AppConstants.textSecondary,
+                              fontSize: 9,
+                            ),
+                          ),
+                          const Spacer(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '₹${originalPrice.toStringAsFixed(0)}',
+                                    style: TextStyle(
+                                      color: AppConstants.textSecondary,
+                                      fontSize: 9,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                                  Text(
+                                    '₹${price.toStringAsFixed(0)}',
+                                    style: TextStyle(
+                                      color: AppConstants.primaryGreen,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  final cartItem = CartItem(
+                                    id: '${item['id']}_deal',
+                                    productId: item['id'],
+                                    nameEnglish: item['titleEn'],
+                                    nameHindi: item['titleHi'],
+                                    imageUrl: item['image'],
+                                    price: price,
+                                    unit: unit,
+                                    quantity: 1,
+                                    isMilk: false,
+                                  );
+                                  context.read<CartCubit>().addItem(cartItem);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        isHindi ? 'कार्ट में जोड़ा गया' : 'Added to Cart',
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: AppConstants.primaryGreen,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.add_rounded,
+                                    color: Colors.white,
+                                    size: 14,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildDevotionalBanner(BuildContext context, bool isHindi, AppLocalizations l10n) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      decoration: BoxDecoration(
+        color: AppConstants.primaryGreen.withValues(alpha: 0.04),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: AppConstants.primaryGreen.withValues(alpha: 0.08),
+        ),
+      ),
+      child: Column(
+        children: [
+          Text(
+            isHindi ? AppConstants.shivayaHi : AppConstants.shivayaEn,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: AppConstants.accentGold,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            l10n.tagline,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppConstants.primaryGreen,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.italic,
+                ),
+          ),
+        ],
       ),
     );
   }

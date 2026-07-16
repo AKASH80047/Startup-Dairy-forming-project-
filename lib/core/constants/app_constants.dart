@@ -136,4 +136,14 @@ class AppConstants {
   static const String imgCategoryBuffalo = 'assets/images/cat_buffalo.jpg';
   static const String imgCategoryOtherProducts = 'assets/images/cat_other_products.jpg';
   static const String imgCategoryBulkOrders = 'assets/images/cat_bulk_orders.jpg';
+  static const String imgCategoryMilk = 'assets/images/banner_milk.jpg';
+  static const String imgCategoryFodder = 'assets/images/cat_fodder.jpg';
+  static const String imgCategoryOrganic = 'assets/images/cat_organic.jpg';
+  static const String imgCategoryVeterinary = 'assets/images/cat_veterinary.jpg';
+  static const String imgCategoryEquipment = 'assets/images/cat_equipment.jpg';
+  static const String imgCategorySeeds = 'assets/images/cat_seeds.jpg';
+  static const String imgCategoryTransport = 'assets/images/cat_transport.jpg';
+  static const String imgCategorySchemes = 'assets/images/cat_schemes.jpg';
+  static const String imgCategoryCommunity = 'assets/images/cat_community.jpg';
+  static const String imgCategoryMyDairy = 'assets/images/cat_mydairy.jpg';
 }
