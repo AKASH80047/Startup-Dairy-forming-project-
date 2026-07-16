@@ -1155,7 +1155,7 @@ class _HomeHeroBannerState extends State<HomeHeroBanner> {
         'titleHi': 'शुद्ध गाय और भैंस का दूध',
         'subtitleEn': 'Freshly sourced dairy products delivered daily directly to your doorstep.',
         'subtitleHi': 'ताजा और पोषक डेयरी उत्पाद रोजाना सीधे आपके घर तक पहुंचाए जाते हैं।',
-        'image': 'https://images.unsplash.com/photo-1550583760-70b37e59c3a1?q=80&w=1200&auto=format&fit=crop',
+        'image': 'assets/images/banner_milk.jpg',
         'btnEn': 'Explore Breeds',
         'btnHi': 'नस्लें देखें',
         'route': '/cows',
@@ -1165,7 +1165,7 @@ class _HomeHeroBannerState extends State<HomeHeroBanner> {
         'titleHi': 'ऑर्गेनिक घी और पनीर',
         'subtitleEn': 'Made using traditional hand-churned methods for authentic rural flavor.',
         'subtitleHi': 'पारंपरिक वैदिक मथानी विधि से तैयार, असली ग्रामीण स्वाद और खुशबू।',
-        'image': 'https://images.unsplash.com/photo-1635383756251-859b04cd1eb6?q=80&w=1200&auto=format&fit=crop',
+        'image': 'assets/images/banner_ghee.jpg',
         'btnEn': 'Shop Products',
         'btnHi': 'उत्पाद खरीदें',
         'route': '/products',
@@ -1175,7 +1175,7 @@ class _HomeHeroBannerState extends State<HomeHeroBanner> {
         'titleHi': 'थोक एवं समारोह बुकिंग',
         'subtitleEn': 'Need milk in bulk for events? Get special pricing and timely delivery.',
         'subtitleHi': 'शादी, त्योहारों या विशेष अवसरों के लिए थोक में दूध ऑर्डर करें। विशेष छूट पाएं।',
-        'image': 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?q=80&w=1200&auto=format&fit=crop',
+        'image': 'assets/images/banner_bulk.jpg',
         'btnEn': 'Book Event Order',
         'btnHi': 'थोक ऑर्डर करें',
         'route': '/bulk-orders',
@@ -1199,8 +1199,8 @@ class _HomeHeroBannerState extends State<HomeHeroBanner> {
               return Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
-                    getWebSafeImageUrl(slide['image']!),
+                  AppImage(
+                    path: slide['image']!,
                     fit: BoxFit.cover,
                   ),
                   Container(

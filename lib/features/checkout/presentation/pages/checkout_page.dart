@@ -463,14 +463,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppConstants.primaryGreen),
           ),
           const SizedBox(height: 12),
-          Image.network(
-            getWebSafeImageUrl('https://business.paytm.com/s3assets/images/allinoneqr/retina/bnr-pwe1919@2x.webp?version=1782836885'),
+          AppImage(
+            path: 'assets/images/paytm_banner.webp',
             width: 220,
             errorBuilder: (context, error, stackTrace) => const SizedBox(),
           ),
           const SizedBox(height: 12),
-          Image.network(
-            getWebSafeImageUrl('https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=pandeydairy@ybl%26pn=Pandey%26am=$payableAmount'),
+          AppImage(
+            path: 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=pandeydairy@ybl%26pn=Pandey%26am=$payableAmount',
             width: 140,
             height: 140,
             errorBuilder: (context, error, stackTrace) => const Icon(Icons.qr_code_2_rounded, size: 80),

@@ -81,8 +81,8 @@ class _CategoryCardState extends State<CategoryCard>
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
-                      Image.network(
-                        getWebSafeImageUrl(widget.imageUrl),
+                      AppImage(
+                        path: widget.imageUrl,
                         fit: BoxFit.cover,
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;

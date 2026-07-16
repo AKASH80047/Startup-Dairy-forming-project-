@@ -163,8 +163,8 @@ class _ProductListPageState extends State<ProductListPage> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
-                    getWebSafeImageUrl(product.imageUrl),
+                  AppImage(
+                    path: product.imageUrl,
                     fit: BoxFit.cover,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;

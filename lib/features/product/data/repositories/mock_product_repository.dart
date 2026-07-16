@@ -12,8 +12,7 @@ class MockProductRepository implements ProductRepository {
           'Freshly prepared soft cottage cheese made from pure wholesome buffalo milk.',
       descriptionHindi:
           'शुद्ध और ताजे भैंस के दूध से तैयार किया गया अत्यंत नरम और स्वादिष्ट पनीर।',
-      imageUrl:
-          'https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=600&auto=format&fit=crop',
+      imageUrl: 'assets/images/prod_paneer.jpg',
       price: 220.0,
       unitEnglish: '500g',
       unitHindi: '५०० ग्राम',
@@ -28,8 +27,7 @@ class MockProductRepository implements ProductRepository {
           'Thick and creamy traditional home-style dahi, naturally set and rich in probiotics.',
       descriptionHindi:
           'पारंपरिक घरेलू तरीके से जमाया हुआ गाढ़ा और मलाईदार दही, जो पाचन के लिए सर्वोत्तम है।',
-      imageUrl:
-          'https://images.unsplash.com/photo-1571244856003-885e3eca834b?q=80&w=600&auto=format&fit=crop',
+      imageUrl: 'assets/images/prod_curd.jpg',
       price: 45.0,
       unitEnglish: '500ml',
       unitHindi: '५०० मिलीलीटर',
@@ -44,8 +42,7 @@ class MockProductRepository implements ProductRepository {
           'Traditional Danedar Ghee prepared from high quality butter, rich in aroma and taste.',
       descriptionHindi:
           'सर्वोत्तम मक्खन से पारंपरिक विधि द्वारा तैयार दानेदार घी, जो सुगंध और स्वाद से भरपूर है।',
-      imageUrl:
-          'https://images.unsplash.com/photo-1589733901241-5e5148685df5?q=80&w=600&auto=format&fit=crop',
+      imageUrl: 'assets/images/prod_ghee.jpg',
       price: 750.0,
       unitEnglish: '1L',
       unitHindi: '१ लीटर',
@@ -60,7 +57,7 @@ class MockProductRepository implements ProductRepository {
           'Refreshing traditional buttermilk blended with roasted cumin, fresh coriander, and black salt.',
       descriptionHindi:
           'भुने जीरे, ताजी धनिया और काले नमक के मिश्रण से तैयार ठंडी और पाचक मसाला छाछ।',
-      imageUrl: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?q=80&w=600&auto=format&fit=crop',
+      imageUrl: 'assets/images/prod_buttermilk.jpg',
       price: 20.0,
       unitEnglish: '500ml',
       unitHindi: '५०० मिलीलीटर',

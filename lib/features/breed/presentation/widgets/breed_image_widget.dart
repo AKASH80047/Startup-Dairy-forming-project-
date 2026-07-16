@@ -54,8 +54,8 @@ class BreedImageWidget extends StatelessWidget {
               child: Stack(
                 fit: hasHeight ? StackFit.expand : StackFit.loose,
                 children: [
-                  Image.network(
-                    getWebSafeImageUrl(imageUrl),
+                  AppImage(
+                    path: imageUrl,
                     width: double.infinity,
                     height: height,
                     fit: hasHeight ? BoxFit.contain : BoxFit.fitWidth,
@@ -271,8 +271,8 @@ class _FullScreenBreedImageState extends State<FullScreenBreedImage> {
                       scaleEnabled: true,
                       boundaryMargin: const EdgeInsets.all(100),
                       clipBehavior: Clip.none,
-                      child: Image.network(
-                        getWebSafeImageUrl(widget.imageUrl),
+                      child: AppImage(
+                        path: widget.imageUrl,
                         width: screenSize.width,
                         height: screenSize.height,
                         fit: BoxFit.contain,

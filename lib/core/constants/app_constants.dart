@@ -131,13 +131,9 @@ class AppConstants {
     }
   }
 
-  // Category High-Quality Unsplash Images
-  static const String imgCategoryCow =
-      'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?q=80&w=600&auto=format&fit=crop';
-  static const String imgCategoryBuffalo =
-      'https://images.unsplash.com/photo-1568043210943-0e8aac4b9734?q=80&w=600&auto=format&fit=crop';
-  static const String imgCategoryOtherProducts =
-      'https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=600&auto=format&fit=crop';
-  static const String imgCategoryBulkOrders =
-      'https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=600&auto=format&fit=crop';
+  // Category High-Quality Images (Local Assets)
+  static const String imgCategoryCow = 'assets/images/cat_cow.jpg';
+  static const String imgCategoryBuffalo = 'assets/images/cat_buffalo.jpg';
+  static const String imgCategoryOtherProducts = 'assets/images/cat_other_products.jpg';
+  static const String imgCategoryBulkOrders = 'assets/images/cat_bulk_orders.jpg';
 }

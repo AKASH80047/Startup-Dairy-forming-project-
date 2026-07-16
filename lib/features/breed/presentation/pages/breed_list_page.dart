@@ -143,8 +143,8 @@ class _BreedListPageState extends State<BreedListPage> {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image.network(
-                      getWebSafeImageUrl(breed.imageUrl),
+                    AppImage(
+                      path: breed.imageUrl,
                       fit: BoxFit.contain,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
