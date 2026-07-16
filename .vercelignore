@@ -27,3 +27,5 @@ build/ios/
 build/linux/
 build/macos/
 build/windows/
+# Exclude canvaskit (loaded from Google CDN instead)
+build/web/canvaskit/
