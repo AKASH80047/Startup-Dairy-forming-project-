@@ -1,0 +1,29 @@
+# Ignore everything except build/web
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.idea/
+.ruby-lsp/
+android/
+ios/
+linux/
+macos/
+windows/
+test/
+lib/
+assets/
+backend/
+basic_tempelate_ui_design/
+AI STUDY GURU/
+pubspec.yaml
+pubspec.lock
+analysis_options.yaml
+l10n.yaml
+pandey.iml
+*.dart
+*.iml
+build/android/
+build/ios/
+build/linux/
+build/macos/
+build/windows/
